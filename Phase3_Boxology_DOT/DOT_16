@@ -1,0 +1,135 @@
+digraph Boxology {
+    rankdir=TB;
+
+    // Subgraph - 1D Pre-process
+    subgraph cluster_1 {
+        label="1D Pre-process";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Patient Health Records";
+        process = "Transform: Embed";
+        output = "Data Structured Data";
+
+        "Data Patient Health Records" [label="Data Patient Health Records", shape=box, fillcolor=white];
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Structured Data" [label="Data Structured Data", shape=box, fillcolor=white];
+
+        "Data Patient Health Records" -> "Transform: Embed";
+        "Transform: Embed" -> "Data Structured Data";
+    }
+
+    // Subgraph - 2a Rule Extraction
+    subgraph cluster_2 {
+        label="2a Rule Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Structured Data";
+        input2 = "Model: Statistical J48 Algorithm";
+        process = "Infer: Deduce";
+        output = "Symbol Extracted Rules";
+
+        "Model: Statistical J48 Algorithm" [label="Model: Statistical J48 Algorithm", shape=hexagon, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Extracted Rules" [label="Symbol Extracted Rules", shape=box, fillcolor=white];
+
+        "Model: Statistical J48 Algorithm" -> "Infer: Deduce";
+        "Data Structured Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Extracted Rules"
+    }
+    
+    // Subgraph - 1d Transformation to Fuzzy Rules
+    subgraph cluster_3 {
+        label="1d Transformation to Fuzzy Rules";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Extracted Rules";
+        process = "Transform";
+        output1 = "Symbol Fuzzy Rules";
+        ouput2 = "Symbol New Rules";
+
+        "Symbol Fuzzy Rules" [label="Symbol Fuzzy Rules", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol New Rules" [label="Symbol New Rules", shape=box, fillcolor=white];
+
+        "Symbol Extracted Rules" -> "Transform";
+        "Transform" -> "Symbol Fuzzy Rules";
+        "Transform" -> "Symbol New Rules";
+    
+    }
+    
+    // Subgraph - 2a Periodic Rule Updating
+    subgraph cluster_4 {
+        label="2a Periodic Rule Updating";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Structured Recommendations";
+        process = "Infer: Deduce1";
+        output = "Symbol New Rules";
+
+        "Symbol Structured Recommendation" [label="Symbol Structured Recommendation", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+    
+        "Symbol Structured Recommendation" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol New Rules";
+    }
+
+    // Subgraph - 1d Output Presentation
+    subgraph cluster_5 {
+        label="1d Output Presentation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Likelihood Prostate Disease";
+        process = "Transform1";
+        ouput =  "Symbol Structured Recommendation";
+
+        "Symbol Likelihood Prostate Disease" [label="Symbol Likelihood Prostate Disease", shape=box, fillcolor=white];
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+       
+        "Symbol Likelihood Prostate Disease" -> "Transform1";
+        "Transform1" -> "Symbol Structured Recommendation";
+    }
+
+    // Subgraph - 2a Inference Engine Operation
+    subgraph cluster_6 {
+        label="2a Inference Engine Operation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Fuzzy Rules";
+        input2 = "Data Fuzzy Values";
+        process = "Infer: Deduce2";
+        output = "Symbol Likelihood Prostate Disease";
+
+        "Data Fuzzy Values" [label="Data Fuzzy Values", shape=box, fillcolor=white];
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+
+        "Symbol Fuzzy Rules" -> "Infer: Deduce2";
+        "Data Fuzzy Values" -> "Infer: Deduce2";
+        "Infer: Deduce2" -> "Symbol Likelihood Prostate Disease";
+    }
+
+    // Subgraph - 1d Fuzzification of Input Data
+    subgraph cluster_7 {
+        label="1d Fuzzification of Input Data";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data New Patient Data";
+        process = "Transform: Embed1";
+        output = "Data Fuzzy Values";
+
+        "Data New Patient Data" [label="Data New Patient Data", shape=box, fillcolor=white];
+        "Transform: Embed1" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+      
+        "Data New Patient Data" -> "Transform: Embed1";
+        "Transform: Embed1" -> "Data Fuzzy Values";
+    }
+
+
+
+}

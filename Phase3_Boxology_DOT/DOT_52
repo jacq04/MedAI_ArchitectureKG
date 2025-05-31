@@ -1,0 +1,117 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Data Collection and Preparation
+    subgraph cluster_1 {
+        label="1d Data Collection and Preparation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Physiological Signal";
+        process = "Transform";
+        output = "Data Numeric Resampled Signals";
+
+        "Data: Numeric Physiological Signal" [label="Data: Numeric Physiological Signal", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Numeric Resampled Signals" [label="Data Numeric Resampled Signals", shape=box, fillcolor=white];
+
+        "Data: Numeric Physiological Signal" -> "Transform";
+        "Transform" -> "Data Numeric Resampled Signals";
+    }
+
+
+    // Subgraph - 1d Signal Analysis and Band Decomposition
+    subgraph cluster_2 {
+        label="1d Signal Analysis and Band Decomposition";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Numeric Resampled Signals";
+        process = "Transform1";
+        output = "Data: Numeric Seperated Signal Components";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Seperated Signal Components" [label="Data: Numeric Seperated Signal Components", shape=box, fillcolor=white];
+
+        "Data Numeric Resampled Signals" -> "Transform1";
+        "Transform1" -> "Data: Numeric Seperated Signal Components";
+    }
+
+    // Subgraph - 1d Cross-Correlation Analysis
+    subgraph cluster_3 {
+        label="1d Cross-Correlation Analysis";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Seperated Signal Components";
+        process = "Transform2";
+        output = "Symbol Degree of Correlation";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol Degree of Correlation" [label="Symbol Degree of Correlation", shape=box, fillcolor=white];
+
+        "Data: Numeric Seperated Signal Components" -> "Transform2";
+        "Transform2" -> "Symbol Degree of Correlation";
+    }
+
+    // Subgraph - 1a System Modelling Using AR and NFIS
+    subgraph cluster_4 {
+        label="1a System Modelling Using AR and NFIS";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Numeric Seperated Signal Components";
+        input2 = "Symbol Degree of Correlation";
+        process = "Generate: Train";
+        output1 = "Model: Semantic NFIS";
+        output2 = "Model: Statistical AR";
+
+        "Model: Semantic NFIS" [label="Model: Semantic NFIS", shape=HEXAGON, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Statistical AR" [label="Model: Statistical AR", shape=hexagon, fillcolor=white];
+
+        "Data: Numeric Seperated Signal Components" -> "Generate: Train";
+        "Symbol Degree of Correlation" -> "Generate: Train";
+        "Generate: Train" -> "Model: Semantic NFIS";
+        "Generate: Train" -> "Model: Statistical AR";
+    }
+    
+    // Subgraph - 1c Integration
+    subgraph cluster_5 {
+        label="1c Integration";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Semantic NFIS";
+        input2 = "Model: Statistical AR";
+        process = "Generate: Engineer";
+        output = "Model: Hybrid ANFIS";
+
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS" [label="Model: Hybrid ANFIS", shape=hexagon, fillcolor=white];
+
+        "Model: Semantic NFIS" -> "Generate: Engineer";
+        "Model: Statistical AR" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Hybrid ANFIS";
+    }
+
+    // Subgraph - 2a Clinical Application
+    subgraph cluster_6 {
+        label="2a Clinical Application";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid ANFIS";
+        input2 = "Symbol Cardiovascular predictions";
+        process = "Infer: Deduce";
+        output = "Data Physiological Data";
+
+        "Symbol Cardiovascular predictions" [label="Symbol Cardiovascular predictions", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Physiological Data" [label="Data Physiological Data", shape=box, fillcolor=white];
+
+        "Symbol Cardiovascular predictions" -> "Infer: Deduce";
+        "Model: Hybrid ANFIS" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Physiological Data";
+    }
+}

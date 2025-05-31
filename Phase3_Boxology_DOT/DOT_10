@@ -1,0 +1,119 @@
+digraph Boxology {
+    rankdir=TB;
+    
+      // Subgraph - 1d Pre-process
+    subgraph cluster_1 {
+        label="1d Pre-process";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Overnight Polysomographic Recordings";
+        process = "Transform";
+        output = "Data: Numeric Cleaned Physiological Signals";
+
+        "Data: Numeric Overnight Polysomographic Recordings" [label="Data: Numeric Overnight Polysomographic Recordings", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Cleaned Physiological Signals" [label="Data: Numeric Cleaned Physiological Signals", shape=box, fillcolor=white];
+
+        "Data: Numeric Overnight Polysomographic Recordings" -> "Transform";
+        "Transform" -> "Data: Numeric Cleaned Physiological Signals";
+    }
+
+    // Subgraph - 1c Adapting Symbolic Fusion for Sleep Staging
+    subgraph cluster_2 {
+        label="1c Adapting Symbolic Fusion for Sleep Staging";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Numeric Cleaned Physiological Signals";
+        input2 = "Data Clinical Guidelines for Sleep Staging";
+        process = "Generate: Engineer";
+        output = "Model: Semantic Symbolic Fusion Framework";
+
+        "Data Clinical Guidelines for Sleep Staging" [label="Data Clinical Guidelines for Sleep Staging", shape=box, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model: Semantic Symbolic Fusion Framework" [label="Model: Semantic Symbolic Fusion Framework", shape=hexagon, fillcolor=white];
+
+        "Data: Numeric Cleaned Physiological Signals" -> "Generate: Engineer";
+        "Data Clinical Guidelines for Sleep Staging" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Semantic Symbolic Fusion Framework";
+    }
+
+    // Subgraph - 2a Automated Sleep Staging
+    subgraph cluster_3 {
+        label="2a Automated Sleep Staging";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Semantic Symbolic Fusion Framework";
+        input2 = "Data Personalized Threshold"
+        process = "Infer: Deduce";
+        output = "Symbol Hypnogram";
+
+        "Data Personalized Threshold" [label="Data Personalized Threshold", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Hypnogram" [label="Symbol Hypnogram", shape=box, fillcolor=white];
+
+        "Model: Semantic Symbolic Fusion Framework" -> "Infer: Deduce";
+        "Data Personalized Threshold" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Hypnogram";}
+    
+    // Subgraph - 1d Feature Extraction
+    subgraph cluster_4 {
+        label="1d Feature Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Cleaned Physiological Signals";
+        process = "Transform: Embed";
+        output = "Data Sleep Events Parameters";
+
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Sleep Events Parameters" [label="Data Sleep Events Parameters", shape=box, fillcolor=white];
+
+        "Data: Numeric Cleaned Physiological Signals" -> "Transform: Embed";
+        "Transform: Embed" -> "Data Sleep Events Parameters";
+    }
+
+    // Subgraph - 1d Personal Epoch Selection and Scoring
+    subgraph cluster_5 {
+        label="1d Personal Epoch Selection and Scoring";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Numeric Cleaned Physiological Signals";
+        input2 = "Actor Physician"
+        process = "Transform: Embed2";
+        output = "Data Partially Scored Hypnogram";
+
+        "Actor Physician" [label="Actor Physician", shape=triangle, fillcolor=white];
+        "Transform: Embed2" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Partially Scored Hypnogram" [label="Data Partially Scored Hypnogram", shape=box, fillcolor=white];
+
+        "Data: Numeric Cleaned Physiological Signals" -> "Transform: Embed2";
+        "Actor Physician" -> "Transform: Embed2"; 
+        "Transform: Embed2" -> "Data Partially Scored Hypnogram";
+    }
+
+
+
+     // Subgraph - 1a Integrating Differntial Evolution for Personalization
+    subgraph cluster_6 {
+        label="1a Integrating Differntial Evolution for Personalization";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Sleep Events Parameters";
+        input2 = "Data Partially Scored Hypnogram";
+        process = "Transform: Embed3";
+        output = "Data Personalized Threshold";
+
+        "Transform: Embed3" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+
+        "Data Sleep Events Parameters" -> "Transform: Embed3";
+        "Data Partially Scored Hypnogram" -> "Transform: Embed3";
+        "Transform: Embed3" -> "Data Personalized Threshold";
+    }
+
+
+}

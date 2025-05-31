@@ -1,0 +1,100 @@
+digraph Boxology {
+    rankdir=TB;
+    // Subgraph - 1c Expert Knowledge
+    subgraph cluster_1 {
+        label="1c Expert Knowledge";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor Experienced Cardiac Clinicians";
+        process = "Generate: Engineer";
+        output = "Model: Semantic Risk";
+
+        "Actor Experienced Cardiac Clinicians" [label="Actor Experienced Cardiac Clinicians", shape=triangle, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model: Semantic Risk" [label="Model: Semantic Risk", shape=hexagon, fillcolor=white];
+
+        "Actor Experienced Cardiac Clinicians" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Semantic Risk";
+    }
+    
+    // Subgraph - 2a Pairwise Comaprison
+    subgraph cluster_2 {
+        label="2a Pairwise Comaprison";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Semantic Risk";
+        input2 = "Data Patient Data";
+        process = "Transform: Embed";
+        output = "Data: Numeric Fuzzy Numbers";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Fuzzy Numbers" [label="Data: Numeric Fuzzy Numbers", shape=box, fillcolor=white];
+
+        "Data Patient Data" -> "Transform: Embed";
+        "Model: Semantic Risk" -> "Transform: Embed";
+        "Transform: Embed" -> "Data: Numeric Fuzzy Numbers";
+    }
+
+    // Subgraph - 1d Fuzzy Analytic Hierarchy
+    subgraph cluster_3 {
+        label="1d Fuzzy Analytic Hierarchy";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Fuzzy Numbers";
+        process = "Transform: Embed1";
+        output = "Data: Numeric Local and Global Weights";
+
+        "Transform: Embed1" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Local and Global Weights" [label="Data: Numeric Local and Global Weights", shape=box, fillcolor=white];
+
+        "Data: Numeric Fuzzy Numbers" -> "Transform: Embed1";
+        "Transform: Embed1" -> "Data: Numeric Local and Global Weights";
+    }
+    
+ 
+    // Subgraph - 1a Train ANN
+    subgraph cluster_4 {
+        label="1a Train ANN";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Patient Data";
+        input2 = "Data: Numeric Local and Global Weights";
+        process = "Generate: Train";
+        output = "Model: Static ANN";
+
+        "Generate: Train" [label="Generate: Train" , shape=oval, fillcolor=lightgray];
+        "Model: Static ANN" [label="Model: Static ANN", shape=hexagon, fillcolor=white];
+
+        "Data Patient Data" -> "Generate: Train";
+        "Data: Numeric Local and Global Weights" -> "Generate: Train";
+    }   "Generate: Train" -> "Model: Static ANN";
+
+    // Subgraph - 2b Predict
+    subgraph cluster_5 {
+        label="2b Predict";
+        style=filled;
+        color=lightgrey;
+
+        input = "Model: Static ANN";
+        process = "Infer: Deduce";
+        output = "Symbol Heart Failure Risk";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Heart Failure Risk" [label="Symbol Heart Failure Risk", shape=box, fillcolor=white];
+
+        "Model: Static ANN" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Heart Failure Risk";
+    }
+
+
+
+
+
+
+
+}

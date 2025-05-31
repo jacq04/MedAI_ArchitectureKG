@@ -1,0 +1,95 @@
+digraph Boxology {
+    rankdir=TB;
+    
+
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Raw Brain MRI";
+        process = "Transform";
+        output = "Data: Image Pre-processed Images";
+
+        "Data: Image Raw Brain MRI" [label="Data: Image Raw Brain MRI", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image Pre-processed Images" [label="Data: Image Pre-processed Images", shape=box, fillcolor=white];
+
+        "Data: Image Raw Brain MRI" -> "Transform";
+        "Transform" -> "Data: Image Pre-processed Images";
+    }
+
+    // Subgraph - 1d Feature Extraction
+    subgraph cluster_2 {
+        label="1d Feature Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Pre-processed Images";
+        process = "Transform1";
+        output = "Data: Numeric Extracted Features";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Extracted Features" [label="Data: Numeric Extracted Features", shape=box, fillcolor=white];
+
+        "Data: Image Pre-processed Images" -> "Transform1";
+        "Transform1" -> "Data: Numeric Extracted Features";
+    }
+
+    // Subgraph - 2a Tissue Classification Using FCM (Fuzzy C-Means)
+    subgraph cluster_3 {
+        label="2a Tissue Classification Using FCM (Fuzzy C-Means)";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Extracted Features";
+        process = "Infer: Deduce";
+        output = "Data: Numeric Labeled Tissue Region";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Labeled Tissue Region" [label="Data: Numeric Labeled Tissue Region", shape=box, fillcolor=white];
+
+        "Data: Numeric Extracted Features" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data: Numeric Labeled Tissue Region";
+    }
+    
+    // Subgraph - 1a Model Creation
+    subgraph cluster_4 {
+        label="1a Model Creation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Labeled Tissue Region";
+        process = "Generate: Train";
+        output = "Model: Hybrid ANFIS";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS" [label="Model: Hybrid ANFIS", shape=hexagon, fillcolor=white];
+
+        "Data: Numeric Labeled Tissue Region" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid ANFIS";
+    }
+
+    // Subgraph - 2a Classification and Segmentation
+    subgraph cluster_5 {
+        label="2a Classification and Segmentation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid ANFIS";
+        input2 = "Data: Image Patient Brain MRI";
+        process = "Infer: Deduce1";
+        output = "Symbol Segmented Images";
+
+        "Data: Image Patient Brain MRI" [label="Data: Image Patient Brain MRI", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Segmented Images" [label="Symbol Segmented Images", shape=box, fillcolor=white];
+
+        "Model: Hybrid ANFIS" -> "Infer: Deduce1";
+        "Data: Image Patient Brain MRI" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Segmented Images";
+    }
+
+
+}

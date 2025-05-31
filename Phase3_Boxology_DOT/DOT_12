@@ -1,0 +1,112 @@
+digraph Boxology {
+    rankdir=TB;
+    
+
+    // Subgraph - 1d Medical Database Selection
+    subgraph cluster_1 {
+        label="1d Medical Database Selection";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Medical Databases";
+        process = "Transform: Embed";
+        output = "Data Structured Datasets";
+
+        "Data Raw Medical Databases" [label="Data Raw Medical Databases", shape=box, fillcolor=white];
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Structured Datasets" [label="Data Structured Datasets", shape=box, fillcolor=white];
+
+        "Data Raw Medical Databases" -> "Transform: Embed";
+        "Transform: Embed" -> "Data Structured Datasets";
+    }
+
+    // Subgraph - 1d Preprocessing with Stepwise Regression Analysis (SRA)
+    subgraph cluster_2 {
+        label="1d Preprocessing with Stepwise Regression Analysis (SRA)";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Structured Datasets";
+        process = "Transform: Embed1";
+        output = "Data Features for Each Condition";
+
+        "Transform: Embed1" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Features for Each Condition" [label="Data Features for Each Condition", shape=box, fillcolor=white];
+
+        "Data Structured Datasets" -> "Transform: Embed1";
+        "Transform: Embed1" -> "Data Features for Each Condition";
+    }
+
+    // Subgraph - 2a Case-Based Clustering
+    subgraph cluster_3 {
+        label="2a Case-Based Clustering";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Features for Each Condition";
+        process = "Infer: Deduce";
+        output = "Data Clusters of Cases";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Clusters of Cases" [label="Data Clusters of Cases", shape=box, fillcolor=white];
+
+        "Data Features for Each Condition" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Clusters of Cases";
+    }
+    
+    // Subgraph - 1a Fuzzy Decision Tree (FDT) Construction
+    subgraph cluster_4 {
+        label="1a Fuzzy Decision Tree (FDT) Construction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Clusters of Cases";
+        process = "Generate: Train";
+        output = "Model: Hybrid Fuzzy Decision Tree";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid Fuzzy Decision Tree" [label="Model: Hybrid Fuzzy Decision Tree", shape=hexagon, fillcolor=white];
+
+        "Data Clusters of Cases" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid Fuzzy Decision Tree";
+    }
+    
+    // Subgraph - 1a Genetic Algorithm Optimization
+    subgraph cluster_5 {
+        label="1a Genetic Algorithm Optimization";
+        style=filled;
+        color=lightgrey;
+
+        input = "Model: Hybrid Fuzzy Decision Tree";
+        process = "Generate: Train1";
+        output = "Model: Hybrid Optimized Set";
+
+        "Generate: Train1" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid Optimized Set" [label="Model: Hybrid Optimized Set", shape=hexagon, fillcolor=white];
+
+        "Model: Hybrid Fuzzy Decision Tree" -> "Generate: Train1";
+        "Generate: Train1" -> "Model: Hybrid Optimized Set";
+    }
+
+    // Subgraph - 2a Medical Diagnosis
+    subgraph cluster_6 {
+        label="2a Medical Diagnosis";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid Optimized Set";
+        input2 = "Data Features for Each Condition";
+        process = "Infer: Deduce1";
+        output = "Symbol Condition";
+
+        "Infer: Deduce1" [label="Infer: Deduce1", shape=oval, fillcolor=lightgray];
+        "" [label="", shape=box, fillcolor=white];
+
+        "Model: Hybrid Optimized Set" -> "Infer: Deduce1";
+        "Data Features for Each Condition" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Condition";
+    }
+
+
+
+}

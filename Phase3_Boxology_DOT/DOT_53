@@ -1,0 +1,112 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Data Preprocessing
+    subgraph cluster_1 {
+        label="1d Data Preprocessing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Raw Gene Expression";
+        process = "Transform";
+        output = "Data: Numeric Normalized Gene Expression Data";
+
+        "Data: Numeric Raw Gene Expression" [label="Data: Numeric Raw Gene Expression", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Normalized Gene Expression Data" [label="Data: Numeric Normalized Gene Expression Data", shape=box, fillcolor=white];
+
+        "Data: Numeric Raw Gene Expression" -> "Transform";
+        "Transform" -> "Data: Numeric Normalized Gene Expression Data";
+    }
+
+    // Subgraph - 1d Gene Selection Using Modified AHP
+    subgraph cluster_2 {
+        label="1d Gene Selection Using Modified AHP";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Normalized Gene Expression Data";
+        process = "Transform1";
+        output = "Data: Numeric Ranked Informative Genes";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Ranked Informative Genes" [label="Data: Numeric Ranked Informative Genes", shape=box, fillcolor=white];
+
+        "Data: Numeric Normalized Gene Expression Data" -> "Transform1";
+        "Transform1" -> "Data: Numeric Ranked Informative Genes";
+    }
+
+    // Subgraph - 2a Fuzzy Model Setup
+    subgraph cluster_3 {
+        label="2a Fuzzy Model Setup";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Ranked Informative Genes";
+        process = "Infer: Deduce";
+        output = "Symbol Type-2 Fuzzy Rules";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Type-2 Fuzzy Rules" [label="Symbol Type-2 Fuzzy Rules", shape=box, fillcolor=white];
+
+        "Data: Numeric Ranked Informative Genes" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Type-2 Fuzzy Rules";
+    }
+
+    // Subgraph - 1a Unsupervised Learning by Fuzzy C-Means (FCM) Clustering
+    subgraph cluster_4 {
+        label="1a Unsupervised Learning by Fuzzy C-Means (FCM) Clustering";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Ranked Informative Genes";
+        process = "Generate: Train";
+        output = "Model: Semantic FCM";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Semantic FCM" [label="Model: Semantic FCM", shape=hexagon, fillcolor=white];
+
+        "Data: Numeric Ranked Informative Genes" -> "Generate: Train";
+        "Generate: Train" -> "Model: Semantic FCM";
+    }
+
+    // Subgraph - 1 Fuzzy Rough Set Application
+    subgraph cluster_5 {
+        label="1 Fuzzy Rough Set Application";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Type-2 Fuzzy Rules";
+        input2 = "Model: Semantic FCM";
+        process = "Generate: Engineer";
+        output = "Model: Hybrid IT2FLS";
+
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid IT2FLS" [label="Model: Hybrid IT2FLS", shape=hexagon, fillcolor=white];
+
+        "Symbol Type-2 Fuzzy Rules" -> "Generate: Engineer";
+        "Model: Semantic FCM" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Hybrid IT2FLS";
+    }
+
+    // Subgraph - 2a Prediction Making
+    subgraph cluster_6 {
+        label="2a Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid IT2FLS";
+        input2 = "Data: Numeric Gene Expression Data";
+        process = "Infer: Deduce1";
+        output = "Symbol Classified Sample";
+
+        "Data: Numeric Gene Expression Data" [label="Data: Numeric Gene Expression Data", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+ 
+
+        "Model: Hybrid IT2FLS" -> "Infer: Deduce1";
+        "Data: Numeric Gene Expression Data" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Classified Sample";
+    }
+
+}

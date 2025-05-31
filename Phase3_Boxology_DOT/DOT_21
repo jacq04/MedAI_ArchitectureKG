@@ -1,0 +1,119 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1D Construct Fuzzy Rough Set
+    subgraph cluster_1 {
+        label="1D Construct Fuzzy Rough Set";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Gene Expression Levels";
+        process = "Transform: Embed Fuzzy Rough Set";
+        output = "Data Fuzzy Equivalence Relations and Lower + Upper Approx";
+
+        "Data: Numeric Gene Expression Levels" [label="Data: Numeric Gene Expression Levels", shape=box, fillcolor=white];
+        "Transform: Embed Fuzzy Rough Set" [label="Transform: Embed Fuzzy Rough Set", shape=oval, fillcolor=lightgray];
+        "Data Fuzzy Equivalence Relations and Lower + Upper Approx" [label="Data Fuzzy Equivalence Relations and Lower + Upper Approx", shape=box, fillcolor=white];
+
+        "Data: Numeric Gene Expression Levels" -> "Transform: Embed Fuzzy Rough Set";
+        "Transform: Embed Fuzzy Rough Set" -> "Data Fuzzy Equivalence Relations and Lower + Upper Approx";
+    }
+
+
+    // Subgraph - 1d Compute Information Measures
+    subgraph cluster_2 {
+        label="1d Compute Information Measures";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Fuzzy Equivalence Relations and Lower + Upper Approx";
+        process = "Transform: Embed";
+        output = "Data Fuzzy Information Measures";
+
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Fuzzy Information Measures" [label="Data Fuzzy Information Measures", shape=box, fillcolor=white];
+
+        "Data Fuzzy Equivalence Relations and Lower + Upper Approx" -> "Transform: Embed";
+        "Transform: Embed" -> "Data Fuzzy Information Measures";
+    }
+
+    // Subgraph - 1d Calculate Fuzzy Gain Ratio 
+    subgraph cluster_3 {
+        label="1d Calculate Fuzzy Gain Ratio";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Fuzzy Information Measures";
+        process = "Transform: Embed1";
+        output = "Data Fuzzy Gain Ratios";
+
+        "Transform: Embed1" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Fuzzy Gain Ratios" [label="Data Fuzzy Gain Ratios", shape=box, fillcolor=white];
+
+        "Data Fuzzy Information Measures" -> "Transform: Embed1";
+        "Transform: Embed1" -> "Data Fuzzy Gain Ratios";
+    }
+
+    // Subgraph - 1d Rank Attributes
+    subgraph cluster_4 {
+        label="1d Rank Attributes";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Fuzzy Gain Ratios";
+        process = "Transform: Embed2";
+        output = "Data Selected Attributes";
+
+        "Transform: Embed2" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Selected Attributes" [label="Data Selected Attributes", shape=box, fillcolor=white];
+
+        "Data Fuzzy Gain Ratios" -> "Transform: Embed2";
+        "Transform: Embed2" -> "Data Selected Attributes";
+    }
+    
+    // Subgraph - 1a Train Classification Model
+    subgraph cluster_5 {
+        label="1a Train Classification Model";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Selected Attributes";
+        process = "Generate: Train";
+        output = "Model: Semantic";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Semantic" [label="Model: Semantic", shape=hexagon, fillcolor=white];
+
+        "Data Selected Attributes" -> "Generate: Train";
+        "Generate: Train" -> "Model: Semantic";
+    }
+    
+    // Subgraph - 2a Classify Tumor
+    subgraph cluster_6 {
+        label="Subgraph - 2a Classify Tumor";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Semantic";
+        input2 = "Data: Numeric Gene Expression Levels1";
+        process = "Infer: Deduce";
+        output = "Symbol: Label Tumor Class";
+
+        "Data: Numeric Gene Expression Levels1" [label="Data: Numeric Gene Expression Levels", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol: Label Tumor Class" [label="Symbol: Label Tumor Class", shape=box, fillcolor=white];
+
+        "Model: Semantic" -> "Infer: Deduce";
+        "Data: Numeric Gene Expression Levels1" -> "Infer: Deduce";
+    }   "Infer: Deduce" -> "Symbol: Label Tumor Class";
+
+
+
+
+
+
+
+
+
+
+}

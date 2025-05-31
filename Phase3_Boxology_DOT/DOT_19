@@ -1,0 +1,182 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1c Expert Opinion
+    subgraph cluster_1 {
+        label="1c Expert Opinion";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor Diabetes Experts";
+        process = "Generate: Train";
+        output = "Model: Semantic Relationships";
+
+        "Actor Diabetes Experts" [label="Actor Diabetes Experts", shape=triangle, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Semantic Relationships" [label="Model: Semantic Relationships", shape=hexagon, fillcolor=white];
+
+        "Actor Diabetes Experts" -> "Generate: Train";
+        "Generate: Train" -> "Model: Semantic Relationships";
+    }
+
+    // Subgraph - 1d Aggregation of Experts'Opinion
+    subgraph cluster_2 {
+        label="1d Aggregation of Experts'Opinion";
+        style=filled;
+        color=lightgrey;
+
+        input = "Model: Semantic Relationships";
+        process = "Transform: Embed";
+        output = "Data: Matrix Single Matrix Clusters and sub-criteria";
+
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Matrix Single Matrix Clusters and sub-criteria" [label="Data: Matrix Single Matrix Clusters and sub-criteria", shape=box, fillcolor=white];
+
+        "Model: Semantic Relationships" -> "Transform: Embed";
+        "Transform: Embed" -> "Data: Matrix Single Matrix Clusters and sub-criteria";
+    }
+
+
+
+    // Subgraph - 1d Normalization
+    subgraph cluster_3 {
+        label="Subgraph - 1d Normalization";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Matrix Single Matrix Clusters and sub-criteria";
+        process = "Transform: Embed1";
+        output = "Data: Matrix Normalized Matrix";
+
+        "Transform: Embed1" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Matrix Normalized Matrix" [label="Data: Matrix Normalized Matrix", shape=box, fillcolor=white];
+
+        "Data: Matrix Single Matrix Clusters and sub-criteria" -> "Transform: Embed1";
+        "Transform: Embed1" -> "Data: Matrix Normalized Matrix";
+    }
+
+    // Subgraph - 1d Calculate Total
+    subgraph cluster_4 {
+        label="1d Calculate Total";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Matrix Normalized Matrix";
+        process = "Transform: Embed2";
+        output = "Data: Matrix Total Relationship Matrix";
+
+        "Transform: Embed2" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Matrix Total Relationship Matrix" [label="Data: Matrix Total Relationship Matrix", shape=box, fillcolor=white];
+
+        "Data: Matrix Normalized Matrix" -> "Transform: Embed2";
+        "Transform: Embed2" -> "Data: Matrix Total Relationship Matrix";
+    }
+
+    // Subgraph - 1c Network Diagram Drawing
+    subgraph cluster_5 {
+        label="1c Network Diagram Drawing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Matrix Total Relationship Matrix";
+        process = "Generate: Train1";
+        output = "Model: Semantic Relationship Diagram";
+
+        "Generate: Train1" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Semantic Relationship Diagram" [label="Model: Semantic Relationship Diagram", shape=hexagon, fillcolor=white];
+
+        "Data: Matrix Total Relationship Matrix" -> "Generate: Train1";
+        "Generate: Train1" -> "Model: Semantic Relationship Diagram";
+    }
+    
+    // Subgraph - 1d Pairwise Comparison Matrices Formation
+    subgraph cluster_6 {
+        label="1d Pairwise Comparison Matrices Formation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Model: Semantic Relationship Diagram";
+        process = "Trannsform: Embed3";
+        output = "Data: Matix Pairwise Comparison";
+
+        "Trannsform: Embed3" [label="Trannsform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Matix Pairwise Comparison" [label="Data: Matix Pairwise Comparison", shape=box, fillcolor=white];
+
+        "Model: Semantic Relationship Diagram" -> "Trannsform: Embed3";
+        "Trannsform: Embed3" -> "Data: Matix Pairwise Comparison";
+    }
+
+    // Subgraph - 1d Super Matrix
+    subgraph cluster_7 {
+        label="1d Super Matrix";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Matix Pairwise Comparison";
+        process = "Transform: Embed4";
+        output = "Data: Matrix Weighted Super Matrix";
+
+        "Transform: Embed4" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Matrix Weighted Super Matrix" [label="Data: Matrix Weighted Super Matrix", shape=box, fillcolor=white];
+
+        "Data: Matix Pairwise Comparison" -> "Transform: Embed4";
+        "Transform: Embed4" -> "Data: Matrix Weighted Super Matrix";
+    }
+
+
+    // Subgraph - 1d Limit Long Term Influence
+    subgraph cluster_8 {
+        label="1d Limit Long Term Influence";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Matrix Weighted Super Matrix";
+        process = "Transform: Embed5";
+        output = "Model: Static Limited Weighted Super Matrix";
+
+        "Transform: Embed5" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Model: Static Limited Weighted Super Matrix" [label="Model: Static Limited Weighted Super Matrix", shape=hexagon, fillcolor=white];
+
+        "Data: Matrix Weighted Super Matrix" -> "Transform: Embed5";
+        "Transform: Embed5" -> "Model: Static Limited Weighted Super Matrix";
+    }
+
+    // Subgraph - 2a Severity of Damage Calculation Based on VFS
+    subgraph cluster_9 {
+        label="2a Severity of Damage Calculation Based on VFS";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Static Limited Weighted Super Matrix";
+        input2 = "Data Patient Data";
+        process = "Infer: Deduce";
+        output = "Data: Tensor Damage Severity";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data: Tensor Damage Severity" [label="Data: Tensor Damage Severity", shape=box, fillcolor=white];
+
+        "Model: Static Limited Weighted Super Matrix" -> "Infer: Deduce";
+        "Data Patient Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data: Tensor Damage Severity";
+    }
+
+
+    // Subgraph - 1d Convert to Single-dimension
+    subgraph cluster_10 {
+        label="1d Convert to Single-dimension";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Tensor Damage Severity";
+        process = "Transform: Embed6";
+        output = "Symbol Damage Severity";
+
+        "Transform: Embed6" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Symbol Damage Severity" [label="Symbol Damage Severity", shape=box, fillcolor=white];
+
+        "Data: Tensor Damage Severity" -> "Transform: Embed6";
+        "Transform: Embed6" -> "Symbol Damage Severity";
+    }
+
+}

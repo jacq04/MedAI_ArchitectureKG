@@ -1,0 +1,114 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Raw FISH Image";
+        process = "Transform";
+        output = "Data: Image Pre-processed Image";
+
+        "Data: Image Raw FISH Image" [label="Data: Image Raw FISH Image", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image Pre-processed Image" [label="Data: Image Pre-processed Image", shape=box, fillcolor=white];
+
+        "Data: Image Raw FISH Image" -> "Transform";
+        "Transform" -> "Data: Image Pre-processed Image";
+    }
+
+
+    // Subgraph - 1d Feature Extraction 
+    subgraph cluster_2 {
+        label="1d Feature Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Pre-processed Image";
+        process = "Transform1";
+        output = "Data: Numeric Extracted Quantitative Features";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Extracted Quantitative Features" [label="Data: Numeric Extracted Quantitative Features", shape=box, fillcolor=white];
+
+        "Data: Image Pre-processed Image" -> "Transform1";
+        "Transform1" -> "Data: Numeric Extracted Quantitative Features";
+    }
+    
+    // Subgraph - 1d Feature Representation
+    subgraph cluster_3 {
+        label="1d Feature Representation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Extracted Quantitative Features";
+        process = "Transform2";
+        output = "Data: Numeric Normalized Features";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Normalized Features" [label="Data: Numeric Normalized Features", shape=box, fillcolor=white];
+
+        "Data: Numeric Extracted Quantitative Features" -> "Transform2";
+        "Transform2" -> "Data: Numeric Normalized Features";
+    }
+    
+    // Subgraph - 1a Model Training
+    subgraph cluster_4 {
+        label="1a Model Training";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Normalized Features";
+        process = "Generate: Train";
+        output = "Model: Hybrid Fuzzy ARTMAP";
+
+      
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid Fuzzy ARTMAP" [label="Model: Hybrid Fuzzy ARTMAP", shape=hexagon, fillcolor=white];
+
+        "Data: Numeric Normalized Features" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid Fuzzy ARTMAP";
+    }
+
+    // Subgraph - 2a Classify
+    subgraph cluster_5 {
+        label="2a Classify";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid Fuzzy ARTMAP";
+        input2 = "Data: Numeric Patient Image Vectors";
+        process = "Infer: Deduce";
+        output = "Symbol Raw Classification Results";
+
+        "Data: Numeric Patient Image Vectors" [label="Data: Numeric Patient Image Vectors", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Raw Classification Results" [label="Symbol Raw Classification Results", shape=box, fillcolor=white];
+
+        "Data: Numeric Patient Image Vectors" -> "Infer: Deduce";
+        "Model: Hybrid Fuzzy ARTMAP" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Raw Classification Results";
+    }
+
+    // Subgraph - 1d Transform Results
+    subgraph cluster_6 {
+        label="1d Transform Results";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Raw Classification Results";
+        process = "Transform3";
+        output = "Symbol Interpretable Diagnostic Results";
+
+        "Transform3" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol Interpretable Diagnostic Results" [label="Symbol Interpretable Diagnostic Results", shape=box, fillcolor=white];
+
+        "Symbol Raw Classification Results" -> "Transform3";
+        "Transform3" -> "Symbol Interpretable Diagnostic Results";
+    }
+
+
+
+}

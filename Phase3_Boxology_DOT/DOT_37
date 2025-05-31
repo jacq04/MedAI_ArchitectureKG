@@ -1,0 +1,82 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-Processing
+    subgraph cluster_1 {
+        label="1d Pre-Processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Clinical Data + CT Scan";
+        process = "Transform";
+        output = "Data Cleaned and Normalized Data";
+
+        "Data Clinical Data + CT Scan" [label="Data Clinical Data + CT Scan", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Cleaned and Normalized Data" [label="Data Cleaned and Normalized Data", shape=box, fillcolor=white];
+
+        "Data Clinical Data + CT Scan" -> "Transform";
+        "Transform" -> "Data Cleaned and Normalized Data";
+    }
+    
+    // Subgraph - 2a Feature Reduction Using PCA
+    subgraph cluster_2 {
+        label="2a Feature Reduction Using PCA";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Cleaned and Normalized Data";
+        process = "Infer: Deduce";
+        output = "Data Dataset w/ Reduced Features";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Dataset w/ Reduced Features" [label="Data Dataset w/ Reduced Features", shape=box, fillcolor=white];
+
+        "Data Cleaned and Normalized Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Dataset w/ Reduced Features";
+    }
+
+    // Subgraph - 1a ANFIS Model Training
+    subgraph cluster_3 {
+        label="1a ANFIS Model Training";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Dataset w/ Reduced Features";
+        process = "Generate: Train";
+        output = "Model: Hybrid ANFIS";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS" [label="Model: Hybrid ANFIS", shape=hexagon, fillcolor=white];
+
+        "Data Dataset w/ Reduced Features" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid ANFIS";
+    }
+
+    // Subgraph - 2a Prediction
+    subgraph cluster_4 {
+        label="2a Prediction";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid ANFIS";
+        input2 = "Data Patient Data + CT Scan";
+        process = "Infer: Deduce";
+        output = "Symbol Predicted Infraction Volume Growth";
+        
+
+        "Data Patient Data + CT Scan" [label="Data Patient Data + CT Scan", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Predicted Infraction Volume Growth" [label="Symbol Predicted Infraction Volume Growth", shape=box, fillcolor=white];
+
+        "Model: Hybrid ANFIS" -> "Infer: Deduce";
+        "Data Patient Data + CT Scan" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Predicted Infraction Volume Growth";
+    }
+
+
+
+
+
+
+}

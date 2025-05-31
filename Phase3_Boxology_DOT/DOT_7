@@ -1,0 +1,75 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1a Generation and Extraction of Decision Rules
+    subgraph cluster_1 {
+        label="1a Generation and Extraction of Decision Rules";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Clinical Dataset";
+        process = "Generate: Train";
+        output = "Model: Static Decision Trees";
+
+        "Data Clinical Dataset" [label="Data Clinical Dataset", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Static Decision Trees" [label="Model: Static Decision Trees", shape=hexagon, fillcolor=white];
+
+        "Data Clinical Dataset" -> "Generate: Train";
+        "Generate: Train" -> "Model: Static Decision Trees";
+    }
+
+    // Subgraph - 1d Prediction of the Correctness of Each Rule
+    subgraph cluster_2 {
+        label="1d Prediction of the Correctness of Each Rule";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Clinical Dataset";
+        input2 = "Model: Static Selected Rules DT"
+        process = "Infer: Deduce";
+        output = "Symbol Predicted Rule Accuracy";
+
+        "Model: Static Selected Rules DT" [label="Model: Static Selected Rules DT", shape=hexagon, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Predicted Rule Accuracy" [label="Symbol Predicted Rule Accuracy", shape=box, fillcolor=white];
+
+        "Data Clinical Dataset" -> "Infer: Deduce";
+        "Model: Static Selected Rules DT" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Predicted Rule Accuracy";
+    }
+
+    // Subgraph - 1d Computation of the Probability of Each Class
+    subgraph cluster_3 {
+        label="1d Computation of the Probability of Each Class";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Predicted Rule Accuracy";
+        process = "Transform";
+        output = "Data Probability Score";
+
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Probability Score" [label="Data Probability Score", shape=box, fillcolor=white];
+
+        "Symbol Predicted Rule Accuracy" -> "Transform";
+        "Transform" -> "Data Probability Score";
+    }
+    
+    // Subgraph - 1d Selection of a Set of Best Decision Rules
+    subgraph cluster_4 {
+        label="1d Selection of a Set of Best Decision Rules";
+        style=filled;
+        color=lightgrey;
+
+        input = "Model: Static Decision Trees";
+        process = "Transform: Embed";
+        output = "Model: Static Selected Rules DT";
+
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+
+        "Model: Static Decision Trees" -> "Transform: Embed";
+        "Transform: Embed" -> "Model: Static Selected Rules DT";
+    }
+
+}

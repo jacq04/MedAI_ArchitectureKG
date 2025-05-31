@@ -1,0 +1,94 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Clinical and Pathalogical Data";
+        process = "Transform";
+        output = "Data Processed and Normalized";
+
+        "Data Raw Clinical and Pathalogical Data" [label="Data Raw Clinical and Pathalogical Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Processed and Normalized" [label="Data Processed and Normalized", shape=box, fillcolor=white];
+
+        "Data Raw Clinical and Pathalogical Data" -> "Transform";
+        "Transform" -> "Data Processed and Normalized";
+    }
+
+
+    // Subgraph - 1d Division of Follow-up Time into Intervals
+    subgraph cluster_2 {
+        label="1d Division of Follow-up Time into Intervals";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Processed and Normalized";
+        process = "Transform1";
+        output = "Data Time Segmented Data";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Time Segmented Data" [label="Data Time Segmented Data", shape=box, fillcolor=white];
+
+        "Data Processed and Normalized" -> "Transform1";
+        "Transform1" -> "Data Time Segmented Data";
+    }
+    
+    // Subgraph - 2a Selection of Prognostic Factors with Decision Trees
+    subgraph cluster_3 {
+        label="2a Selection of Prognostic Factors with Decision Trees";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Time Segmented Data";
+        process = "Infer: Deduce";
+        output = "Symbol Prognostic Factors per Time";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Prognostic Factors per Time" [label="Symbol Prognostic Factors per Time", shape=box, fillcolor=white];
+
+        "Data Time Segmented Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Prognostic Factors per Time";
+    }
+    
+    // Subgraph - 1a Neural Network Model Construction
+    subgraph cluster_4 {
+        label="1a Neural Network Model Construction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Prognostic Factors per Time";
+        process = "Generate: Train";
+        output = "Model: Hybrid DS Tool";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid DS Tool" [label="Model: Hybrid DS Tool", shape=hexagon, fillcolor=white];
+
+        "Symbol Prognostic Factors per Time" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid DS Tool";
+    }
+    
+    // Subgraph - 2a Prediction Making
+    subgraph cluster_5 {
+        label="2a Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid DS Tool";
+        input2 = "Data Patient Clinical and Pathalogical Data";
+        process = "Infer: Deduce1";
+        output = "Symbol Relapse and Factors";
+
+        "Data Patient Clinical and Pathalogical Data" [label="Data Patient Clinical and Pathalogical Data", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce1", shape=oval, fillcolor=lightgray];
+        "Symbol Relapse and Factors" [label="Symbol Relapse and Factors", shape=box, fillcolor=white];
+
+        "Model: Hybrid DS Tool" -> "Infer: Deduce1";
+        "Data Patient Clinical and Pathalogical Data" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Relapse and Factors";
+    }
+
+}

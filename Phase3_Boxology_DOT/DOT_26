@@ -1,0 +1,100 @@
+digraph Boxology {
+    rankdir=TB;
+    
+      // Subgraph - 1d Data Collection and Preprocessing
+    subgraph cluster_1 {
+        label="1d Data Collection and Preprocessing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Medical Data";
+        process = "Transform: Embed";
+        output = "Data Categorized and Pre-processed Data";
+
+        "Data Raw Medical Data" [label="Data Raw Medical Data", shape=box, fillcolor=white];
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Categorized and Pre-processed Data" [label="Data Categorized and Pre-processed Data", shape=box, fillcolor=white];
+
+        "Data Raw Medical Data" -> "Transform: Embed";
+        "Transform: Embed" -> "Data Categorized and Pre-processed Data";
+    }
+
+
+    // Subgraph - 2a Data Analysis for Feature Selection
+    subgraph cluster_2 {
+        label="2a Data Analysis for Feature Selection";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Categorized and Pre-processed Data";
+        process = "Infer: Deduce";
+        output = "Data Refined Features";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Refined Features" [label="Data Refined Features", shape=box, fillcolor=white];
+
+        "Data Categorized and Pre-processed Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Refined Features";
+    }
+
+
+    // Subgraph - 1a BN Model Building
+    subgraph cluster_3 {
+        label="1a BN Model Building";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Refined Features";
+        process = "Generate: Train";
+        output = "Model: Statistical Bayesian Networks";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Statistical Bayesian Networks" [label="Model: Statistical Bayesian Networks", shape=hexagon, fillcolor=white];
+
+        "Data Refined Features" -> "Generate: Train";
+        "Generate: Train" -> "Model: Statistical Bayesian Networks";
+    }
+
+    // Subgraph - 2a Integrating BN and CBR for Decision Support 
+    subgraph cluster_4 {
+        label="2a Integrating BN and CBR for Decision Support ";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Statistical Bayesian Networks";
+        input2 = "Data Patient Data"
+        input3 = "Data Previous Cases"
+        process = "Infer: Deduce1";
+        output = "Symbol Pain Level";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Data Previous Cases" [label="Data Previous Cases", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Pain Level" [label="Symbol Pain Level", shape=box, fillcolor=white];
+
+        "Data Patient Data" -> "Infer: Deduce1";
+        "Data Previous Cases" -> "Infer: Deduce1";
+        "Model: Statistical Bayesian Networks" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Pain Level";
+    }
+    
+    // Subgraph - 2a Providing Recommendations to Clinicians
+    subgraph cluster_5 {
+        label="2a Providing Recommendations to Clinicians";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Pain Level";
+        process = "Infer: Deduce2";
+        output = "Symbol Pain Classificiation w/ Supporting Info";
+
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Pain Classificiation w/ Supporting Info" [label="Symbol Pain Classificiation w/ Supporting Info", shape=box, fillcolor=white];
+
+        "Symbol Pain Level" -> "Infer: Deduce2";
+        "Infer: Deduce2" -> "Symbol Pain Classificiation w/ Supporting Info";
+    }
+
+
+
+}

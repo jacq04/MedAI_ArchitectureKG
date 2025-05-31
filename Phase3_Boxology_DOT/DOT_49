@@ -1,0 +1,103 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processed
+    subgraph cluster_1 {
+        label="1d Pre-processed";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Symptom Back Pains";
+        process = "Transform";
+        output = "Data Structured Data";
+
+        "Data Symptom Back Pains" [label="Data Symptom Back Pains", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Structured Data" [label="Data Structured Data", shape=box, fillcolor=white];
+
+        "Data Symptom Back Pains" -> "Transform";
+        "Transform" -> "Data Structured Data";
+    }
+    
+    // Subgraph - 1d Fuzzification
+    subgraph cluster_2 {
+        label="1d Fuzzification";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Structured Data";
+        input2 = "Actor Physicians";
+        process = "Transform1";
+        output = "Data Fuzzified Values";
+
+        "Actor Physicians" [label="Actor Physicians", shape=triangle, fillcolor=white];
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Fuzzified Values" [label="Data Fuzzified Values", shape=box, fillcolor=white];
+
+        "Data Structured Data" -> "Transform1";
+        "Actor Physicians" -> "Transform1";
+    }   "Transform1" -> "Data Fuzzified Values";
+
+    // Subgraph - 1a Fuzzy Inference System (FIS)
+    subgraph cluster_3 {
+        label="1a Fuzzy Inference System (FIS)";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Fuzzified Values";
+        process = "Generate: Train";
+        output = "Model: Hybrid FNDSB";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid FNDSB" [label="Model: Hybrid FNDSB", shape=box, fillcolor=white];
+
+        "Data Fuzzified Values" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid FNDSB";
+    }
+    
+    // Subgraph - 2a Prediction Making
+    subgraph cluster_4 {
+        label="2a Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid FNDSB";
+        input2 = "Data Patient Symptoms";
+        process = "Infer: Deduce";
+        output = "Symbol Condition and Severity";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Condition and Severity" [label="Symbol Condition and Severity", shape=box, fillcolor=white];
+
+        "Model: Hybrid FNDSB" -> "Infer: Deduce";
+        "Data Patient Symptoms" -> "Infer: Deduce";
+        "Infer: Deduce"-> "Symbol Condition and Severity";
+    }
+    
+    // Subgraph - 1d Presentation of Diagnosis and Advice
+    subgraph cluster_5 {
+        label="1d Presentation of Diagnosis and Advice";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Condition and Severity";
+        process = "Transform2";
+        output = "Symbol Diagnosis + Recommended Actions";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol Diagnosis + Recommended Actions" [label="Symbol Diagnosis + Recommended Actions", shape=box, fillcolor=white];
+
+        "Symbol Condition and Severity" -> "Transform2";
+        "Transform2" -> "Symbol Diagnosis + Recommended Actions";
+    }
+
+
+
+
+
+
+
+
+
+
+}

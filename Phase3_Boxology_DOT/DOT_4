@@ -1,0 +1,80 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Data Pre-processing
+    subgraph cluster_1 {
+        label="1d Data Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data EHRs";
+        process = "Transform: Embed";
+        output = "Data Preprocessed Data";
+
+        "Data EHRs" [label="Data EHRs", shape=box, fillcolor=white];
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Preprocessed Data" [label="Data Preprocessed Data", shape=box, fillcolor=white];
+
+        "Data EHRs" -> "Transform: Embed";
+        "Transform: Embed" -> "Data Preprocessed Data";
+    }
+
+    // Subgraph - 1d Data Transformation
+    subgraph cluster_2 {
+        label="1d Data Transformation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Preprocessed Data";
+        process = "Transform: Embed1";
+        output = "Data Transformed Data";
+
+        "Transform: Embed1" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Transformed Data" [label="Data Transformed Data", shape=box, fillcolor=white];
+
+        "Data Preprocessed Data" -> "Transform: Embed1";
+        "Transform: Embed1" -> "Data Transformed Data";
+    }
+
+    // Subgraph - 2a Decision Support Generation
+    subgraph cluster_3 {
+        label="2a Decision Support Generation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model Patterns";
+        input2 = "Data Patient Data";
+        process = "Infer: Deduce";
+        output = "Symbol Risk Assessment + Recommendation";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Risk Assessment + Recommendation" [label="Symbol Risk Assessment + Recommendation", shape=box, fillcolor=lightgray];
+
+        "Data Patient Data" -> "Infer: Deduce";
+        "Model Patterns" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Risk Assessment + Recommendation";
+    }
+
+    // Subgraph - 1c Knowledge Integration + Data Mining
+    subgraph cluster_4 {
+        label="1c Knowledge Integration + Data Mining";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Transformed Data";
+        input2 = "Actor Experts";
+        input3 = "Symbol Risk Assessment + Recommendation";
+        process = "Generate: Engineer";
+        output = "Model Patterns";
+
+        "Actor Experts" [label="Actor Experts", shape=triangle, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model Patterns" [label="Model Patterns", shape=hexagon, fillcolor=white];
+
+        "Data Transformed Data" -> "Generate: Engineer";
+        "Symbol Risk Assessment + Recommendation" -> "Generate: Engineer";
+        "Actor Experts" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model Patterns";
+    }
+}

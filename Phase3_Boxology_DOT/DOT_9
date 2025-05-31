@@ -1,0 +1,72 @@
+digraph Boxology {
+       rankdir=TB; //arrange top to bottom 
+
+    // Subgraph - Data Preparation
+    subgraph cluster_1 {
+        label="1d Data Preparation";
+        order="1";  //Hidden sorting attribute to get step names in order;
+        style=filled;
+        color=lightgrey;
+        input = "Time Series Data COVID-19";
+        process = "Transform: Embed";
+        output = "Data Prepared Time Series Data";
+
+        "Time_Series_Data_COVID19" [label="Data\nTime Series Data COVID-19", shape=box, fillcolor=white];
+        "Transform_Embed1" [label="Transform:Embed", shape=oval, fillcolor=lightgray];
+        "Prepared_Time_Series_Data" [label="Data\nPrepared Time Series Data", shape=box, fillcolor=white];
+
+        "Time_Series_Data_COVID19" -> "Transform_Embed1";
+        "Transform_Embed1" -> "Prepared_Time_Series_Data";
+    }
+
+    // Subgraph - Calculation of Fractal Dimensions
+    subgraph cluster_2 {
+        label="1d Calculation of Fractal Dimensions";
+        order="2";
+        style=filled;
+        color=lightgrey;
+        input = "Data Prepared Time Series Data";
+        process = "Transforme: Embed";
+        output = "Data Fractal Dimensions";
+
+        "Transform_Embed2" [label="Transform:Embed", shape=oval, fillcolor=lightgray];
+        "Fractal_Dimensions" [label="Data\nFractal Dimensions", shape=box, fillcolor=white];
+
+        "Prepared_Time_Series_Data" -> "Transform_Embed2";
+        "Transform_Embed2" -> "Fractal_Dimensions";
+    }
+
+    // Subgraph - Fuzzy Model Formation
+    subgraph cluster_3 {
+        label="1a Fuzzy Model Formation";
+        order="3";
+        style=filled;
+        color=lightgrey;
+        input = "Data Fractal Dimensions";
+        process = "Generate: Train";
+        output = "Model: Semantic Fuzzy Logic Model";
+
+        "Generate_Train" [label="Generate:Train", shape=oval, fillcolor=lightgray];
+        "Fuzzy_Logic_Model" [label="Model:Semantic\nFuzzy Logic Model", shape=hexagon, fillcolor=lightpink];
+
+        "Fractal_Dimensions" -> "Generate_Train";
+        "Generate_Train" -> "Fuzzy_Logic_Model";
+    }
+
+    // Subgraph - Forecasting Using Fuzzy Logic
+    subgraph cluster_4 {
+        label="2a Forecasting Using Fuzzy Logic";
+        order="4";
+        style=filled;
+        color=lightgrey;
+        input = "Model: Semantic Fuzzy Logic Model";
+        process = "Infer:Deduce";
+        output = "Symbol Forecasted Trends";
+
+        "Infer_Deduce" [label="Infer:Deduce", shape=oval, fillcolor=lightgray];
+        "Forecasted_Trends" [label="Symbol\nForecasted Trends", shape=box, fillcolor=white];
+
+        "Fuzzy_Logic_Model" -> "Infer_Deduce";
+        "Infer_Deduce" -> "Forecasted_Trends";
+    }
+}

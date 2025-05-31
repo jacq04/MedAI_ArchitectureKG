@@ -1,0 +1,146 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Microarray Gene Expression Datasets";
+        process = "Transform";
+        output = "Data Cleaned and Normalize";
+
+        "Data Raw Microarray Gene Expression Datasets" [label="Data Raw Microarray Gene Expression Datasets", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Cleaned and Normalize" [label="Data Cleaned and Normalize", shape=box, fillcolor=white];
+
+        "Data Raw Microarray Gene Expression Datasets" -> "Transform";
+        "Transform" -> "Data Cleaned and Normalize";
+    }
+
+    // Subgraph - 1d Annotation
+    subgraph cluster_2 {
+        label="1d Annotation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Cleaned and Normalize";
+        input2 = "Actor Experts";
+        process = "Transform1";
+        output = "Data Unlabeled Data";
+        output2 = "Data Labeled Data";
+
+        "Actor Experts" [label="Actor Experts", shape=triangle, fillcolor=white];
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Unlabeled Data" [label="Data Unlabeled Data", shape=box, fillcolor=white];
+        "Data Labeled Data" [label="Data Labeled Data", shape=box, fillcolor=white];
+        
+        "Data Cleaned and Normalize" -> "Transform1";
+        "Actor Experts" -> "Transform1";
+        "Transform1" -> "Data Unlabeled Data";
+        "Transform1" -> "Data Labeled Data";
+    }
+
+    // Subgraph - 1a Development of the Rough-Fuzzy Classifier
+    subgraph cluster_3 {
+        label="1a Development of the Rough-Fuzzy Classifier";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Labeled Data";
+        process = "Generate: Train";
+        output = "Model: Hybrid Rough-Fuzzy Classifier";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid Rough-Fuzzy Classifier" [label="Model: Hybrid Rough-Fuzzy Classifier", shape=hexagon, fillcolor=white];
+
+        "Data Labeled Data" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid Rough-Fuzzy Classifier";
+    }
+    
+    // Subgraph - 2a Iterative Selection
+    subgraph cluster_4 {
+        label="2a Iterative Selection";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Unlabeled Data";
+        input2 = "Model: Hybrid Rough-Fuzzy Classifier";
+        process = "Infer: Deduce";
+        output = "Data Most Uncertain Data";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Most Uncertain Data" [label="Data Most Uncertain Data", shape=box, fillcolor=white];
+
+        "Data Unlabeled Data" -> "Infer: Deduce";
+        "Model: Hybrid Rough-Fuzzy Classifier" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Most Uncertain Data";
+    }
+    
+    // Subgraph - 2a Expert Labeling
+    subgraph cluster_5 {
+        label="2a Expert Labeling";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Most Uncertain Data";
+        input2 = "Actor Experts1"
+        process = "Infer: Deduce1";
+        output = "Data Labeled Data";
+
+        "Actor Experts1" [label="Actor Experts", shape=triangle, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Labeled Data1" [label="Data Labeled Data", shape=box, fillcolor=white];
+
+        "Data Most Uncertain Data" -> "Infer: Deduce1";
+        "Actor Experts1" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Data Labeled Data1";
+    }
+
+    // Subgraph - 1a Classsifier Update
+    subgraph cluster_6 {
+        label="1a Classsifier Update";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Labeled Data1";
+        process = "Generate: Train1";
+        output = "Model: Hybrid Rough Fuzzy Classifier";
+
+        "Generate: Train1" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid Rough Fuzzy Classifier" [label="Model: Hybrid Rough Fuzzy Classifier", shape=hexagon, fillcolor=white];
+
+        "Data Labeled Data1" -> "Generate: Train1";
+        "Generate: Train1" -> "Model: Hybrid Rough Fuzzy Classifier";
+    }
+    
+    // Subgraph - 2a Prediction
+    subgraph cluster_7 {
+        label="2a Prediction";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid Rough Fuzzy Classifier";
+        input2 = "Data Patient Data";
+        process = "Infer: Predict";
+        output = "Symbol Cancer Type";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Predict" [label="Infer: Predict", shape=oval, fillcolor=lightgray];
+        "Symbol Cancer Type" [label="Symbol Cancer Type", shape=box, fillcolor=white];
+
+        "Model: Hybrid Rough Fuzzy Classifier" -> "Infer: Predict";
+        "Data Patient Data" -> "Infer: Predict";
+        "Infer: Predict" -> "Symbol Cancer Type";
+    }
+
+
+
+
+
+
+
+
+
+}

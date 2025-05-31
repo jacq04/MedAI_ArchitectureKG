@@ -1,0 +1,134 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1D Pre-processing
+    subgraph cluster_1 {
+        label="1D Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Genomic Data";
+        process = "Transform";
+        output = "Data Processed Dataset";
+
+        "Data Raw Genomic Data" [label="Data Raw Genomic Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Processed Dataset" [label="Data Processed Dataset", shape=box, fillcolor=white];
+
+        "Data Raw Genomic Data" -> "Transform";
+        "Transform" -> "Data Processed Dataset";
+    }
+    
+    // Subgraph - 1d Pre-Processing
+    subgraph cluster_2 {
+        label="1d Pre-Processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Curated Biological Information";
+        process = "Transform1";
+        output = "Data Structured Biological Framework";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Structured Biological Framework" [label="Data Structured Biological Framework", shape=box, fillcolor=white];
+
+        "Data Curated Biological Information" -> "Transform1";
+        "Transform1" -> "Data Structured Biological Framework";
+    }
+
+    // Subgraph - 1c Network Architecture Design
+    subgraph cluster_3 {
+        label="1c Network Architecture Design";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Processed Dataset";
+        input2 = "Data Structured Biological Framework";
+        process = "Generate: Engineer";
+        output1 = "Symbol Gene Layer";
+        output2 = "Symbol Protein Complex Layer";
+        output3 = "Symbol Pathway Layer";
+        output4 = "Symbol Drug Layer";
+
+        "Symbol Gene Layer" [label="Symbol Gene Layer", shape=box, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Symbol Protein Complex Layer" [label="Symbol Protein Complex Layer", shape=box, fillcolor=white];
+        "Symbol Pathway Layer" [label="Symbol Pathway Layer", shape=box, fillcolor=white];
+        "Symbol Drug Layer" [label="Symbol Drug Layer", shape=box, fillcolor=white];
+        
+        "Data Processed Dataset" -> "Generate: Engineer";
+        "Data Structured Biological Framework" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Symbol Gene Layer";
+        "Generate: Engineer" -> "Symbol Protein Complex Layer";
+        "Generate: Engineer" -> "Symbol Pathway Layer";
+        "Generate: Engineer" -> "Symbol Drug Layer"
+    }
+
+    // Subgraph - 1c Connection and Regularization Strategy
+    subgraph cluster_4 {
+        label="1c Connection and Regularization Strategy";
+        style=filled;
+        color=lightgrey;
+
+        imput1 = "Symbol Gene Layer";
+        input2 = "Symbol Protein Complex Layer";
+        input3 = "Symbol Pathway Layer";
+        input4 = "Symbol Drug Layer";
+        process = "Generate: Engineer1";
+        output = "Model: Hybrid Fully Connected Network";
+
+        "Generate: Engineer1" [label="Generate: Engineer", shape=box, fillcolor=white];
+        "Model: Hybrid Fully Connected Network" [label="Model: Hybrid Fully Connected Network", shape=oval, fillcolor=lightgray];
+        
+        "Symbol Gene Layer" -> "Generate: Engineer1";
+        "Symbol Protein Complex Layer" -> "Generate: Engineer1";
+        "Symbol Pathway Layer" -> "Generate: Engineer1";
+        "Symbol Drug Layer" -> "Generate: Engineer1";
+        "Generate: Engineer1" -> "Model: Hybrid Fully Connected Network";
+}
+
+    // Subgraph - 1a Model Training
+    subgraph cluster_5 {
+        label="1a Model Training";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid Fully Connected Network";
+        input2 = "Data Gene Expression Data";
+        process = "Generate: Train";
+        output = "Model: Hybrid Refined Model";
+
+        "Data Gene Expression Data" [label="Data Gene Expression Data", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid Refined Model" [label="Model: Hybrid Refined Model", shape=hexagon, fillcolor=white];
+
+        "Model: Hybrid Fully Connected Network" -> "Generate: Train";
+        "Data Gene Expression Data" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid Refined Model";
+    }
+    
+    // Subgraph - 
+    subgraph cluster_6 {
+        label="2a Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid Refined Model";
+        input2 = "Data New Genomic Data";
+        process = "Infer: Deduce";
+        output = "Symbol Predicted Drug Response";
+
+        "Data New Genomic Data" [label="Data New Genomic Data", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Predicted Drug Response" [label="Symbol Predicted Drug Response", shape=box, fillcolor=white];
+
+        "Model: Hybrid Refined Model" -> "Infer: Deduce";
+        "Data New Genomic Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Predicted Drug Response";
+    }
+
+
+
+
+
+}

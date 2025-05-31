@@ -1,0 +1,72 @@
+digraph Boxology {
+    rankdir=TB;
+
+    // Subgraph - 1c Rules from experts
+    subgraph cluster_1 {
+        label="1c Rules from experts";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor Physicians";
+        process = "Generate: Engineer";
+        output = "Model: Rule-Based";
+
+        "Actor Physicians" [label="Actor Physicians", shape=triangle, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model: Rule-Based" [label="Model: Rule-Based", shape=hexagon, fillcolor=white];
+
+        "Actor Physicians" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Rule-Based";
+    }
+
+
+    // Subgraph - 1a Train from previous cases
+    subgraph cluster_2 {
+        label="1a Train from previous cases";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Previous Cases";
+        process = "Generate: Train";
+        output = "Model: Case-Based";
+
+        "Data Previous Cases" [label="Data Previous Cases", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Case-Based" [label="Model: Case-Based", shape=hexagon, fillcolor=white];
+
+        "Data Previous Cases" -> "Generate: Train";
+        "Generate: Train" -> "Model: Case-Based";
+    }
+
+
+    // Subgraph - 2a Final Decision
+    subgraph cluster_3 {
+        label="2a Final Decision";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Rule-Based";
+        input2 = "Model: Case-Based";
+        input3 = "Data Current Case";
+        process = "Infer: Deduce"
+        output = "Symbol Final Diagnosis";
+
+        "Data Current Case" [label="Data Current Case", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Final Diagnosis" [label="Symbol Final Diagnosis", shape=box, fillcolor=white];
+
+        "Model: Rule-Based" -> "Infer: Deduce";
+        "Model: Case-Based" -> "Infer: Deduce";
+        "Data Current Case" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Final Diagnosis";
+    }
+
+
+
+
+
+
+
+
+
+}

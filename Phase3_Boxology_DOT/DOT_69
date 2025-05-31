@@ -1,0 +1,120 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Patient Data";
+        process = "Transform";
+        output = "Data Processed Data";
+
+        "Data Raw Patient Data" [label="Data Raw Patient Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Processed Data" [label="Data Processed Data", shape=box, fillcolor=white];
+
+        "Data Raw Patient Data" -> "Transform";
+        "Transform" -> "Data Processed Data";
+    }
+    
+    // Subgraph - 1d Crisp Values
+    subgraph cluster_2 {
+        label="1d Crisp Values";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Processed Data";
+        process = "Transform1";
+        output = "Data Crisp Values";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Crisp Values" [label="Data Crisp Values", shape=box, fillcolor=white];
+
+        "Data Processed Data" -> "Transform1";
+        "Transform1" -> "Data Crisp Values";
+    }
+
+
+    // Subgraph - 1d Variable Selection
+    subgraph cluster_3 {
+        label="1d Variable Selection";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Processed Data";
+        process = "Transform2";
+        output = "Data Selected Variables";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Selected Variables" [label="Data Selected Variables", shape=box, fillcolor=white];
+
+        "Data Processed Data" -> "Transform2";
+        "Transform2" -> "Data Selected Variables";
+    }
+    
+    // Subgraph - 1a MLP Training
+    subgraph cluster_4 {
+        label="1a MLP Training";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Selected Variables";
+        process = "Generate: Train";
+        output = "Model: ML MLP";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: ML MLP" [label="Model: ML MLP", shape=hexagon, fillcolor=white];
+
+        "Data Selected Variables" -> "Generate: Train";
+        "Generate: Train" -> "Model: ML MLP";
+    }
+
+    // Subgraph - 2a Prediction Making
+    subgraph cluster_5 {
+        label="2a Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: ML MLP";
+        input2 = "Model: Semantic Fuzzy Regression";
+        input3 = "Data New Patient Data";
+        process = "Infer: Predict";
+        output = "Symbol Predicted Triglyceride Levels";
+
+        "Model: Semantic Fuzzy Regression" [label="Model: Semantic Fuzzy Regression", shape=hexagon, fillcolor=white];
+        "Infer: Predict" [label="Infer: Predict", shape=oval, fillcolor=lightgray];
+        "Data New Patient Data" [label="Data New Patient Data", shape=box, fillcolor=white];
+
+        "Model: ML MLP" -> "Infer: Predict";
+        "Model: Semantic Fuzzy Regression" -> "Infer: Predict";
+        "Data New Patient Data" -> "Infer: Predict";
+        "Infer: Predict" -> "Symbol Predicted Triglyceride Levels";
+    }
+
+    // Subgraph - 1a Fuzzy Regression
+    subgraph cluster_6 {
+        label="1a Fuzzy Regression";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Crisp Values";
+        process = "Generate: Train1";
+        output = "Model: Semantic Fuzzy Regression";
+
+        "Generate: Train1" [label="Generate: Train1", shape=oval, fillcolor=lightgray];
+
+
+        "Data Crisp Values" -> "Generate: Train1";
+        "Generate: Train1" -> "Model: Semantic Fuzzy Regression";
+    }
+
+
+
+
+
+
+
+
+}

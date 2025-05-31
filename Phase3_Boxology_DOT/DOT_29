@@ -1,0 +1,171 @@
+digraph Boxology {
+    rankdir=TB;
+        
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Imgae Brain MRI Images";
+        process = "Transform";
+        output = "Data: Image Contrast Enhanced Images";
+
+        "Data: Imgae Brain MRI Images" [label="Data: Imgae Brain MRI Images", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image Contrast Enhanced Images" [label="Data: Image Contrast Enhanced Images", shape=box, fillcolor=white];
+
+        "Data: Imgae Brain MRI Images" -> "Transform";
+        "Transform" -> "Data: Image Contrast Enhanced Images";
+    }
+
+    // Subgraph - 2a Dual-Tree Complex Wavelet Transform (DTCWT)
+    subgraph cluster_2 {
+        label="2a Dual-Tree Complex Wavelet Transform (DTCWT)";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Contrast Enhanced Images";
+        process = "Transform1";
+        output = "Data: Image Decomposed sub-band images";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image Decomposed sub-band images" [label="Data: Image Decomposed sub-band images", shape=box, fillcolor=white];
+
+        "Data: Image Contrast Enhanced Images" -> "Transform1";
+        "Transform1" -> "Data: Image Decomposed sub-band images";
+    }
+    
+    // Subgraph - 2a Fuzzy Logic-based Edge Detection
+    subgraph cluster_3 {
+        label="2a Fuzzy Logic-based Edge Detection";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Image Decomposed sub-band images";
+        input2 = "Symbol Fuzzy Rules"
+        process = "Infer: Deduce";
+        output = "Data: Image Edge-detected Images";
+
+        "Symbol Fuzzy Rules" [label="Symbol Fuzzy Rules", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data: Image Edge-detected Images" [label="Data: Image Edge-detected Images", shape=box, fillcolor=white];
+
+        "Symbol Fuzzy Rules" -> "Infer: Deduce";
+        "Data: Image Decomposed sub-band images" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data: Image Edge-detected Images";
+    }
+    
+    // Subgraph - 1c Fuzzy-Rules Creation
+    subgraph cluster_4 {
+        label="1c Fuzzy-Rules Creation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor";
+        process = "Generate: Engineer";
+        output = "Symbol Fuzzy Rules";
+
+        "Actor" [label="Actor", shape=triangle, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+    
+        "Actor" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Symbol Fuzzy Rules";
+    }
+
+
+
+    // Subgraph - 1d Feature Extraction
+    subgraph cluster_5 {
+        label="1d Feature Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Edge-detected Images"
+        process = "Transform: Embed";
+        output = "Data: Image Extracted Features";
+
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Image Extracted Features" [label="Data: Image Extracted Features", shape=box, fillcolor=white];
+
+        "Data: Image Edge-detected Images" -> "Transform: Embed";
+        "Transform: Embed" -> "Data: Image Extracted Features";
+    }
+    
+    // Subgraph - 1a Model Training
+    subgraph cluster_6 {
+        label="1a Model Training";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Image Extracted Features";
+        input2 = "Data Labels"
+        process = "Generate: Train";
+        output = "Model-Statistical U-NET CNN";
+
+        "Data Labels" [label="Data Labels", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model-Statistical U-NET CNN" [label="Model-Statistical U-NET CNN", shape=box, fillcolor=white];
+
+        "Data: Image Extracted Features" -> "Generate: Train";
+        "Data Labels" -> "Generate: Train";
+        "Generate: Train" -> "Model-Statistical U-NET CNN";
+    }
+
+    // Subgraph - 2a Annotation
+    subgraph cluster_7 {
+        label="2a Annotation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Extracted Features";
+        process = "Infer: Deduce1";
+        output = "Data Labels";
+
+        
+        "Infer: Deduce1" [label="Infer: Deduce1", shape=oval, fillcolor=lightgray];
+        "Data Labels" [label="Data Labels", shape=box, fillcolor=white];
+
+        "Data: Image Extracted Features" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Data Labels";
+    }
+
+    // Subgraph - 2a U-NET CNN Classification
+    subgraph cluster_8 {
+        label="2a U-NET CNN Classification";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model-Statistical U-NET CNN";
+        input2 = "Data: Image Processed Image"
+        process = "Infer: Deduce";
+        output = "Symbol Segregated and Classified Images";
+
+        "Data: Image Processed Image" [label="Data: Image Processed Image", shape=box, fillcolor=white];
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Segregated and Classified Images" [label="Symbol Segregated and Classified Images", shape=box, fillcolor=white];
+
+        "Model-Statistical U-NET CNN" -> "Infer: Deduce2";
+        "Data: Image Processed Image" -> "Infer: Deduce2";
+        "Infer: Deduce2" -> "Symbol Segregated and Classified Images";
+    }
+    
+    // Subgraph - 1d Data Processing
+    subgraph cluster_9 {
+        label="1d Data Processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Patient Brain MRI";
+        process = "Transform: Embed1";
+        output = "Data: Image Processed Image";
+
+        "Data: Image Patient Brain MRI" [label="Data: Image Patient Brain MRI", shape=box, fillcolor=white];
+        "Transform: Embed1" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+
+
+        "Data: Image Patient Brain MRI" -> "Transform: Embed1";
+        "Transform: Embed1" -> "Data: Image Processed Image";
+    }
+
+}

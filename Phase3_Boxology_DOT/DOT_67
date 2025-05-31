@@ -1,0 +1,81 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label=" 1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Clinical Records CKD Patients";
+        process = "Transform";
+        output = "Data Pre-processed Data";
+
+        "Data Clinical Records CKD Patients" [label="Data Clinical Records CKD Patients", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Pre-processed Data" [label="Data Pre-processed Data", shape=box, fillcolor=white];
+
+        "Data Clinical Records CKD Patients" -> "Transform";
+        "Transform" -> "Data Pre-processed Data";
+    }
+
+    // Subgraph - 1d Variable Selection and Correlation Analysis
+    subgraph cluster_2 {
+        label="1d Variable Selection and Correlation Analysis";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Pre-processed Data";
+        process = "Transform1";
+        output = "Data Selected Variables";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Selected Variables" [label="Data Selected Variables", shape=box, fillcolor=white];
+
+        "Data Pre-processed Data" -> "Transform1";
+        "Transform1" -> "Data Selected Variables";
+    }
+    
+    // Subgraph - 1a ANFIS Training
+    subgraph cluster_3 {
+        label="1a ANFIS Training";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Selected Variables";
+        process = "Generate: Train";
+        output = "Model: Hybrid ANFIS";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS" [label="Model: Hybrid ANFIS", shape=hexagon, fillcolor=white];
+
+        "Data Selected Variables" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid ANFIS";
+    }
+    
+    // Subgraph - 2a Prediction of GFR Values 
+    subgraph cluster_4 {
+        label="2a Prediction of GFR Values";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid ANFIS";
+        input2 = "Data New GFR and Patient Data"
+        process = "Infer: Predict";
+        output = "Symbol Predicted GFR Values";
+
+        "Data New GFR and Patient Data" [label="Data New GFR and Patient Data", shape=box, fillcolor=white];
+        "Infer: Predict" [label="Infer: Predict", shape=oval, fillcolor=lightgray];
+        "Symbol Predicted GFR Values" [label="Symbol Predicted GFR Values", shape=box, fillcolor=white];
+
+        "Data New GFR and Patient Data" -> "Infer: Predict";
+        "Model: Hybrid ANFIS" -> "Infer: Predict";
+        "Infer: Predict" -> "Symbol Predicted GFR Values"
+    }
+
+
+
+
+
+
+}

@@ -1,0 +1,159 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Next-Generation Genomic Data";
+        process = "Transform";
+        output = "Data Cleaned Data";
+
+        "Data Raw Next-Generation Genomic Data" [label="Data Raw Next-Generation Genomic Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Cleaned Data" [label="Data Cleaned Data", shape=box, fillcolor=white];
+
+        "Data Raw Next-Generation Genomic Data" -> "Transform";
+        "Transform" -> "Data Cleaned Data";
+    }
+    
+    // Subgraph - 1a DL-training
+    subgraph cluster_2 {
+        label="1a DL-training";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Cleaned Data";
+        process = "Generate: Train";
+        output = "Model: ML Abstracted Weights";
+
+        
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: ML Abstracted Weights" [label="Model: ML Abstracted Weights", shape=hexagon, fillcolor=white];
+
+        "Data Cleaned Data" -> "Generate: Train";
+        "Generate: Train" -> "Model: ML Abstracted Weights";
+    }
+    
+    // Subgraph - 2a Cox Proportional Hazards (CoxPH) Model Application
+    subgraph cluster_3 {
+        label="2a Cox Proportional Hazards (CoxPH) Model Application";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Cleaned Data";
+        input2 = "Model: Statisitcal CoxPH";
+        process = "Infer: Deduce";
+        output = "Data: Numeric HR-Values";
+
+        "Model: Statisitcal CoxPH" [label="Model: Statisitcal CoxPH", shape=hexagon, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data: Numeric HR-Values" [label="Data: Numeric HR-Values", shape=box, fillcolor=white];
+
+        "Data Cleaned Data" -> "Infer: Deduce";
+        "Model: Statisitcal CoxPH" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data: Numeric HR-Values";
+    }
+    
+    // Subgraph - 1a Risk Score Development
+    subgraph cluster_4 {
+        label="1a Risk Score Development";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: ML Abstracted Weights";
+        input2 = "Data: Numeric HR-Values"
+        process = "Generate: Train";
+        output1 = "Model: Statistical Multiplication model-based";
+        ouptut2 = "Model: Statistical CoxPH HR-based";
+        output3 = "Model: Statistical Addition model-based";
+        output4 = "Model: ML DL-based";
+
+        "Generate: Train2" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: ML DL-based" [label="Model: ML DL-based", shape=hexagon, fillcolor=white];
+        "Model: Statistical Addition model-based" [label="Model: Statistical Addition model-based", shape=hexagon, fillcolor=white];
+        "Model: Statistical CoxPH HR-based" [label="Model: Statistical CoxPH HR-based", shape=hexagon, fillcolor=white];
+        "Model: Statistical Multiplication model-based" [label="Model: Statistical Multiplication model-based", shape=hexagon, fillcolor=white];
+        
+
+
+        "Model: ML Abstracted Weights" -> "Generate: Train2";
+        "Data: Numeric HR-Values" -> "Generate: Train2";
+        "Generate: Train2" -> "Model: Statistical Multiplication model-based";
+        "Generate: Train2" -> "Model: Statistical CoxPH HR-based";
+        "Generate: Train2" -> "Model: Statistical Addition model-based";
+        "Generate: Train2" -> "Model: ML DL-based";
+         
+    }
+    
+    // Subgraph - 2a Fuzzy Logic Integration 
+    subgraph cluster_5 {
+        label="2a Fuzzy Logic Integration";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Statistical Multiplication model-based";
+        input2 = "Model: Statistical CoxPH HR-based";
+        input3 = "Model: Statistical Addition model-based";
+        input4 = "Model: ML DL-based";
+        input5 = "Data Patient's Genomic Data";
+        input6 = "Model: Semantic Fuzzy Rules";
+        process = "Infer: Deduce2";
+        output = "Data Risk-scores";
+
+        "Data Patient's Genomic Data" [label="Data Patient's Genomic Data", shape=box, fillcolor=white];
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Model: Semantic Fuzzy Rules" [label="Model: Semantic Fuzzy Rules", shape=hexagon, fillcolor=white];
+        "Data Risk-scores" [label="Data Risk-scores", shape=box, fillcolor=white];
+
+        "Model: Statistical Multiplication model-based" -> "Infer: Deduce2";
+        "Model: Statistical CoxPH HR-based" -> "Infer: Deduce2";
+       "Model: Statistical Addition model-based" -> "Infer: Deduce2";
+       "Model: ML DL-based" -> "Infer: Deduce2";
+       "Data Patient's Genomic Data" -> "Infer: Deduce2";
+       "Model: Semantic Fuzzy Rules" -> "Infer: Deduce2";
+       "Infer: Deduce2"-> "Data Risk-scores";
+       
+    
+    }
+    
+    // Subgraph - 1c Fuzzy Rules
+    subgraph cluster_6 {
+        label=" 1c Fuzzy Rules";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor Experts";
+        process = "Generate: Engineer";
+        output = "Model: Semantic Fuzzy Rules";
+
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Actor Experts" [label="Actor Experts", shape=triangle, fillcolor=white];
+
+        "Actor Experts" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Semantic Fuzzy Rules";
+    }
+
+
+    // Subgraph - 1d Reporting and interpretation
+    subgraph cluster_7 {
+        label="1d Reporting and interpretation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Risk-scores";
+        process = "Transform2";
+        output = "Symbol Clinical Implications";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol Clinical Implications" [label="Symbol Clinical Implications", shape=box, fillcolor=white];
+
+        "Data Risk-scores" -> "Transform2";
+        "Transform2" -> "Symbol Clinical Implications";
+    }
+
+
+
+}

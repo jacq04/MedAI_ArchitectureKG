@@ -1,0 +1,94 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Feature Extraction
+    subgraph cluster_1 {
+        label="1d Feature Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data mDixon MR Images";
+        process = "Transform";
+        output = "Data Extracted Features";
+
+        "Data mDixon MR Images" [label="Data mDixon MR Images", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Extracted Features" [label="Data Extracted Features", shape=box, fillcolor=white];
+
+        "Data mDixon MR Images" -> "Transform";
+        "Transform" -> "Data Extracted Features";
+    }
+
+    // Subgraph - 1d MR Feature Data Generation
+    subgraph cluster_2 {
+        label="1d MR Feature Data Generation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Extracted Features";
+        process = "Transform1";
+        output = "Data Seven-dimensional MR Feature";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Seven-dimensional MR Feature" [label="Data Seven-dimensional MR Feature", shape=box, fillcolor=white];
+
+        "Data Extracted Features" -> "Transform1";
+        "Transform1" -> "Data Seven-dimensional MR Feature";
+    }
+
+    // Subgraph - 2a Reference Class Prototype Acquistion
+    subgraph cluster_3 {
+        label="2a Reference Class Prototype Acquistion";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Seven-dimensional MR Feature";
+        process = "Infer: Deduce";
+        output = "Data Referenced Class Prototypes";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Referenced Class Prototypes" [label="Data Referenced Class Prototypes", shape=box, fillcolor=white];
+
+        "Data Seven-dimensional MR Feature" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Referenced Class Prototypes";
+    }
+    
+    // Subgraph - 1a Generation of Tissue-Distinguisable Operators (TDOs)
+    subgraph cluster_4 {
+        label="1a Generation of Tissue-Distinguisable Operators (TDOs)";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Extracted Features";
+        input2 = "Data Referenced Class Prototypes";
+        process = "Generate: Train";
+        output = "Model: Hybrid TDOs";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid TDOs" [label="Model: Hybrid TDOs", shape=hexagon, fillcolor=white];
+
+        "Data Extracted Features" -> "Generate: Train";
+        "Data Referenced Class Prototypes" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid TDOs";
+    }
+
+    // Subgraph - 1 Fuzzy Rough Set Application
+    subgraph cluster_5 {
+        label="1 Fuzzy Rough Set Application";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid TDOs";
+        input2 = "Data Patient MR Feature Data"
+        process = "Infer: Deduce1";
+        output = "Symbol Segmented MR Images";
+
+        "Data Patient MR Feature Data" [label="Data Patient MR Feature Data", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Segmented MR Images" [label="Symbol Segmented MR Images", shape=box, fillcolor=white];
+
+        "Model: Hybrid TDOs" -> "Infer: Deduce1";
+        "Data Patient MR Feature Data" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Segmented MR Images";
+    }
+}

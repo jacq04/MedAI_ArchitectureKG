@@ -1,0 +1,84 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Image Preprocessing
+    subgraph cluster_1 {
+        label="1d Image Preprocessing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Raw Chest MRI Image";
+        process = "Transform";
+        output = "Data: Image Standardized Images";
+
+        "Data: Image Raw Chest MRI Image" [label="Data: Image Raw Chest MRI Image", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image Standardized Images" [label="Data: Image Standardized Images", shape=box, fillcolor=white];
+
+        "Data: Image Raw Chest MRI Image" -> "Transform";
+        "Transform" -> "Data: Image Standardized Images";
+    }
+
+    // Subgraph - 2a Feature Extraction Using GLCM
+    subgraph cluster_2 {
+        label="2a Feature Extraction Using GLCM";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Image Standardized Images";
+        input2 = "Model: Statistical GLCM"
+        process = "Infer: Deduce";
+        output = "Data Feature Vector";
+
+        "Model: Statistical GLCM" [label="Model: Statistical GLCM", shape=hexagon, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Feature Vector" [label="Data Feature Vector", shape=box, fillcolor=white];
+
+        "Data: Image Standardized Images" -> "Infer: Deduce";
+        "Model: Statistical GLCM" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Feature Vector";
+    }
+
+    // Subgraph - ANFIS Fine-tuning
+    subgraph cluster_3 {
+        label="ANFIS Fine-tuning";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Feature Vector";
+        input2 = "Data: Image Standardized Images";
+        process = "Generate: Train";
+        output = "Model: Hybrid ANFIS";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS" [label="Model: Hybrid ANFIS", shape=hexagon, fillcolor=white];
+
+        "Data Feature Vector" -> "Generate: Train";
+        "Data: Image Standardized Images" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid ANFIS";
+    }
+    
+    // Subgraph - 2a Classification with ANFIS
+    subgraph cluster_4 {
+        label="2a Classification with ANFIS";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid ANFIS";
+        input2 = "Data: Image Patient Chest MRI Images"
+        process = "Infer: Deduce1";
+        output = "Symbol COVID-19 Prediction";
+
+        "Data: Image Patient Chest MRI Images" [label="Data: Image Patient Chest MRI Images", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol COVID-19 Prediction" [label="Symbol COVID-19 Prediction", shape=box, fillcolor=white];
+
+        "Model: Hybrid ANFIS" -> "Infer: Deduce1";
+        "Data: Image Patient Chest MRI Images" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol COVID-19 Prediction";
+    }
+
+
+
+
+}

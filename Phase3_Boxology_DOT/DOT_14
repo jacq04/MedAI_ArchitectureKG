@@ -1,0 +1,131 @@
+digraph Boxology {
+    rankdir=TB;
+    // Subgraph - 1d Pre-Process Data
+    subgraph cluster_1 {
+        label="1d Pre-Process Data";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Time-series Raw EEG Signals";
+        process = "Transform";
+        output = "Data: Time-series Segemented EEG Signals";
+
+        "Data: Time-series Raw EEG Signals" [label="Data: Time-series Raw EEG Signals", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Time-series Segemented EEG Signals" [label="Data: Time-series Segemented EEG Signals", shape=box, fillcolor=white];
+
+        "Data: Time-series Raw EEG Signals" -> "Transform";
+        "Transform" -> "Data: Time-series Segemented EEG Signals";
+    }
+
+    // Subgraph - 1d Feature Extraction
+    subgraph cluster_2 {
+        label="1d Feature Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Time-series Segemented EEG Signals";
+        process = "Transform: Embed";
+        output = "Data: Time-series Extracted Features";
+
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Time-series Extracted Features" [label="Data: Time-series Extracted Features", shape=box, fillcolor=white];
+
+        "Data: Time-series Segemented EEG Signals" -> "Transform: Embed";
+        "Transform: Embed" -> "Data: Time-series Extracted Features";
+    }
+
+    // Subgraph - 2a Fuzzy Rules Construction
+    subgraph cluster_3 {
+        label="2a Fuzzy Rules Construction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Time-series Extracted Features";
+        process = "Infer: Deduce";
+        output = "Symbol Fuzzy Rules";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Fuzzy Rules" [label="Symbol Fuzzy Rules", shape=box, fillcolor=white];
+
+        "Data: Time-series Extracted Features" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Fuzzy Rules";
+    }
+
+    // Subgraph - 1d Annotate Data
+    subgraph cluster_4 {
+        label="1d Annotate Data";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Time-series Extracted Features";
+        process = "Transform: Embed1";
+        output1 = "Data: Time-series Labeled Data";
+        output2 = "Data: Time-series Unlabeled Data";
+
+        "Data: Time-series Labeled Data" [label="Data: Time-series Labeled Data", shape=box, fillcolor=white];
+        "Transform: Embed1" [label="Transform: Embed1", shape=oval, fillcolor=lightgray];
+        "Data: Time-series Unlabeled Data" [label="Data: Time-series Unlabeled Data", shape=box, fillcolor=white];
+
+        "Data: Time-series Extracted Features" -> "Transform: Embed1";
+        "Transform: Embed1" -> "Data: Time-series Labeled Data";
+        "Transform: Embed1" -> "Data: Time-series Unlabeled Data";
+    }
+    
+    // Subgraph - 1a Semi-supervised Learning
+    subgraph cluster_5 {
+        label="1a Semi-supervised Learning";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Time-series Labeled Data";
+        input2 = "Data: Time-series Unlabeled Data";
+        process = "Generate: Train";
+        output = "Model Classification Model";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model Classification Model" [label="Model Classification Model", shape=hexagon, fillcolor=white];
+
+        "Data: Time-series Labeled Data" -> "Generate: Train";
+        "Data: Time-series Unlabeled Data" -> "Generate: Train";
+        "Generate: Train" -> "Model Classification Model";
+    }
+
+    // Subgraph - 1a TSK Fuzzy System Integration and Training
+    subgraph cluster_6 {
+        label="1a TSK Fuzzy System Integration and Training";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Fuzzy Rules";
+        input2 = "Model Classification Model";
+        process = "Generate: Train1";
+        output = "Model: Hybrid TSK Fuzzy System";
+
+        "Generate: Train1" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid TSK Fuzzy System" [label="Model: Hybrid TSK Fuzzy System", shape=hexagon, fillcolor=white];
+
+        "Symbol Fuzzy Rules" -> "Generate: Train1";
+        "Model Classification Model" -> "Generate: Train1";
+    }   "Generate: Train1" -> "Model: Hybrid TSK Fuzzy System"
+
+    // Subgraph - 2a Clinical Application
+    subgraph cluster_7 {
+        label="2a Clinical Application";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid TSK Fuzzy System";
+        input2 = "Data: Time-series EEG Data"
+        process = "Infer: Deduce1";
+        output = "Symbol Seizure Instance";
+
+        "Data: Time-series EEG Data" [label="Data: Time-series EEG Data", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Seizure Instance" [label="Symbol Seizure Instance", shape=box, fillcolor=white];
+
+        "Model: Hybrid TSK Fuzzy System" -> "Infer: Deduce1";
+        "Data: Time-series EEG Data" -> "Infer: Deduce1";
+    }   "Infer: Deduce1" -> "Symbol Seizure Instance";
+
+}

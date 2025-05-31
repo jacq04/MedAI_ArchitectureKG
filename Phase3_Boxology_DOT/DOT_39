@@ -1,0 +1,87 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Data Preprocessing
+    subgraph cluster_1 {
+        label="1d Data Preprocessing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Patient Data";
+        process = "Transform";
+        output = "Data Cleaned w/ Resistance and Reactance param.";
+
+        "Data Raw Patient Data" [label="Data Raw Patient Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Cleaned w/ Resistance and Reactance param" [label="Data Cleaned w/ Resistance and Reactance param", shape=box, fillcolor=white];
+
+        "Data Raw Patient Data" -> "Transform";
+        "Transform" -> "Data Cleaned w/ Resistance and Reactance param";
+    }
+
+    // Subgraph - 2a Feature Selection and Reduction
+    subgraph cluster_2 {
+        label="2a Feature Selection and Reduction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Cleaned w/ Resistance and Reactance param";
+        process = "Infer: Deduce";
+        output = "Data Reduced Dataset";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Reduced Dataset" [label="Data Reduced Dataset", shape=box, fillcolor=white];
+
+        "Data Cleaned w/ Resistance and Reactance param" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Reduced Dataset";
+    }
+
+    // Subgraph - 1a Training the Models
+    subgraph cluster_3 {
+        label="1a Training the Models";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Reduced Dataset";
+        process = "Generate: Train";
+        output1 = "Model: Statistic ML Model";
+        output2 = "Model: Hybrid Neuro-Fuzzy Classifier";
+
+        "Model: Statistic ML Model" [label="Model: Statistic ML Model", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid Neuro-Fuzzy Classifier" [label="Model: Hybrid Neuro-Fuzzy Classifier", shape=box, fillcolor=white];
+
+        "Data Reduced Dataset" -> "Generate: Train";
+        "Generate: Train" -> "Model: Statistic ML Model";
+        "Generate: Train" -> "Model: Hybrid Neuro-Fuzzy Classifier";
+    }
+
+    // Subgraph - 2a Prediction
+    subgraph cluster_4 {
+        label="2a Prediction";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Statistic ML Model";
+        input2 = "Model: Hybrid Neuro-Fuzzy Classifier";
+        input3 = "Data Patient Data";
+        process = "Infer: Deduce1";
+        output1 = "Symbol Diagnosis";
+        output2 = "Symbol Explenation";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Diagnosis" [label="Symbol Diagnosis", shape=box, fillcolor=white];
+        "Symbol Explenation" [label="Symbol Explenation", shape=box, fillcolor=white];
+        
+        "Data Patient Data" -> "Infer: Deduce1";
+        "Model: Statistic ML Model" -> "Infer: Deduce1";
+        "Model: Hybrid Neuro-Fuzzy Classifier" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Diagnosis";
+        "Infer: Deduce1" -> "Symbol Explenation";
+    }
+
+
+
+
+}

@@ -1,0 +1,98 @@
+digraph Boxology {
+    rankdir=TB;
+        
+     // Subgraph - 1d Fuzzification
+    subgraph cluster_1 {
+        label="1d Fuzzification";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image BUS Image";
+        process = "Transform";
+        output = "Data: Image Fuzzy Image";
+
+        "Data: Image BUS Image" [label="Data: Image BUS Image", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image Fuzzy Image" [label="Data: Image Fuzzy Image", shape=box, fillcolor=white];
+
+        "Data: Image BUS Image" -> "Transform";
+        "Transform" -> "Data: Image Fuzzy Image";
+    }
+
+    // Subgraph - 1d Intensification
+    subgraph cluster_2 {
+        label="1d Intensification";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Fuzzy Image";
+        process = "Transform1";
+        output = "Data: Image Enhanced Image";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image Enhanced Image" [label="Data: Image Enhanced Image", shape=box, fillcolor=white];
+
+        "Data: Image Fuzzy Image" -> "Transform1";
+        "Transform1" -> "Data: Image Enhanced Image";
+    }
+    
+    // Subgraph - 1d Defuzzification
+    subgraph cluster_3 {
+        label="1d Defuzzification";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Enhanced Image";
+        process = "Transform2";
+        output = "Data: Image Defuzzified Image";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image Defuzzified Image" [label="Data: Image Defuzzified Image", shape=box, fillcolor=white];
+
+        "Data: Image Enhanced Image" -> "Transform2";
+        "Transform2" -> "Data: Image Defuzzified Image";
+    }
+
+    // Subgraph - 1a CNN Training 
+    subgraph cluster_4 {
+        label="1a CNN Training";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Defuzzified Image";
+        process = "Generate: Train";
+        output = "Model: Statistical CNN";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Statistical CNN" [label="Model: Statistical CNN", shape=hexagon, fillcolor=white];
+
+        "Data: Image Defuzzified Image" -> "Generate: Train";
+        "Generate: Train" -> "Model: Statistical CNN";
+    }
+
+    // Subgraph - 2a Segmentation
+    subgraph cluster_5 {
+        label="2a Segmentation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Statistical CNN";
+        input2 = "Data: Image Patient BUS Image"
+        process = "Infer: Deduce";
+        output = "Symbol Segmented Images with Labels";
+
+        "Data: Image Patient BUS Image" [label="Data: Image Patient BUS Image", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Segmented Images with Labels" [label="Symbol Segmented Images with Labels", shape=box, fillcolor=white];
+
+        "Model: Statistical CNN" -> "Infer: Deduce";
+        "Data: Image Patient BUS Image" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Segmented Images with Labels";
+    }
+
+
+
+
+
+
+}

@@ -1,0 +1,79 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Feature Extraction
+    subgraph cluster_1 {
+        label="1d Feature Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Brain MRI Images";
+        process = "Transform: Embed Wavelet Transformation";
+        output = "Data: Numeric Wavelet Features";
+
+        "Data: Image Brain MRI Images" [label="Data: Image Brain MRI Images", shape=box, fillcolor=white];
+        "Transform: Embed Wavelet Transformation" [label="Transform: Embed Wavelet Transformation", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Wavelet Features" [label="Data: Numeric Wavelet Features", shape=box, fillcolor=white];
+
+        "Data: Image Brain MRI Images" -> "Transform: Embed Wavelet Transformation";
+        "Transform: Embed Wavelet Transformation" -> "Data: Numeric Wavelet Features";
+    }
+
+    // Subgraph - 1d Fuzzy Logic Analysis
+    subgraph cluster_2 {
+        label="1d Fuzzy Logic Analysis";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Wavelet Features";
+        process = "Transform: Embed Fuzzy Logic Analysis";
+        output = "Data: Numeric Refined Set of Features";
+
+        "Transform: Embed Fuzzy Logic Analysis" [label="Transform: Embed Fuzzy Logic Analysis", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Refined Set of Features" [label="Data: Numeric Refined Set of Features", shape=box, fillcolor=white];
+
+        "Data: Numeric Wavelet Features" -> "Transform: Embed Fuzzy Logic Analysis";
+        "Transform: Embed Fuzzy Logic Analysis" -> "Data: Numeric Refined Set of Features";
+    }
+
+    // Subgraph - 1a Train WNN
+    subgraph cluster_3 {
+        label="1a Train WNN";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Refined Set of Features";
+        process = "Generate: Train";
+        output = "Model: Semantic WNN";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Semantic WNN" [label="Model: Semantic WNN", shape=hexagon, fillcolor=white];
+
+        "Data: Numeric Refined Set of Features" -> "Generate: Train";
+        "Generate: Train" -> "Model: Semantic WNN";
+    }
+    
+    // Subgraph - 2a Output
+    subgraph cluster_4 {
+        label="2a Output";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Semantic WNN";
+        input2 = "Data: Image Brain MRI Images2"
+        process = "Infer: Deduce";
+        output = "Symbol Diagnostic Report";
+
+        "Data: Image Brain MRI Images2" [label="Data: Image Brain MRI Images", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Diagnostic Report" [label="Symbol Diagnostic Report", shape=box, fillcolor=white];
+
+        "Model: Semantic WNN" -> "Infer: Deduce";
+        "Data: Image Brain MRI Images2" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Diagnostic Report";
+    }
+
+
+
+
+}

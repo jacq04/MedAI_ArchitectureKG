@@ -1,0 +1,97 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Mammographic";
+        process = "Transform";
+        output = "Data Pre-processed Data";
+
+        "Data Raw Mammographic" [label="Data Raw Mammographic", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Pre-processed Data" [label="Data Pre-processed Data", shape=box, fillcolor=white];
+
+        "Data Raw Mammographic" -> "Transform";
+        "Transform" -> "Data Pre-processed Data";
+    }
+
+    // Subgraph - 1a Train the ANFIS Model
+    subgraph cluster_2 {
+        label="1a Train the ANFIS Model";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Pre-processed Data";
+        input2 = "Model: Hybrid ANFIS Framework"
+        process = "Generate: Train";
+        output = "Model: Hybrid ANFIS";
+
+        "Model: Hybrid ANFIS Framework" [label="Model: Hybrid ANFIS Framework", shape=hexagon, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS" [label="Model: Hybrid ANFIS", shape=hexagon, fillcolor=white];
+
+        "Data Pre-processed Data" -> "Generate: Train";
+        "Model: Hybrid ANFIS Framework" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid ANFIS";
+    }
+    
+    // Subgraph - 2a Use the ANFIS Model for Prediction
+    subgraph cluster_3 {
+        label="2a Use the ANFIS Model for Prediction";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid ANFIS";
+        input2 = "Data Patient Mammographic"
+        process = "Infer: Predict";
+        output = "Symbol Diagnosis Severity";
+
+        "Data Patient Mammographic" [label="Data Patient Mammographic", shape=box, fillcolor=white];
+        "Infer: Predict" [label="Infer: Predict", shape=oval, fillcolor=lightgray];
+        "Symbol Diagnosis Severity" [label="Symbol Diagnosis Severity", shape=box, fillcolor=white];
+
+        "Model: Hybrid ANFIS" -> "Infer: Predict";
+        "Data Patient Mammographic" -> "Infer: Predict";
+        "Infer: Predict" -> "Symbol Diagnosis Severity";
+    }
+
+    // Subgraph - 1 Fuzzy Rough Set Application
+    subgraph cluster_4 {
+        label="1 Fuzzy Rough Set Application";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Pre-processed Data";
+        process = "Infer: Deduce";
+        output = "Data Features";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Features" [label="Data Features", shape=box, fillcolor=white];
+
+        "Data Pre-processed Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Features";
+    }
+
+    // Subgraph - 1c Generate the Equivalent ANFIS Architecture
+    subgraph cluster_5 {
+        label="1c Generate the Equivalent ANFIS Architecture";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Features";
+        input2 = "Symbol Fuzzy Rules"
+        process = "Generate: Engineer";
+        output = "Model: Hybrid ANFIS Framework";
+
+        "Symbol Fuzzy Rules" [label="Symbol Fuzzy Rules", shape=box, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+
+        "Data Features" -> "Generate: Engineer";
+        "Symbol Fuzzy Rules" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Hybrid ANFIS Framework";
+    }
+}

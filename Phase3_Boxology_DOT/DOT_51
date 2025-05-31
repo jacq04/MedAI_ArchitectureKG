@@ -1,0 +1,142 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Data Preparation and Splitting
+    subgraph cluster_1 {
+        label="1d Data Preparation and Splitting";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Observational Data";
+        process = "Transform";
+        output1 = "Data Infrence Data";
+        output2 = "Data Discovery Data";
+
+        "Data Observational Data" [label="Data Observational Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Infrence Data" [label="Data Infrence Data", shape=box, fillcolor=white];
+        "Data Discovery Data" [label="Data Discovery Data", shape=box, fillcolor=white];
+
+        "Data Observational Data" -> "Transform";
+        "Transform" -> "Data Infrence Data";
+        "Transform" -> "Data Discovery Data";
+    }
+
+    // Subgraph - 1d Pseudo-outcoem Re-estimation
+    subgraph cluster_2 {
+        label="1d Pseudo-outcome Re-estimation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Infrence Data";
+        input2 = "Symbol Candidate Rules";
+        process = "Transform1";
+        output = "Symbol Re-estimated Pseudo Outcomes";
+
+        "Symbol Candidate Rules" [label="Symbol Candidate Rules", shape=box, fillcolor=white];
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol Re-estimated Pseudo Outcomes" [label="Symbol Re-estimated Pseudo Outcomes", shape=box, fillcolor=white];
+
+        "Data Infrence Data" -> "Transform1";
+        "Symbol Candidate Rules" -> "Transform1";
+        "Transform1" -> "Symbol Re-estimated Pseudo Outcomes";
+    }
+    
+    // Subgraph - 2a Effect Estimation
+    subgraph cluster_3 {
+        label="2a Effect Estimation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Re-estimated Pseudo Outcomes";
+        process = "Generate: Engineer";
+        output = "Model: Hybrid Treatment Model";
+
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid Treatment Model" [label="Model: Hybrid Treatment Model", shape=hexagon, fillcolor=white];
+
+        "Symbol Re-estimated Pseudo Outcomes" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Hybrid Treatment Model";
+    }
+
+    // Subgraph - 2a Model Application
+    subgraph cluster_4 {
+        label="2a Model Application";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid Treatment Model";
+        input2 = "Data Clinical Data";
+        process = "Infer: Deduce";
+        output = "Symbol Treatment Effects";
+
+        "Data Clinical Data" [label="Data Clinical Data", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Treatment Effects" [label="Symbol Treatment Effects", shape=box, fillcolor=white];
+
+        "Model: Hybrid Treatment Model" -> "Infer: Deduce";
+        "Data Clinical Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Treatment Effects";
+    }
+
+    // Subgraph - 2a Rule Selection
+    subgraph cluster_5 {
+        label="2a Rule Selection";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Potential Decision Rules";
+        process = "Infer: Deduce1";
+        output = "Symbol Candidate Rules";
+
+        "Symbol Potential Decision Rules" [label="Symbol Potential Decision Rules", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        
+        "Symbol Potential Decision Rules" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Candidate Rules";
+    }
+    
+    // Subgraph - 1d Pseudo-outcome Estimation
+    subgraph cluster_6 {
+        label="1d Pseudo-outcome Estimation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Discovery Data";
+        process = "Transform1";
+        output = "Data Individual Pseudo Outcomes";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Individual Pseudo Outcomes" [label="Data Individual Pseudo Outcomes", shape=box, fillcolor=white];
+
+        "Data Discovery Data" -> "Transform1";
+        "Transform1" -> "Data Individual Pseudo Outcomes";
+    }
+
+    // Subgraph - 1d Rule Generation
+    subgraph cluster_7 {
+        label="1d Rule Generation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Individual Pseudo Outcomes";
+        process = "Transform2";
+        output = "Symbol Potential Decision Rules";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+    
+        "Data Individual Pseudo Outcomes" -> "Transform2";
+        "Transform2" -> "Symbol Potential Decision Rules";
+    }
+
+
+
+
+
+
+
+
+
+
+
+}

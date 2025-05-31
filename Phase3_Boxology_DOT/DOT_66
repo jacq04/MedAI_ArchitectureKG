@@ -1,0 +1,117 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Raw Mammogram";
+        process = "Transform";
+        output = "Data: Image Pre-processed Mammogram";
+
+        "Data: Image Raw Mammogram" [label="Data: Image Raw Mammogram", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image Pre-processed Mammogram" [label="Data: Image Pre-processed Mammogram", shape=box, fillcolor=white];
+
+        "Data: Image Raw Mammogram" -> "Transform";
+        "Transform" -> "Data: Image Pre-processed Mammogram";
+    }
+
+    // Subgraph - 1d Feature Extraction using Discrete Wavelet Transform (DWT)
+    subgraph cluster_2 {
+        label="1d Feature Extraction using Discrete Wavelet Transform (DWT)";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Pre-processed Mammogram";
+        process = "Transform1";
+        output = "Data: Numeric HF Components";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric HF Components" [label="Data: Numeric HF Components", shape=box, fillcolor=white];
+
+        "Data: Image Pre-processed Mammogram" -> "Transform1";
+        "Transform1" -> "Data: Numeric HF Components";
+    }
+
+
+    // Subgraph - 2a Location of Suspicious Microclacifications Using Thresholding with Hysteresis
+    subgraph cluster_3 {
+        label="2a Location of Suspicious Microclacifications Using Thresholding with Hysteresis";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric HF Components";
+        process = "Infer: Deduce";
+        output = "Symbol Initial Detected Locations";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Initial Detected Locations" [label="Symbol Initial Detected Locations", shape=box, fillcolor=white];
+
+        "Data: Numeric HF Components" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Initial Detected Locations";
+    }
+
+    // Subgraph - 1a ANFIS
+    subgraph cluster_4 {
+        label="1a ANFIS";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Initial Detected Locations";
+        process = "Generate: Train";
+        output = "Model: Hybrid ANFIS";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS" [label="Model: Hybrid ANFIS", shape=hexagon, fillcolor=white];
+
+        "Symbol Initial Detected Locations" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid ANFIS";
+    }
+
+    // Subgraph - 2a Region Segmentation
+    subgraph cluster_5 {
+        label="2a Region Segmentation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid ANFIS";
+        input2 = "Symbol Initial Detected Locations1"
+        process = "Infer: Deduce1";
+        output = "Symbol Segmented Regions";
+
+        "Symbol Initial Detected Locations1" [label="Symbol Initial Detected Locations", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce1", shape=oval, fillcolor=lightgray];
+        "Symbol Segmented Regions" [label="Symbol Segmented Regions", shape=box, fillcolor=white];
+
+        "Model: Hybrid ANFIS" -> "Infer: Deduce1";
+        "Symbol Initial Detected Locations1" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Segmented Regions";
+    }
+
+    // Subgraph - 2a Location of Suspicious Microcalcifications Using Thresholding with Hysteresis
+    subgraph cluster_6 {
+        label="2a Location of Suspicious Microcalcifications Using Thresholding with Hysteresis";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Patient HF Components";
+        process = "Infer: Deduce2";
+        output = "";
+
+        "Data: Numeric Patient HF Components" [label="Data: Numeric Patient HF Components", shape=box, fillcolor=white];
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+
+
+        "Data: Numeric Patient HF Components" -> "Infer: Deduce2";
+        "Infer: Deduce2" -> "Symbol Initial Detected Locations";
+    }
+
+
+
+
+
+
+}

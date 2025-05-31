@@ -1,0 +1,137 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw EDIC Data";
+        process = "Transform";
+        output = "Data Cleaned Data";
+
+        "Data Raw EDIC Data" [label="Data Raw EDIC Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Cleaned Data" [label="Data Cleaned Data", shape=box, fillcolor=white];
+
+        "Data Raw EDIC Data" -> "Transform";
+        "Transform" -> "Data Cleaned Data";
+    }
+
+    // Subgraph - 2a Feature Ranking
+    subgraph cluster_2 {
+        label="2a Feature Ranking";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Cleaned Data";
+        process = "Infer: Deduce";
+        output = "Symbol Ranked MNSI Parameters";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Ranked MNSI Parameters" [label="Symbol Ranked MNSI Parameters", shape=box, fillcolor=white];
+
+        "Data Cleaned Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Ranked MNSI Parameters";
+    }
+    
+    // Subgraph - 1a Model Development with ANFIS
+    subgraph cluster_3 {
+        label="1a Model Development with ANFIS";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Cleaned Data";
+        input2 = "Symbol Ranked MNSI Parameters";
+        process = "Generate: Train";
+        output = "Model: Hybrid ANFIS Model";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS Model" [label="Model: Hybrid ANFIS Model", shape=box, fillcolor=white];
+
+        "Data Cleaned Data" -> "Generate: Train";
+        "Symbol Ranked MNSI Parameters" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid ANFIS Model";
+    }
+
+
+    // Subgraph - 2a Longitudinal Analysis of DSPN Progression
+    subgraph cluster_4 {
+        label="2a Longitudinal Analysis of DSPN Progression";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Other EDIC Data";
+        process = "Infer: Deduce1";
+        output = "Symbol DSPN Severity Progress";
+
+        "Data Other EDIC Data" [label="Data Other EDIC Data", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol DSPN Severity Progress" [label="Symbol DSPN Severity Progress", shape=box, fillcolor=white];
+
+        "Data Other EDIC Data" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol DSPN Severity Progress";
+    }
+    
+    // Subgraph - 1a EMG Signal Analysis for DSPN Severity Classification
+    subgraph cluster_5 {
+        label="1a EMG Signal Analysis for DSPN Severity Classification";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid ANFIS Model";
+        input2 = "Symbol DSPN Severity Progress";
+        input3 = "Data Selected Datas";
+        process = "Generate: Train1";
+        output = "Model: Hybrid ANFIS Model1";
+
+        "Data Selected Datas" [label="Data Selected Datas", shape=box, fillcolor=white];
+        "Generate: Train1" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS Model1" [label="Model: Hybrid ANFIS Model", shape=box, fillcolor=white];
+
+        "Model: Hybrid ANFIS Model" -> "Generate: Train1";
+        "Symbol DSPN Severity Progress" -> "Generate: Train1";
+        "Data Selected Datas" -> "Generate: Train1";
+        "Generate: Train1" -> "Model: Hybrid ANFIS Model1";
+    }
+
+    // Subgraph - 1d EMG Signal Pre-processing
+    subgraph cluster_6 {
+        label="1d EMG Signal Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data EMG Signals";
+        process = "Transform1";
+        output = "Data Selected Datas";
+
+        "Data EMG Signals" [label="Data EMG Signals", shape=box, fillcolor=white];
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        
+        "Data EMG Signals" -> "Transform1";
+        "Transform1" -> "Data Selected Datas";
+    }
+    
+    // Subgraph - 2a Prediction
+    subgraph cluster_7 {
+        label="2a Prediction";
+        style=filled;
+        color=lightgrey;
+
+        input1= "Model: Hybrid ANFIS Model1";
+        input2 = "Data Patient Data"
+        process = "Infer: Deduce2";
+        output = "Symbol Severity and Treatment Plan";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Severity and Treatment Plan" [label="Symbol Severity and Treatment Plan", shape=box, fillcolor=white];
+
+        "Model: Hybrid ANFIS Model1" -> "Infer: Deduce2";
+        "Data Patient Data" -> "Infer: Deduce2";
+       "Infer: Deduce2"-> "Symbol Severity and Treatment Plan";
+       
+    }
+
+}

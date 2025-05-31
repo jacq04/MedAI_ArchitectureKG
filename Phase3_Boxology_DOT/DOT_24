@@ -1,0 +1,109 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Fuzzification
+    subgraph cluster_1 {
+        label="1d Fuzzification";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Vital Signs Data";
+        process = "Transform";
+        output = "Symbol Fuzzy Values";
+
+        "Data Vital Signs Data" [label="Data Vital Signs Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol Fuzzy Values" [label="Symbol Fuzzy Values", shape=box, fillcolor=white];
+
+        "Data Vital Signs Data" -> "Transform";
+        "Transform" -> "Symbol Fuzzy Values";
+    }
+    
+    // Subgraph - 2a First Layer FIS
+    subgraph cluster_2 {
+        label="2a First Layer FIS";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Fuzzy Values";
+        input2 = "Model: Semantic Rules"
+        process = "Infer: Deduce";
+        output = "Symbol Intermediate Fuzzy Values (Y1)";
+
+        "Model: Semantic Rules" [label="Model: Semantic Rules", shape=hexagon, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Intermediate Fuzzy Values (Y1)" [label="Symbol Intermediate Fuzzy Values (Y1)", shape=box, fillcolor=white];
+
+        "Symbol Fuzzy Values" -> "Infer: Deduce";
+        "Model: Semantic Rules" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Intermediate Fuzzy Values (Y1)";
+    }
+
+    // Subgraph - 2a Second Layer FIS
+    subgraph cluster_3 {
+        label="2a Second Layer FIS";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Intermediate Fuzzy Values (Y1)";
+        process = "Infer: Deduce1";
+        output = "Symbol Intermediate Fuzzy Values (Y2)";
+
+        "Infer: Deduce1" [label="Infer: Deduce1", shape=oval, fillcolor=lightgray];
+        "Symbol Intermediate Fuzzy Values (Y2)" [label="Symbol Intermediate Fuzzy Values (Y2)", shape=box, fillcolor=white];
+
+        "Symbol Intermediate Fuzzy Values (Y1)" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Intermediate Fuzzy Values (Y2)";
+    }
+
+    // Subgraph - 2a Final Layer FIS
+    subgraph cluster_4 {
+        label="2a Final Layer FIS";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Intermediate Fuzzy Values (Y2)";
+        process = "Infer: Deduce2";
+        output = "Symbol Cardiovascular Risk Level";
+
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Cardiovascular Risk Level" [label="Symbol Cardiovascular Risk Level", shape=box, fillcolor=white];
+
+        "Symbol Intermediate Fuzzy Values (Y2)" -> "Infer: Deduce2";
+        "Infer: Deduce2" -> "Symbol Cardiovascular Risk Level";
+    }
+    
+    // Subgraph - 1d Defuzzification and Final Decision
+    subgraph cluster_5 {
+        label="1d Defuzzification and Final Decision";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Cardiovascular Risk Level";
+        process = "Transform1";
+        output = "Symbol Crisp Risk Level";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol Crisp Risk Level" [label="Symbol Crisp Risk Level", shape=box, fillcolor=white];
+
+        "Symbol Cardiovascular Risk Level" -> "Transform1";
+        "Transform1" -> "Symbol Crisp Risk Level";
+    }
+    
+    // Subgraph - 1c Generate Fuzzy Rules
+    subgraph cluster_6 {
+        label="1c Generate Fuzzy Rules";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor Clinicians";
+        process = "Generate: Engineer";
+        output = "Model: Semantic Rules";
+
+        "Actor Clinicians" [label="Actor Clinicians", shape=triangle, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        
+        "Actor Clinicians" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Semantic Rules";
+    }
+}

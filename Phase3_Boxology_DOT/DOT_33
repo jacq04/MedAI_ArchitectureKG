@@ -1,0 +1,175 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Compilation of Charecteristics and Other Information of Interest and Expert Interpretation
+    subgraph cluster_1 {
+        label="1d Compilation of Charecteristics and Other Information of Interest and Expert Interpretation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Raw Patient Data";
+        input2 = "Actor Experts";
+        process = "Transform";
+        output = "Data Structured Data";
+
+        "Data Raw Patient Data" [label="Data Raw Patient Data", shape=box, fillcolor=white];
+        "Actor Experts" [label="Actor Experts", shape=triangle, fillcolor=lightgray];
+        "Data Structured Data" [label="Data Structured Data", shape=box, fillcolor=white];
+
+        "Data Raw Patient Data" -> "Transform";
+        "Actor Experts" -> "Transform";
+    }   "Transform" -> "Data Structured Data";
+
+    // Subgraph - 2a Risk Assessment
+    subgraph cluster_2 {
+        label="2a Risk Assessment";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Structured Data";
+        input2 = "Model: Semantic Cascaded Expert Systems";
+        process = "Infer: Deduce";
+        output = "Symbol Risk Assesment";
+
+        "Model: Semantic Cascaded Expert Systems" [label="Model: Semantic Cascaded Expert Systems", shape=hexagon, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Risk Assesment" [label="Symbol Risk Assesment", shape=box, fillcolor=white];
+
+        "Data Structured Data" -> "Infer: Deduce";
+        "Model: Semantic Cascaded Expert Systems" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Risk Assesment";
+    }
+    
+    // Subgraph - 1d Cascade Individual Systems
+    subgraph cluster_3 {
+        label="1d Cascade Individual Systems";
+        style=filled;
+        color=lightgrey;
+
+        input = "Model: Semantic Individual Expert System";
+        process = "Transform1";
+        output = "Model: Semantic Cascaded Expert Systems";
+
+        "Model: Semantic Individual Expert System" [label="Model: Semantic Individual Expert System", shape=hexagon, fillcolor=white];
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        
+        "Model: Semantic Individual Expert System" -> "Transform1";
+        "Transform1" -> "Model: Semantic Cascaded Expert Systems";
+    }
+
+    // Subgraph - 1c Individual System Creation
+    subgraph cluster_4 {
+        label="1c Individual System Creation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Fuzzy Rules";
+        process = "Generate: Engineer";
+        output = "Model: Semantic Individual Expert System";
+
+        "Symbol Fuzzy Rules" [label="Symbol Fuzzy Rules", shape=box, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+
+        "Symbol Fuzzy Rules" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Semantic Individual Expert System";
+    }
+
+    // Subgraph - 1c Fuzzy Rules Creation
+    subgraph cluster_5 {
+        label="1c Fuzzy Rules Creation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actors Domain Experts";
+        process = "Generate Engineer1";
+        output = "Symbol Fuzzy Rules";
+
+        "Actors Domain Experts" [label="Actors Domain Experts", shape=triangle, fillcolor=white];
+        "Generate Engineer1" [label="Generate Engineer", shape=oval, fillcolor=lightgray];
+        "Symbol Fuzzy Rules" [label="Symbol Fuzzy Rules", shape=box, fillcolor=white];
+
+        "Actors Domain Experts" -> "Generate Engineer1";
+        "Generate Engineer1" -> "Symbol Fuzzy Rules";
+    }
+
+    // Subgraph - 1d Structure Dataset
+    subgraph cluster_6 {
+        label="1d Structure Dataset";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Risk Assesment";
+        process = "Transform2";
+        output = "Data Balanced Dataset";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Balanced Dataset" [label="Data Balanced Dataset", shape=box, fillcolor=white];
+
+        "Symbol Risk Assesment" -> "Transform2";
+        "Transform2" -> "Data Balanced Dataset";
+    }
+
+    // Subgraph - 1d Latent Factors
+    subgraph cluster_7 {
+        label="1d Latent Factors";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Balanced Dataset";
+        process = "Transform3";
+        output = "Data Latent Factors";
+
+        "Transform3" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Latent Factors" [label="Data Latent Factors", shape=box, fillcolor=white];
+
+        "Data Balanced Dataset" -> "Transform3";
+        "Transform3" -> "Data Latent Factors";
+    }
+
+    // Subgraph - 1a Train Model
+    subgraph cluster_8 {
+        label="1a Train Model";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Latent Factors";
+        process = "Generate: Train";
+        output = "Model: Statistical ML Model";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Statistical ML Model" [label="Model: Statistical ML Model", shape=hexagon, fillcolor=white];
+
+        "Data Latent Factors" -> "Generate: Train";
+        "Generate: Train" -> "Model: Statistical ML Model";
+    }
+    
+    // Subgraph - 2a Risk Assessment
+    subgraph cluster_9 {
+        label="2a Risk Assessment";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Statistical ML Model";
+        input2 = "Data Patient Data";
+        process = "Infer: Deduce";
+        output = "Symbol Risk Assessment";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Risk Assessment" [label="Symbol Risk Assessment", shape=box, fillcolor=white];
+
+        "Model: Statistical ML Model" -> "Infer: Deduce";
+        "Data Patient Data" -> "Infer: Deduce";
+        "Infer: Deduce" ->  "Symbol Risk Assessment";
+    }
+
+
+
+
+
+
+
+
+
+
+}

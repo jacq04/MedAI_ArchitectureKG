@@ -1,0 +1,116 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1D C4.5 Feature Selection and Processing 
+    subgraph cluster_1 {
+        label=" 1D C4.5 Feature Selection and Processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Patient Records";
+        process = "Transform: Embed";
+        output = "Data Reduced Dataset";
+
+        "Data Raw Patient Records" [label="Data Raw Patient Records", shape=box, fillcolor=white];
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Reduced Dataset" [label="Data Reduced Dataset", shape=box, fillcolor=white];
+
+        "Data Raw Patient Records" -> "Transform: Embed";
+        "Transform: Embed" -> "Data Reduced Dataset";
+    }
+
+    // Subgraph - 1d Fuzzy Weighted Pre-Processing
+    subgraph cluster_2 {
+        label="1d Fuzzy Weighted Pre-Processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Reduced Dataset";
+        process = "Transform: Embed1";
+        output = "Data Weighted Dataset";
+
+        "Transform: Embed1" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Weighted Dataset" [label="Data Weighted Dataset", shape=box, fillcolor=white];
+
+        "Data Reduced Dataset" -> "Transform: Embed1";
+        "Transform: Embed1" -> "Data Weighted Dataset";
+    }
+    
+    // Subgraph - 1d Antigenic Presentation
+    subgraph cluster_3 {
+        label="1d Antigenic Presentation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Weighted Dataset";
+        process = "Transform";
+        output = "Data ARB Pool";
+
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data ARB Pool" [label="Data ARB Pool", shape=box, fillcolor=white];
+
+        "Data Weighted Dataset" -> "Transform";
+        "Transform" -> "Data ARB Pool";
+    }
+    
+    // Subgraph - 2a Competiton and Selection
+    subgraph cluster_4 {
+        label="2a Competiton and Selection";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data ARB Pool";
+        process = "Infer: Deduce";
+        output = "Data Refined ARB Pool";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Refined ARB Pool" [label="Data Refined ARB Pool", shape=box, fillcolor=white];
+
+        "Data ARB Pool" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Refined ARB Pool";
+    }
+
+    // Subgraph - 1d Memory Cell Update
+    subgraph cluster_5 {
+        label="1d Memory Cell Update";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Refined ARB Pool";
+        process = "Transform1";
+        output = "Data Memory Pool";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Memory Pool" [label="Data Memory Pool", shape=box, fillcolor=white];
+
+        "Data Refined ARB Pool" -> "Transform1";
+        "Transform1" -> "Data Memory Pool";
+    }
+    
+    // Subgraph - 2a Classification
+    subgraph cluster_6 {
+        label="2a Classification";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Memory Pool";
+        process = "Infer: Deduce1";
+        output = "Symbol Patient Record Classification";
+
+        "Data Memory Pool" [label="Data Memory Pool", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Patient Record Classification" [label="Symbol Patient Record Classification", shape=box, fillcolor=white];
+
+        "Data Memory Pool" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Patient Record Classification";
+    }
+
+
+
+
+
+
+
+
+
+}

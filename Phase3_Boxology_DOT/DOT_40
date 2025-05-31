@@ -1,0 +1,82 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Data Preprocessing
+    subgraph cluster_1 {
+        label="1d Data Preprocessing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw UCI Data";
+        process = "Transform";
+        output = "Data Cleaned and Normalized Data";
+
+        "Data Raw UCI Data" [label="Data Raw UCI Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Cleaned and Normalized Data" [label="Data Cleaned and Normalized Data", shape=box, fillcolor=white];
+
+        "Data Raw UCI Data" -> "Transform";
+        "Transform" -> "Data Cleaned and Normalized Data";
+    }
+
+    // Subgraph - 2a Mining and Selection of Suitable Attributes
+    subgraph cluster_2 {
+        label="2a Mining and Selection of Suitable Attributes";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Cleaned and Normalized Data";
+        process = "Infer: Deduce";
+        output = "Data Selected Attributes";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Selected Attributes" [label="Data Selected Attributes", shape=box, fillcolor=white];
+
+        "Data Cleaned and Normalized Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Selected Attributes";
+    }
+
+    // Subgraph - 2a Finding Weighted Fuzzy Rules
+    subgraph cluster_3 {
+        label="2a Finding Weighted Fuzzy Rules";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Cleaned and Normalized Data";
+        input2 = "Data Selected Attributes";
+        process = "Infer: Deduce1";
+        output = "Symbol Weighted Fuzzy Rules";
+
+        "Infer: Deduce1" [label="Infer: Deduce1", shape=oval, fillcolor=lightgray];
+        "Symbol Weighted Fuzzy Rules" [label="Symbol Weighted Fuzzy Rules", shape=box, fillcolor=white];
+
+        "Data Cleaned and Normalized Data" -> "Infer: Deduce1";
+        "Data Selected Attributes" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Weighted Fuzzy Rules";
+    }
+    
+    // Subgraph - 2a Prediction Making
+    subgraph cluster_4 {
+        label="2a Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Weighted Fuzzy Rules";
+        input2 = "Data Patient Data"
+        process = "Infer: Predict";
+        output = "Symbol Risk Levels";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Predict" [label="Infer: Predict", shape=oval, fillcolor=lightgray];
+        "Symbol Risk Levels" [label="", shape=box, fillcolor=white];
+
+        "Symbol Weighted Fuzzy Rules" -> "Infer: Predict";
+        "Data Patient Data" -> "Infer: Predict";
+        "Infer: Predict" -> "Symbol Risk Levels";
+    }
+
+
+
+
+
+}

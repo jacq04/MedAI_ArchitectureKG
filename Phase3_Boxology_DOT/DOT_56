@@ -1,0 +1,83 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Feature Extraction
+    subgraph cluster_1 {
+        label="1d Feature Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Respiratory Signals";
+        process = "Transform";
+        output = "Data Extracted Features";
+
+        "Data Respiratory Signals" [label="Data Respiratory Signals", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Extracted Features" [label="Data Extracted Features", shape=box, fillcolor=white];
+
+        "Data Respiratory Signals" -> "Transform";
+        "Transform" -> "Data Extracted Features";
+    }
+    
+    // Subgraph - 1d Patient Clustering Based on Breating Features
+    subgraph cluster_2 {
+        label="1d Patient Clustering Based on Breating Features";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Extracted Features";
+        process = "Transform1";
+        output = "Symbol Patient Group Clusters";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol Patient Group Clusters" [label="Symbol Patient Group Clusters", shape=box, fillcolor=white];
+
+        "Data Extracted Features" -> "Transform1";
+        "Transform1" -> "Symbol Patient Group Clusters";
+    }
+
+    // Subgraph - 1a Training Fuzzy Deep Learning (FDL) Models
+    subgraph cluster_3 {
+        label="1a Training Fuzzy Deep Learning (FDL) Models";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Patient Group Clusters";
+        input2 = "Symbol Expert Fuzzy Rules"
+        process = "Generate: Train";
+        output = "Model: Hybrid FDL";
+
+        "Symbol Expert Fuzzy Rules" [label="Symbol Expert Fuzzy Rules", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid FDL" [label="Model: Hybrid FDL", shape=hexagon, fillcolor=white];
+
+        "Symbol Patient Group Clusters" -> "Generate: Train";
+        "Symbol Expert Fuzzy Rules" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid FDL";
+    }
+
+
+    // Subgraph - 2a Prediction Making
+    subgraph cluster_4 {
+        label="2a Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid FDL";
+        input2 = "Data Patient Respiratory Signals";
+        process = "Infer: Deduce";
+        output = "Symbol Tumor Position Predictons";
+
+        "Data Patient Respiratory Signals" [label="Data Patient Respiratory Signals", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Tumor Position Predictons" [label="Symbol Tumor Position Predictons", shape=box, fillcolor=white];
+
+        "Model: Hybrid FDL" -> "Infer: Deduce";
+        "Data Patient Respiratory Signals" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Tumor Position Predictons";
+    }
+
+
+
+
+}

@@ -1,0 +1,96 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 2d Prediction Generation
+    subgraph cluster_1 {
+        label="2d Prediction Generation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Patient Reocrds";
+        input2 = "Model WFM Model";
+        process = "Infer: Deduce";
+        output = "Symbol Hospital Readmission";
+
+        "Model WFM Model" [label="Model WFM Model", shape=hexagon, fillcolor=white];
+        "Data Patient Reocrds" [label="Data Patient Reocrds", shape=oval, fillcolor=lightgray];
+        "Symbol Hospital Readmission" [label="Symbol Hospital Readmission", shape=box, fillcolor=white];
+
+        "Model WFM Model" -> "Data Patient Reocrds";
+        "Data Patient Reocrds" -> "Symbol Hospital Readmission";
+    }
+    // Subgraph - 1d Submodel Construction
+    subgraph cluster_2 {
+        label="1d Submodel Construction";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Hospital Readmission";
+        input2 = "Data Partitioned Subsets";
+        process = "Generate: Train";
+        output = "Model WFM Model";
+
+        "Data Partitioned Subsets" [label="Data Partitioned Subsets", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+
+        "Symbol Hospital Readmission" -> "Generate: Train";
+        "Data Partitioned Subsets" -> "Generate: Train";
+        "Generate: Train" -> "Model WFM Model";
+    }
+
+    // Subgraph - 1d Fuzzy Partitioning with FCM
+    subgraph cluster_3 {
+        label="1d Fuzzy Partitioning with FCM";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Weighted Training Instances";
+        process = "Transform: Embed";
+        output = "Data Partitioned Subsets";
+
+        "Data Weighted Training Instances" [label="Data Weighted Training Instances", shape=box, fillcolor=white];
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Weighted Training Instances" -> "Transform: Embed";
+        "Transform: Embed" -> "Data Partitioned Subsets";
+    }
+
+    // Subgraph - 1d Locally Weighted FM
+    subgraph cluster_4 {
+        label="1d Locally Weighted FM";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Prepared Dataset";
+        process = "Transform: Embed";
+        output = "Data Weighted Training Instances";
+
+        "Data Prepared Dataset" [label="Data Prepared Dataset", shape=box, fillcolor=white];
+        "Transform: Embed1" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        
+        "Data Prepared Dataset" -> "Transform: Embed1";
+        "Transform: Embed1" -> "Data Weighted Training Instances";
+    }
+
+
+    // Subgraph - 1d Factorization Machines
+    subgraph cluster_5 {
+        label="1d Factorization Machines";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Patient Records";
+        process = "Transform: Embed2";
+        output = "Data Prepared Dataset";
+
+        "Data Patient Records" [label="Data Patient Records", shape=box, fillcolor=white];
+        "Transform: Embed2" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+ 
+
+        "Data Patient Records" -> "Transform: Embed2";
+        "Transform: Embed2" -> "Data Prepared Dataset";
+    }
+
+
+
+
+}

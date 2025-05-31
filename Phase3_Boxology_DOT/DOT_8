@@ -1,0 +1,90 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 2a Preliminary Diagnosis
+    subgraph cluster_1 {
+        label="2a Preliminary Diagnosis";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Symptoms";
+        input2 = "Model: Static Diagnostic Rules"
+        process = "Infer: Deduce";
+        output = "Symbol (Final) Diagnosis";
+
+        "Data Symptoms" [label="Data Symptoms", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Model: Static Diagnostic Rules" [label="Model: Static Diagnostic Rules", shape=hexagon, fillcolor=white];
+        "Symbol (Final) Diagnosis" [label="Symbol (Final) Diagnosis", shape=box, fillcolor=white];
+        
+        
+        "Data Symptoms" -> "Infer: Deduce";
+        "Model: Static Diagnostic Rules" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol (Final) Diagnosis";
+    }
+
+    // Subgraph - 1c Knowledge Engineering 
+    subgraph cluster_2 {
+        label="1c Knowledge Engineering ";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Actor Physicians";
+        input2 = "Symbol Final Diagnosis CBR";
+        process = "Generate: Engineer";
+        output = "Model: Static Diagnostic Rules";
+
+        "Actor Physicians" [label="Actor Physicians", shape=triangle, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Symbol Final Diagnosis CBR" [label="Symbol Final Diagnosis CBR", shape=box, fillcolor=white];
+
+        "Actor Physicians" -> "Generate: Engineer";
+        "Symbol Final Diagnosis CBR" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Static Diagnostic Rules";
+    }
+
+    // Subgraph - 2a CBR Process
+    subgraph cluster_3 {
+        label="2a CBR Process";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol (Final) Diagnosis CBR";
+        input2 = "Data Previous Cases"
+        process = "Infer: Deduce2";
+        output = "Symbol Similarity Score";
+
+        "Symbol Similarity Score" [label="Symbol Similarity Score", shape=box, fillcolor=white];
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Previous Cases" [label="Data Previous Cases", shape=box, fillcolor=white];
+
+        "Symbol (Final) Diagnosis" -> "Infer: Deduce2";
+        "Infer: Deduce2" -> "Symbol Similarity Score";
+        "Data Previous Cases" -> "Infer: Deduce2"
+    }
+
+
+    // Subgraph - 1d Similarity Assesment
+    subgraph cluster_4 {
+        label="1d Similarity Assesment";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Similarity Score";
+        input2 = "Symbol (Final) Diagnosis";
+        input3 = "Actor Medical Professional";
+        process = "Transform";
+        output = "Symbol Final Diagnosis CBR";
+
+        "Actor Medical Professional" [label="Actor Medical Professional", shape=triangle, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+      
+        "Symbol Similarity Score" -> "Transform";
+        "Symbol (Final) Diagnosis" -> "Transform";
+        "Actor Medical Professional" -> "Transform";
+        "Transform" -> "Symbol Final Diagnosis CBR";
+        
+    }
+
+
+}

@@ -1,0 +1,129 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Data Collection and Preprocessing
+    subgraph cluster_1 {
+        label="1d Data Collection and Preprocessing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Patient";
+        process = "Transform";
+        output = "Data Normalized Data";
+
+        "Data Raw Patient" [label="Data Raw Patient", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Normalized Data" [label="Data Normalized Data", shape=box, fillcolor=white];
+
+        "Data Raw Patient" -> "Transform";
+        "Transform" -> "Data Normalized Data";
+    }
+
+    // Subgraph - 2a PICA
+    subgraph cluster_2 {
+        label="2a PICA";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Normalized Data";
+        process = "Infer: Deduce";
+        output = "Data Reduced Dataset w/ Principal Components";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Reduced Dataset w/ Principal Components" [label="Data Reduced Dataset w/ Principal Components", shape=box, fillcolor=white];
+
+        "Data Normalized Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Reduced Dataset w/ Principal Components";
+    }
+    
+    // Subgraph - 1a TRain ML Models
+    subgraph cluster_3 {
+        label="1a TRain ML Models";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Reduced Dataset w/ Principal Components";
+        process = "Generate: Train";
+        output1 = "Model: Statistical IVGR2";
+        output2 = "Model: Statistical DHCN";
+
+        "Model: Statistical IVGR2" [label="Model: Statistical IVGR2", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Statistical DHCN" [label="Model: Statistical DHCN", shape=box, fillcolor=white];
+
+        "Data Reduced Dataset w/ Principal Components" -> "Generate: Train";
+        "Generate: Train" -> "Model: Statistical IVGR2";
+        "Generate: Train" -> "Model: Statistical DHCN";
+    }
+    
+    // Subgraph - 2a Defining Input Variables 
+    subgraph cluster_4 {
+        label="2a Defining Input Variables";
+        style=filled;
+        color=lightgrey;
+
+        input = "Model: Statistical IVGR2";
+        process = "Infer: Predict";
+        output = "Symbol Volume Growth Rate";
+
+        "Infer: Predict" [label="Infer: Predict", shape=oval, fillcolor=lightgray];
+        "Symbol Volume Growth Rate" [label="Symbol Volume Growth Rate", shape=box, fillcolor=white];
+
+        "Model: Statistical IVGR2" -> "Infer: Predict";
+        "Infer: Predict" -> "Symbol Volume Growth Rate";
+    }
+    
+    // Subgraph - 2a Defining Input Variables
+    subgraph cluster_5 {
+        label="2a Defining Input Variables";
+        style=filled;
+        color=lightgrey;
+
+        input = "Model: Statistical DHCN";
+        process = "Infer: Predict1";
+        output = "Symbol Surgery Prediction";
+
+        "Infer: Predict1" [label="Infer: Predict", shape=oval, fillcolor=lightgray];
+        "Symbol Surgery Prediction" [label="Symbol Surgery Prediction", shape=box, fillcolor=white];
+
+        "Model: Statistical DHCN" -> "Infer: Predict1";
+        "Infer: Predict1" -> "Symbol Surgery Prediction";
+    }
+
+    // Subgraph - 2a Integrating ML Predictions with Fuzzy Inference System (FIS)
+    subgraph cluster_6 {
+        label="2a Integrating ML Predictions with Fuzzy Inference System (FIS)";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Surgery Prediction";
+        input2 = "Symbol Volume Growth Rate";
+        process = "Infer: Deduce1";
+        output = "Model: Semantic FIS";
+
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Model: Semantic FIS" [label="Model: Semantic FIS", shape=hexagon, fillcolor=white];
+
+        "Symbol Surgery Prediction" -> "Infer: Deduce1";
+        "Symbol Volume Growth Rate" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Model: Semantic FIS";
+    }
+    
+    // Subgraph - 2a Final Decision
+    subgraph cluster_7 {
+        label="2a Final Decision";
+        style=filled;
+        color=lightgrey;
+
+        input = "Model: Semantic FIS";
+        process = "Infer: Deduce2";
+        output = "Symbol Recommendations";
+
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Recommendations" [label="Symbol Recommendations", shape=box, fillcolor=white];
+
+        "Model: Semantic FIS" -> "Infer: Deduce2";
+        "Infer: Deduce2" -> "Symbol Recommendations";
+    }
+
+}

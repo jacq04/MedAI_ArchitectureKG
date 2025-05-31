@@ -1,0 +1,101 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Data Input and Ontology Mapping
+    subgraph cluster_1 {
+        label="1d Data Input and Ontology Mapping";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data ECG Data and Medical Records";
+        process = "Transform";
+        output = "Data Structured Representation";
+
+        "Data ECG Data and Medical Records" [label="Data ECG Data and Medical Records", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Structured Representation" [label="Data Structured Representation", shape=box, fillcolor=white];
+
+        "Data ECG Data and Medical Records" -> "Transform";
+        "Transform" -> "Data Structured Representation";
+    }
+    // Subgraph - 2a Rule-Based Reasoning
+    subgraph cluster_2 {
+        label="2a Rule-Based Reasoning";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Structured Representation";
+        process = "Infer: Deduce";
+        output = "Symbol Inferred Knowledge";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Inferred Knowledge" [label="Symbol Inferred Knowledge", shape=box, fillcolor=white];
+
+        "Data Structured Representation" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Inferred Knowledge";
+    }
+    
+    // Subgraph - 1a LCS Training 
+    subgraph cluster_3 {
+        label="1a LCS Training ";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Structured Representation";
+        input2 = "Symbol Inferred Knowledge";
+        process = "Generate: Train";
+        output = "Model: Hybrid LCS";
+
+        
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid LCS" [label="Model: Hybrid LCS", shape=hexagon, fillcolor=white];
+
+        "Symbol Inferred Knowledge" -> "Generate: Train";
+        "Data Structured Representation" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid LCS";
+    }
+
+    // Subgraph - 2a Decision Support Generate
+    subgraph cluster_4 {
+        label="2a Decision Support Generate";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid LCS";
+        input2 = "Data Patient ECG and Medical Data"
+        input3 =  "Symbol Expert Adjusted Advice";
+        process = "Infer: Deduce1";
+        output = "Symbol Decision Support Recommendation";
+
+
+        "Data Patient ECG and Medical Data" [label="Data Patient ECG and Medical Data", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Expert Adjusted Advice" [label="Symbol Expert Adjusted Advice", shape=box, fillcolor=white];
+        "Symbol Decision Support Recommendation" [label="Symbol Decision Support Recommendation", shape=box, fillcolor=white];
+
+        "Model: Hybrid LCS" -> "Infer: Deduce1";
+        "Data Patient ECG and Medical Data" -> "Infer: Deduce1";
+        "Symbol Expert Adjusted Advice" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Decision Support Recommendation";
+    }
+    
+    // Subgraph - 1d Human Involvement and System Feedback
+    subgraph cluster_5 {
+        label="1d Human Involvement and System Feedback";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Decision Support Recommendation";
+        input2 = "Actor";
+        process = "Transform1";
+        output = "Symbol Expert Adjusted Advice";
+
+        "Actor" [label="Actor", shape=triangle, fillcolor=white];
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+      
+        "Actor" -> "Transform1";
+        "Symbol Decision Support Recommendation" -> "Transform1";
+        "Transform1" -> "Symbol Expert Adjusted Advice"
+    }
+
+}

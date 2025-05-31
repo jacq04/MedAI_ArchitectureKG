@@ -1,0 +1,110 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Data Colletion and Preparation
+    subgraph cluster_1 {
+        label="1d Data Colletion and Preparation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Breast Cancer + Heart Disease Dataset";
+        process = "Transform";
+        output = "Data Cleaned and Pre-processed Data";
+
+        "Data Raw Breast Cancer + Heart Disease Dataset" [label="Data Raw Breast Cancer + Heart Disease Dataset", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Cleaned and Pre-processed Data" [label="Data Cleaned and Pre-processed Data", shape=box, fillcolor=white];
+
+        "Data Raw Breast Cancer + Heart Disease Dataset" -> "Transform";
+        "Transform" -> "Data Cleaned and Pre-processed Data";
+    }
+
+
+    // Subgraph - 1d Feature Extraction via Wavelet Transformation 
+    subgraph cluster_2 {
+        label="1d Feature Extraction via Wavelet Transformation ";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Cleaned and Pre-processed Data";
+        process = "Transform1";
+        output = "Data Reduced Datasets";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Reduced Datasets" [label="Data Reduced Datasets", shape=box, fillcolor=white];
+
+        "Data Cleaned and Pre-processed Data" -> "Transform1";
+        "Transform1" -> "Data Reduced Datasets";
+    }
+
+    // Subgraph - 1a Unsupervised Learning by Adaptive Vector Quantization (AVQ) Clustering
+    subgraph cluster_3 {
+        label="1a Unsupervised Learning by Adaptive Vector Quantization (AVQ) Clustering";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Reduced Datasets";
+        process = "Infer: Deduce";
+        output = "Symbol Fuzzy Rules";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Fuzzy Rules" [label="Symbol Fuzzy Rules", shape=box, fillcolor=white];
+
+        "Data Reduced Datasets" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Fuzzy Rules";
+    }
+    
+    // Subgraph - 2a Fuzzy Rule Optimization using Genetic Algorithms (GA) 
+    subgraph cluster_4 {
+        label="2a Fuzzy Rule Optimization using Genetic Algorithms (GA) ";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Fuzzy Rules";
+        process = "Infer: Deduce1";
+        output = "Symbol Optimized Rules";
+
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Optimized Rules" [label="Symbol Optimized Rules", shape=box, fillcolor=white];
+
+        "Symbol Fuzzy Rules" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Optimized Rules";
+    }
+    
+    // Subgraph - 1a Supervised Learning to Tune Rule Parameters
+    subgraph cluster_5 {
+        label="1a Supervised Learning to Tune Rule Parameters";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Optimized Rules";
+        process = "Generate: Train";
+        output = "Model: Hybrid GSAM System";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid GSAM System" [label="Model: Hybrid GSAM System", shape=hexagon, fillcolor=white];
+
+        "Symbol Optimized Rules" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid GSAM System";
+    }
+
+    // Subgraph - 2a Prediction Making
+    subgraph cluster_6 {
+        label="2a Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid GSAM System";
+        input2 = "Data Patient Data"
+        process = "Infer: Deduce2";
+        output = "Symbol Clinical Diagnosis";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Clinical Diagnosis" [label="Symbol Clinical Diagnosis", shape=box, fillcolor=white];
+
+        "Model: Hybrid GSAM System" -> "Infer: Deduce2";
+        "Data Patient Data" -> "Infer: Deduce2";
+        "Infer: Deduce2" -> "Symbol Clinical Diagnosis";
+    }
+}

@@ -1,0 +1,114 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Raw CT Images";
+        process = "Transform";
+        output = "Data: Image Adjusted Images";
+
+        "Data: Image Raw CT Images" [label="Data: Image Raw CT Images", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image Adjusted Images" [label="Data: Image Adjusted Images", shape=box, fillcolor=white];
+
+        "Data: Image Raw CT Images" -> "Transform";
+        "Transform" -> "Data: Image Adjusted Images";
+    }
+
+
+    // Subgraph - 1d Segmentation w/ Morphological Operations
+    subgraph cluster_2 {
+        label="1d Segmentation w/ Morphological Operations";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Adjusted Images";
+        process = "Transform1";
+        output = "Data: Image Segmented Lung Regions";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image Segmented Lung Regions" [label="Data: Image Segmented Lung Regions", shape=box, fillcolor=white];
+
+        "Data: Image Adjusted Images" -> "Transform1";
+        "Transform1" -> "Data: Image Segmented Lung Regions";
+    }
+    
+    // Subgraph - 1d Feature Extraction
+    subgraph cluster_3 {
+        label="1d Feature Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Segmented Lung Regions";
+        process = "Transform2";
+        output = "Data: Numerical Feature Vectors";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numerical Feature Vectors" [label="Data: Numerical Feature Vectors", shape=box, fillcolor=white];
+
+        "Data: Image Segmented Lung Regions" -> "Transform2";
+        "Transform2" -> "Data: Numerical Feature Vectors";
+    }
+    
+    // Subgraph - 1a Model Training
+    subgraph cluster_4 {
+        label="1a Model Training";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numerical Feature Vectors";
+        process = "Generate: Train";
+        output = "Model: Hybrid NN Model";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid NN Model" [label="Model: Hybrid NN Model", shape=hexagon, fillcolor=white];
+
+        "Data: Numerical Feature Vectors" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid NN Model";
+    }
+    
+    // Subgraph - 2a Predicting
+    subgraph cluster_5 {
+        label="2a Predicting";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid NN Model";
+        input2 = "Actor Radiologist";
+        input3 = "Data: Numerical Features";
+        process = "Infer: Deduce";
+        output = "Symbol Diagnostic Report";
+
+        "Actor Radiologist" [label="Actor Radiologist", shape=triangle, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data: Numerical Features" [label="Data: Numerical Features", shape=box, fillcolor=white];
+        "Symbol Diagnostic Report" [label="Symbol Diagnostic Report", shape=box, fillcolor=white];
+
+
+        "Model: Hybrid NN Model" -> "Infer: Deduce";
+        "Actor Radiologist" -> "Infer: Deduce";
+        "Data: Numerical Features" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Diagnostic Report";
+    }
+
+    // Subgraph - 1d Data Transformation
+    subgraph cluster_6 {
+        label="1d Data Transformation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Images Patient CT";
+        process = "Transform3";
+        output = "Data: Numerical Features";
+
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Images Patient CT" [label="Data: Images Patient CT", shape=box, fillcolor=white];
+
+        "Data: Images Patient CT" -> "Transform3";
+        "Transform3" -> "Data: Numerical Features";
+    }
+}

@@ -1,0 +1,84 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing 
+    subgraph cluster_1 {
+        label="1d Pre-processing ";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw EEG Data";
+        process = "Transform";
+        output = "Data Preprocessed EEG Data";
+
+        "Data Raw EEG Data" [label="Data Raw EEG Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Preprocessed EEG Data" [label="Data Preprocessed EEG Data", shape=box, fillcolor=white];
+
+        "Data Raw EEG Data" -> "Transform";
+        "Transform" -> "Data Preprocessed EEG Data";
+    }
+
+
+    // Subgraph - 1d Feature Extraction Using DWT
+    subgraph cluster_2 {
+        label="1d Feature Extraction Using DWT";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Preprocessed EEG Data";
+        process = "Transform1";
+        output = "Data Statistical Features";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Statistical Features" [label="Data Statistical Features", shape=box, fillcolor=white];
+
+        "Data Preprocessed EEG Data" -> "Transform1";
+        "Transform1" -> "Data Statistical Features";
+    }
+
+    // Subgraph - 1a Train Model
+    subgraph cluster_3 {
+        label="1a Train Model";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Statistical Features";
+        process = "Generate: Train";
+        output = "Model: Hybrid ANFIS";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS" [label="Model: Hybrid ANFIS", shape=hexagon, fillcolor=white];
+
+        "Data Statistical Features" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid ANFIS";
+    }
+
+    // Subgraph - 2a Analyzing
+    subgraph cluster_4 {
+        label="2a Analyzing";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid ANFIS";
+        input2 = "Data Patient EEG Signals";
+        process = "Infer: Deduce";
+        output = "Symbol Detected Epileptic Seizure";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Detected Epileptic Seizure" [label="Symbol Detected Epileptic Seizure", shape=box, fillcolor=white];
+
+        "Model: Hybrid ANFIS" -> "Infer: Deduce";
+        "Data Patient EEG Signals" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Detected Epileptic Seizure"; 
+    } 
+
+
+
+
+
+
+
+
+
+}

@@ -1,0 +1,109 @@
+digraph Boxology {
+    rankdir=TB;
+
+    // Subgraph - 1d Encode
+    subgraph cluster_1 {
+        label="1d Encode";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Patient Data";
+        process = "Transform: Embed";
+        output = "Data Encoded and Structured Data";
+
+        "Data Raw Patient Data" [label="Data Raw Patient Data", shape=box, fillcolor=white];
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Encoded and Structured Data" [label="Data Encoded and Structured Data", shape=box, fillcolor=white];
+
+        "Data Raw Patient Data" -> "Transform: Embed";
+        "Transform: Embed" -> "Data Encoded and Structured Data";
+    }
+
+
+    // Subgraph - Rule-Based Preprocessing
+    subgraph cluster_2 {
+        label="Rule-Based Preprocessing";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Encoded and Structured Data";
+        input2 = "Model: Semantic Rules";
+        process = "Infer: Deduce";
+        output = "Symbol Case with Attribute Weights";
+
+        "Model: Semantic Rules" [label="Model: Semantic Rules", shape=hexagon, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Case with Attribute Weights" [label="Symbol Case with Attribute Weights", shape=box, fillcolor=white];
+
+        "Data Encoded and Structured Data" -> "Infer: Deduce";
+        "Model: Semantic Rules" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Case with Attribute Weights" 
+    }
+
+
+    // Subgraph - 1c Create Rules 
+    subgraph cluster_3 {
+        label="1c Create Rules";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor Experts";
+        process = "Generate: Engineer";
+        output = "Model: Semantic Rules";
+
+        "Actor Experts" [label="Actor Experts", shape=traingle, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        
+        "Actor Experts" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Semantic Rules";
+    }
+    
+    // Subgraph - 2a Case Retrival
+    subgraph cluster_4 {
+        label="2a Case Retrival";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Case with Attribute Weights";
+        input2 = "Data All Cases";
+        process = "Infer: Deduce1";
+        output = "Data Similar Cases";
+
+        "Data All Cases" [label="Data All Cases", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Similar Cases" [label="Data Similar Cases", shape=box, fillcolor=white];
+
+        "Symbol Case with Attribute Weights" -> "Infer: Deduce1";
+        "Data All Cases" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Data Similar Cases";
+    }
+
+    // Subgraph - 2a Solution Generation
+    subgraph cluster_5 {
+        label="2a Solution Generation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Similar Cases";
+        process = "Infer: Deduce2";
+        output = "Symbol Diagnosis";
+
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Diagnosis" [label="Symbol Diagnosis", shape=box, fillcolor=white];
+
+        "Data Similar Cases" -> "Infer: Deduce2";
+        "Symbol Diagnosis" -> "Infer: Deduce2";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+}

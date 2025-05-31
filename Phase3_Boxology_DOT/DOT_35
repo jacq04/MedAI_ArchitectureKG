@@ -1,0 +1,99 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1c Generate Fuzzy Parameters
+    subgraph cluster_1 {
+        label="1c Generate Fuzzy Parameters";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor Experts";
+        process = "Generate: Engineer";
+        output = "Symbol Fuzzy Parameters";
+
+        "Actor Experts" [label="Actor Experts", shape=triangle, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Symbol Fuzzy Parameters" [label="Symbol Fuzzy Parameters", shape=box, fillcolor=white];
+
+        "Actor Experts" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Symbol Fuzzy Parameters";
+    }
+
+    // Subgraph - 2a Fuzzy Finite State Machine Modeling
+    subgraph cluster_2 {
+        label="2a Fuzzy Finite State Machine Modeling";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Fuzzy Parameters";
+        input2 = "Data Relevant Clinical Variables";
+        process = "Infer: Deduce";
+        output = "Symbol Fuzzy Values Clinical Variables";
+
+        "Data Relevant Clinical Variables" [label="Data Relevant Clinical Variables", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Fuzzy Values Clinical Variables" [label="Symbol Fuzzy Values Clinical Variables", shape=box, fillcolor=white];
+
+        "Symbol Fuzzy Parameters" -> "Infer: Deduce";
+        "Data Relevant Clinical Variables" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Fuzzy Values Clinical Variables";
+    }
+    
+    // Subgraph - 1d Fuzzification of Clinical Variables
+    subgraph cluster_3 {
+        label="1d Fuzzification of Clinical Variables";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Patient Database";
+        process = "Transform";
+        output = "Data Relevant Clinical Variables";
+
+        "Data Patient Database" [label="Data Patient Database", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Relevant Clinical Variables" [label="Data Relevant Clinical Variables", shape=box, fillcolor=white];
+
+        "Data Patient Database" -> "Transform";
+        "Transform" -> "Data Relevant Clinical Variables";
+    }
+
+    // Subgraph - 1a Model Learning and Opitmization
+    subgraph cluster_4 {
+        label="";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Fuzzy Values Clinical Variables";
+        input2 = "Symbol Ranked List of Treatments";
+        process = "Generate: Train";
+        output = "Model: Semantic FFSMs";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Semantic FFSMs" [label="Model: Semantic FFSMs", shape=hexagon, fillcolor=white];
+
+        "Symbol Fuzzy Values Clinical Variables" -> "Generate: Train";
+        "Symbol Ranked List of Treatments" -> "Generate: Train";
+        "Generate: Train" -> "Model: Semantic FFSMs";
+    }
+    
+    // Subgraph - 2a Integration and System Deployment
+    subgraph cluster_5 {
+        label="2a Integration and System Deployment";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Semantic FFSMs";
+        input2 = "Data Patient Data"
+        process = "Infer: Deduce1";
+        output = "Symbol Ranked List of Treatments";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+
+
+        "Model: Semantic FFSMs" -> "Infer: Deduce1";
+        "Data Patient Data" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Ranked List of Treatments";
+    }
+
+}

@@ -1,0 +1,79 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Data Collection and Preprocessing
+    subgraph cluster_1 {
+        label="1d Data Collection and Preprocessing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Raw Clinical Data";
+        process = "Transform";
+        output = "Data Structured Data";
+
+        "Raw Clinical Data" [label="Raw Clinical Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Structured Data" [label="Data Structured Data", shape=box, fillcolor=white];
+
+        "Raw Clinical Data" -> "Transform";
+        "Transform" -> "Data Structured Data";
+    }
+
+    // Subgraph - 2a Attribute Reduction Using Rough Set Theory
+    subgraph cluster_2 {
+        label="2a Attribute Reduction Using Rough Set Theory";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Structured Data";
+        process = "Infer: Deduce";
+        output = "Data Reduced Dataset";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Reduced Dataset" [label="Data Reduced Dataset", shape=box, fillcolor=white];
+
+        "Data Structured Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Reduced Dataset";
+    }
+
+    // Subgraph - 1a Rule Generation
+    subgraph cluster_3 {
+        label="1a Rule Generation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Reduced Dataset";
+        process = "Generate: Train";
+        output = "Model: Statistical IL Algorithms";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Statistical IL Algorithms" [label="Model: Statistical IL Algorithms", shape=hexagon, fillcolor=white];
+
+        "Data Reduced Dataset" -> "Generate: Train";
+        "Generate: Train" -> "Model: Statistical IL Algorithms";
+    }
+
+    // Subgraph - 2a Decision Making
+    subgraph cluster_4 {
+        label="2a Decision Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Statistical IL Algorithms";
+        input2 = "Data Patient Data";
+        process = "Infer: Deduce1";
+        output = "Symbol Various Clinical Predictions";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Various Clinical Predictions" [label="Symbol Various Clinical Predictions", shape=box, fillcolor=white];
+
+        "Data Patient Data" -> "Infer: Deduce1";
+        "Model: Statistical IL Algorithms" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Various Clinical Predictions";
+    }
+
+
+
+
+}

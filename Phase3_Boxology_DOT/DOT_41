@@ -1,0 +1,97 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Data Collection and Pre-processing
+    subgraph cluster_1 {
+        label="1d Data Collection and Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Patient Data";
+        process = "Transform";
+        output = "Data Normalized Data";
+
+        "Data Raw Patient Data" [label="Data Raw Patient Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Normalized Data" [label="Data Normalized Data", shape=box, fillcolor=white];
+
+        "Data Raw Patient Data" -> "Transform";
+        "Transform" -> "Data Normalized Data";
+    }
+
+    // Subgraph - 1d Fuzzification
+    subgraph cluster_2 {
+        label="1d Fuzzification";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Normalized Data";
+        process = "Transform1";
+        output = "Data Fuzzy Values for Input Variables";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Fuzzy Values for Input Variables" [label="Data Fuzzy Values for Input Variables", shape=box, fillcolor=white];
+
+        "Data Normalized Data" -> "Transform1";
+        "Transform1" -> "Data Fuzzy Values for Input Variables";
+    }
+    
+    // Subgraph - 1c System Creation
+    subgraph cluster_3 {
+        label="1c System Creation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Fuzzy Values for Input Variables";
+        process = "Generate: Engineer";
+        output = "Model: Hybrid ANFIS";
+
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS" [label="Model: Hybrid ANFIS", shape=hexagon, fillcolor=white];
+
+        "Data Fuzzy Values for Input Variables" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Hybrid ANFIS";
+    }
+    
+    // Subgraph - 2a Aggregation
+    subgraph cluster_4 {
+        label="2a Aggregation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid ANFIS";
+        input2 = "Data Patient Data"
+        process = "Infer: Deduce";
+        output = "Symbol Single Crisp Prediction";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Single Crisp Prediction" [label="Symbol Single Crisp Prediction", shape=box, fillcolor=white];
+
+        "Model: Hybrid ANFIS" -> "Infer: Deduce";
+        "Data Patient Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Single Crisp Prediction";
+    }
+    
+    // Subgraph - 2a Equilibrated Urea Concentration Prediction 
+    subgraph cluster_5 {
+        label="2a Equilibrated Urea Concentration Prediction";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Single Crisp Prediction";
+        input2 = "Model: Hybrid Second ANFIS";
+        process = "Infer: Deduce1";
+        output = "Symbol Effectiveness Dialysis";
+
+        "Model: Hybrid Second ANFIS" [label="Model: Hybrid Second ANFIS", shape=hexagon, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Effectiveness Dialysis" [label="Symbol Effectiveness Dialysis", shape=box, fillcolor=white];
+
+        "Symbol Single Crisp Prediction" -> "Infer: Deduce1";
+        "Model: Hybrid Second ANFIS" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Effectiveness Dialysis";
+    }
+
+
+}

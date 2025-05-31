@@ -1,0 +1,168 @@
+digraph Boxology {
+    rankdir=TB;
+
+    // Subgraph - Extract Relevant Information
+    subgraph cluster_1 {
+        label="1d Extract Relevant Information";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Text Symptoms";
+        process = "Transform";
+        output = "Data: Text Symptoms Cleaned";
+
+        "Symptoms" [label="Data:Text Symptoms", shape=box, fillcolor=white];
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symptoms_Cleaned" [label="Data:Text Symptoms Cleaned", shape=box, fillcolor=white];
+
+        "Symptoms" -> "Transform1";
+        "Transform1" -> "Symptoms_Cleaned";
+    }
+
+    // Subgraph - Tokenize
+    subgraph cluster_2{
+        label="1d Tokenize";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Text Symptoms Cleaned";
+        process = "Transform";
+        output = "Data: Text Tokens";
+
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Text Tokens" [label="Data: Text Tokens", shape=box, fillcolor=white];
+
+        "Symptoms_Cleaned" -> "Transform";
+        "Transform" -> "Data: Text Tokens";
+    }
+    
+    // Subgraph - Transform to Feature Vectors
+    subgraph cluster_3 {
+        label=" 1d Transform to Feature Vectors";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Text Tokens";
+        process = "Transform: Embed";
+        output = "Data: Text Feature Vectors Symptoms";
+
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Text Feature Vectors Symptoms" [label="Data: Text Feature Vectors Symptoms", shape=box, fillcolor=white];
+
+        "Data: Text Tokens" -> "Transform: Embed";
+        "Transform: Embed" -> "Data: Text Feature Vectors Symptoms";
+    }
+    
+    // Subgraph - 2a Possible Diagnosis (per case)
+    subgraph cluster_4{
+        label="2a Possible Diagnosis (per case)";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Text Feature Vectors Symptoms";
+        process = "Generate: Train";
+        output = "Model: Semantic Support Vector Machine";
+
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Semantic Support Vector Machine" [label="Model: Semantic Support Vector Machine", shape=hexagon, fillcolor=white];
+
+        "Data: Text Feature Vectors Symptoms" -> "Generate: Train";
+        "Generate: Train" -> "Model: Semantic Support Vector Machine";
+    }
+
+    // Subgraph - 2a Possible Diagnosis (per case)
+    subgraph cluster_5 {
+        label=" 2a Possible Diagnosis (per case)";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Text Feature Vectors Symptoms";
+        process = "Infer: Deduce";
+        output = "Data Possible Diagnosis with Likelihood";
+
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Possible Diagnosis with Likelihood" [label="Data Possible Diagnosis with Likelihood", shape=box, fillcolor=white];
+
+        "Data: Text Feature Vectors Symptoms" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Possible Diagnosis with Likelihood";
+    }
+    
+    // Subgraph - 2a Classification 
+    subgraph cluster_6 {
+        label=" 2a Classification ";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Semantic Support Vector Machine";
+        input2 = "Data Possible Diagnosis with Likelihood";
+        process = "Infer: Deduce2"
+        output = "Symbol: Text Possible Diagnosis ranked by Likelihood";
+
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol: Text Possible Diagnosis ranked by Likelihood" [label="Symbol: Text Possible Diagnosis ranked by Likelihood", shape=box, fillcolor=white];
+
+        "Model: Semantic Support Vector Machine" -> "Infer: Deduce2";
+        "Data Possible Diagnosis with Likelihood" -> "Infer: Deduce2";
+        "Infer: Deduce2" -> "Symbol: Text Possible Diagnosis ranked by Likelihood"
+    }
+    
+    // Subgraph - 1d Structure Medical Knowledge
+    subgraph cluster_7 {
+        label="1d Structure Medical Knowledge";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Text Medical Knowledge";
+        process = "Transform: Embed3";
+        output = "Data: Text Structures Representation";
+
+        "Data: Text Medical Knowledge" [label="Data: Text Medical Knowledge", shape=box, fillcolor=white];
+        "Transform: Embed3" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Text Structures Representation" [label="Data: Text Structures Representation", shape=box, fillcolor=white];
+
+        "Data: Text Medical Knowledge" -> "Transform: Embed3";
+        "Transform: Embed3" -> "Data: Text Structures Representation";
+    }
+
+
+    // Subgraph - 1d Fuzzy Rules without Weights
+    subgraph cluster_8 {
+        label="1d Fuzzy Rules without Weights";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Text Structures Representation";
+        process = "Tranform: Embed4";
+        output = "Data: Text Fuzzy Rules";
+
+        "Tranform: Embed4" [label="Tranform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Text Fuzzy Rules" [label="Data: Text Fuzzy Rules", shape=box, fillcolor=white];
+
+        "Data: Text Structures Representation" -> "Tranform: Embed4";
+        "Tranform: Embed4" -> "Data: Text Fuzzy Rules";
+    }
+    
+        // 1a Fuzzy Rules
+    subgraph cluster_9 {
+        label="1a Fuzzy Rules";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Text Fuzzy Rules";
+        process = "Generate: Engineer";
+        output = "Model: Semantic Fuzzy Rules with weights";
+
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model: Semantic Fuzzy Rules with weights" [label="Model: Semantic Fuzzy Rules with weights", shape=hexagon, fillcolor=white];
+
+        "Data: Text Fuzzy Rules" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Semantic Fuzzy Rules with weights";
+        "Model: Semantic Fuzzy Rules with weights" -> "Infer: Deduce"}
+    
+
+
+
+
+    
+}

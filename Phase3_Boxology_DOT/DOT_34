@@ -1,0 +1,119 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Preprocessing and Feature Selection
+    subgraph cluster_1 {
+        label="1d Preprocessing and Feature Selection";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Osteoarthritis Data";
+        process = "Transform";
+        output = "Data Extracted Features";
+
+        "Data Osteoarthritis Data" [label="Data Osteoarthritis Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Extracted Features" [label="Data Extracted Features", shape=box, fillcolor=white];
+
+        "Data Osteoarthritis Data" -> "Transform";
+        "Transform" -> "Data Extracted Features";
+    }
+
+    // Subgraph - 1a learning Process
+    subgraph cluster_2 {
+        label="1a learning Process";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Extracted Features";
+        input2 = "Symbol Overall Importance"
+        process = "Generate: Train";
+        output = "Model: Statistical Prediction Model";
+
+        "Symbol Overall Importance" [label="Symbol Overall Importance", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Statistical Prediction Model" [label="Model: Statistical Prediction Model", shape=hexagon, fillcolor=white];
+        
+        "Data Extracted Features" -> "Generate: Train";
+        "Symbol Overall Importance" -> "Generate: Train";
+        "Generate: Train" -> "Model: Statistical Prediction Model";
+    }
+    
+    // Subgraph - 2a Prediction
+    subgraph cluster_3 {
+        label="2a Prediction";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Statistical Prediction Model";
+        input2 = "Data Patient Data"
+        process = "Infer: Predict";
+        output = "Symbol Likelihood KOA + Certainity";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Predict" [label="Infer: Predict", shape=oval, fillcolor=lightgray];
+        "Symbol Likelihood KOA + Certainity" [label="Symbol Likelihood KOA + Certainity", shape=box, fillcolor=white];
+
+        "Data Patient Data" -> "Infer: Predict";
+        "Model: Statistical Prediction Model" -> "Infer: Predict";
+        "Infer: Predict" ->  "Symbol Likelihood KOA + Certainity";
+    }
+    
+    // Subgraph - 2a FIS 1
+    subgraph cluster_4 {
+        label="2a FIS 1";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Extracted Features";
+        process = "Infer: Deduce";
+        output1 = "Model Semantic FIS 1";
+        output2 = "Symbol Importance Score";
+
+        "Model Semantic FIS 1" [label="Model Semantic FIS 1", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Importance Score" [label="Symbol Importance Score", shape=box, fillcolor=white];
+
+        "Data Extracted Features" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Model Semantic FIS 1";
+    }   "Infer: Deduce" ->"Symbol Importance Score";
+
+    // Subgraph - 1c FIS Creation
+    subgraph cluster_5 {
+        label="1c FIS Creation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Actor Expert";
+        input2 = "Model Semantic FIS 1";
+        process = "Generate: Engineer";
+        output = "Model: Semantic FIS 2";
+
+        "Actor Expert" [label="Actor Expert", shape=triangle, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model: Semantic FIS 2" [label="Model: Semantic FIS 2", shape=hexagon, fillcolor=white];
+
+        "Actor Expert" -> "Generate: Engineer";
+        "Model Semantic FIS 1" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Semantic FIS 2";
+    }
+
+    // Subgraph - 2a FIS 2
+    subgraph cluster_6 {
+        label="2a FIS 2";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Semantic FIS 2";
+        input2 = "Symbol Importance Score";
+        process = "Infer: Deduce1";
+        output = "Symbol Overall Importance";
+
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+     
+        "Model: Semantic FIS 2" -> "Infer: Deduce1";
+        "Symbol Importance Score" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Overall Importance";
+    }
+
+}

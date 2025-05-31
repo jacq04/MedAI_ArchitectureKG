@@ -1,0 +1,97 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-process
+    subgraph cluster_1 {
+        label="1d Pre-process";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Raw Multidimensional 13C MRI Data";
+        process = "Transform: Embed";
+        output = "Data: Image Preprocessed Data";
+
+        "Data: Image Raw Multidimensional 13C MRI Data" [label="Data: Image Raw Multidimensional 13C MRI Data", shape=box, fillcolor=white];
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Image Preprocessed Data" [label="Data: Image Preprocessed Data", shape=box, fillcolor=white];
+
+        "Data: Image Raw Multidimensional 13C MRI Data" -> "Transform: Embed";
+        "Transform: Embed" -> "Data: Image Preprocessed Data";
+    }
+
+    // Subgraph - 1d Initialization
+    subgraph cluster_2 {
+        label="1d Initialization";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Preprocessed Data";
+        process = "Transform: Embed1";
+        output = "Data: Image Initial Segmentation Estimates";
+
+        "Transform: Embed1" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Image Initial Segmentation Estimates" [label="Data: Image Initial Segmentation Estimates", shape=box, fillcolor=white];
+
+        "Data: Image Preprocessed Data" -> "Transform: Embed1";
+        "Transform: Embed1" -> "Data: Image Initial Segmentation Estimates";
+    }
+    
+    // Subgraph - 2a Fuzzy MRF Model Application 
+    subgraph cluster_3 {
+        label="2a Fuzzy MRF Model Application ";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Image Initial Segemntation Estimates";
+        input2 = "Model: Hybrid Fuzzy MRF Model"
+        process = "Infer: Deduce";
+        output = "Symbol Refined Segmentation";
+
+        "Data: Image Initial Segemntation Estimates" [label="Data: Image Initial Segemntation Estimates", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid Fuzzy MRF Model" [label="Model: Hybrid Fuzzy MRF Model", shape=hexagon, fillcolor=white];
+        "Symbol Refined Segmentation" [label="Symbol Refined Segmentation", shape=box, fillcolor=lightgray];
+        
+        "Data: Image Initial Segemntation Estimates" -> "Infer: Deduce";
+        "Model: Hybrid Fuzzy MRF Model" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Refined Segmentation";
+    }
+    
+    // Subgraph - 1d Segmentation Refinement
+    subgraph cluster_4 {
+        label="1d Segmentation Refinement";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Refined Segmentation";
+        process = "Transform: Embed2";
+        output = "Symbol Segmentation Maps";
+
+        "Transform: Embed2" [label="Transform: Embed2", shape=oval, fillcolor=lightgray];
+        "Symbol Segmentation Maps" [label="Symbol Segmentation Maps", shape=box, fillcolor=white];
+
+        "Symbol Refined Segmentation" -> "Transform: Embed2";
+        "Transform: Embed2" -> "Symbol Segmentation Maps";
+    }
+
+    // Subgraph - 1a Development
+    subgraph cluster_5 {
+        label="1a Development";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Silico Data and In Vivo Data";
+        process = "Generate: Train";
+        output = "Model: Hybrid Fuzzy MRF Model";
+
+        "Data Silico Data and In Vivo Data" [label="Data Silico Data and In Vivo Data", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+
+        "Data Silico Data and In Vivo Data" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid Fuzzy MRF Model";
+    }
+
+
+
+
+}

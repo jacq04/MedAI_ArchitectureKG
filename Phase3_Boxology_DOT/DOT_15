@@ -1,0 +1,83 @@
+digraph Boxology {
+    rankdir=TB;
+
+    // Subgraph - 1d Feature Extraction
+    subgraph cluster_1 {
+        label="1d Feature Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Measurements";
+        process = "Transform";
+        output = "Data Extracted Features";
+
+        "Data Raw Measurements" [label="Data Raw Measurements", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Extracted Features" [label="Data Extracted Features", shape=box, fillcolor=white];
+
+        "Data Raw Measurements" -> "Transform";
+        "Transform" -> "Data Extracted Features";
+    
+    }
+
+    // Subgraph - 1a Ensemble Machine Learning Model Training
+    subgraph cluster_2 { 
+        label="1a Ensemble Machine Learning Model Training";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Extracted Features";
+        process = "Generate: Train";
+        output = "Model: Dynamic Boosting Model";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Dynamic Boosting Model" [label="Model: Dynamic Boosting Model", shape=hexagon, fillcolor=white];
+
+        "Data Extracted Features" -> "Generate: Train";
+        "Generate: Train" -> "Model: Dynamic Boosting Model";
+    }
+    
+    // Subgraph - 2a Health Score Prediction
+    subgraph cluster_3 {
+        label="2a Health Score Prediction";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Dynamic Boosting Model";
+        input2 = "Data Measurements"
+        process = "Infer: Deduce";
+        output = "Symbol Health Score and Epilepsy Prediction";
+
+        "Data Measurements" [label="Data Measurements", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Health Score and Epilepsy Prediction" [label="Symbol Health Score and Epilepsy Prediction", shape=box, fillcolor=white];
+
+        "Model: Dynamic Boosting Model" -> "Infer: Deduce";
+        "Data Measurements" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Health Score and Epilepsy Prediction";
+    }
+
+    // Subgraph - 2a Fuzzy Logic Inference
+    subgraph cluster_4 {
+        label="2a Fuzzy Logic Inference";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Health Score and Epilepsy Prediction";
+        input2 = "Symbol Fuzzy Rules";
+        process = "Infer: Deduce1";
+        output = "Symbol Diagnosis and Treatment";
+
+        "Symbol Fuzzy Rules" [label="Symbol Fuzzy Rules", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Diagnosis and Treatment" [label="Symbol Diagnosis and Treatment", shape=box, fillcolor=white];
+
+        "Symbol Fuzzy Rules" -> "Infer: Deduce1";
+        "Symbol Health Score and Epilepsy Prediction"  -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Diagnosis and Treatment";
+    }   
+
+
+
+
+}

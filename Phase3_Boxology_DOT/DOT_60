@@ -1,0 +1,133 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Medical Data";
+        process = "Transform";
+        output = "Data Normalized Data";
+
+        "Data Medical Data" [label="Data Medical Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Normalized Data" [label="Data Normalized Data", shape=box, fillcolor=white];
+
+        "Data Medical Data" -> "Transform";
+        "Transform" -> "Data Normalized Data";
+    }
+
+    // Subgraph - 1d Divide Data
+    subgraph cluster_2 {
+        label="1d Divide Data";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Normalized Data";
+        process = "Transform1";
+        output = "Data Segmented Data";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Segmented Data" [label="Data Segmented Data", shape=box, fillcolor=white];
+
+        "Data Normalized Data" -> "Transform1";
+        "Transform1" -> "Data Segmented Data";
+    }
+
+    // Subgraph - 1c Agent Learning
+    subgraph cluster_3 {
+        label="1c Agent Learning";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Segmented Data";
+        process = "Generate: Engineer";
+        output = "Symbol Local Rules";
+
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Symbol Local Rules" [label="Symbol Local Rules", shape=box, fillcolor=white];
+
+        "Data Segmented Data" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Symbol Local Rules";
+    }
+    
+    // Subgraph - 1d Communication and Neighborhood Formation
+    subgraph cluster_4 {
+        label="1d Communication and Neighborhood Formation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Local Rules";
+        process = "Transform2";
+        output = "Symbol Enriched Rules";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol Enriched Rules" [label="Symbol Enriched Rules", shape=box, fillcolor=white];
+
+        "Symbol Local Rules" -> "Transform2";
+        "Transform2" -> "Symbol Enriched Rules";
+    }
+    
+    // Subgraph - 1d Probabilistic Fuzzy Rule Refinement
+    subgraph cluster_5 {
+        label="1d Probabilistic Fuzzy Rule Refinement";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Enriched Rules";
+        process = "Transform3";
+        output = "Symbol Probabilistic Rules";
+
+        "Transform3" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol Probabilistic Rules" [label="Symbol Probabilistic Rules", shape=box, fillcolor=white];
+
+        "Symbol Enriched Rules" -> "Transform3";
+        "Transform3" -> "Symbol Probabilistic Rules";
+    }
+
+
+    // Subgraph - 1c System Creation
+    subgraph cluster_6 {
+        label="1c System Creation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Probabilistic Rules";
+        process = "Generate: Engineer1";
+        output = "Model: Hybrid DPFRM System";
+
+        "Generate: Engineer1" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid DPFRM System" [label="Model: Hybrid DPFRM System", shape=hexagon, fillcolor=white];
+
+        "Symbol Probabilistic Rules" -> "Generate: Engineer1";
+        "Generate: Engineer1" -> "Model: Hybrid DPFRM System";
+    }
+
+    // Subgraph - 2a Prediction Making
+    subgraph cluster_7 {
+        label="2a Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid DPFRM System";
+        input2 = "Data Patient Data"
+        process = "Infer: Deduce";
+        output = "Symbol Task Specific Prediction (e.g. Mortality)";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Task Specific Prediction (e.g. Mortality)" [label="Symbol Task Specific Prediction (e.g. Mortality)", shape=box, fillcolor=white];
+
+        "Model: Hybrid DPFRM System" -> "Infer: Deduce";
+        "Data Patient Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Task Specific Prediction (e.g. Mortality)";
+    }
+
+
+
+
+
+
+}

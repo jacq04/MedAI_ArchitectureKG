@@ -1,0 +1,102 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1c Construction of the Initial FCM
+    subgraph cluster_1 {
+        label="1c Construction of the Initial FCM";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor Experts";
+        process = "Generate: Engineer";
+        output = "Symbol Preliminary FCM";
+
+        "Actor Experts" [label="Actor Experts", shape=triangle, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Symbol Preliminary FCM" [label="Symbol Preliminary FCM", shape=box, fillcolor=white];
+
+        "Actor Experts" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Symbol Preliminary FCM";
+    }
+
+    // Subgraph - 1d Integration of Fuzzy Rules
+    subgraph cluster_2 {
+        label="1d Integration of Fuzzy Rules";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Preliminary FCM";
+        input2 = "Symbol Additional Existing Knowledge"
+        process = "Transform";
+        output = "Symbol Enhanced FCM";
+
+        "Symbol Additional Existing Knowledge" [label="Symbol Additional Existing Knowledge", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol Enhanced FCM" [label="Symbol Enhanced FCM", shape=box, fillcolor=white];
+
+        "Symbol Preliminary FCM" -> "Transform";
+        "Symbol Additional Existing Knowledge" -> "Transform";
+        "Transform" -> "Symbol Enhanced FCM";
+    }
+    
+    // Subgraph - 1a System Training and Calibration
+    subgraph cluster_3 {
+        label="1a System Training and Calibration";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Enhanced FCM";
+        input2 = "Data Previous Cases";
+        process = "Generate: Train";
+        output = "Model: Hybrid FCM-DSS";
+
+        "Data Previous Cases" [label="Data Previous Cases", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid FCM-DSS" [label="Model: Hybrid FCM-DSS", shape=hexagon, fillcolor=white];
+
+        "Symbol Enhanced FCM" -> "Generate: Train";
+        "Data Previous Cases" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid FCM-DSS";
+    }
+    
+    // Subgraph - 2a Implementation and Real-Time Decision Support 
+    subgraph cluster_3 {
+        label="2a Implementation and Real-Time Decision Support";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid FCM-DSS";
+        input2 = "Data Real-Time Patient Data"
+        process = "Infer: Deduce";
+        output = "Symbol DS Output";
+
+        "Data Real-Time Patient Data" [label="Data Real-Time Patient Data", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol DS Output" [label="Symbol DS Output", shape=box, fillcolor=white];
+
+        "Model: Hybrid FCM-DSS" -> "Infer: Deduce";
+        "Data Real-Time Patient Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol DS Output";
+    }
+    
+    // Subgraph - 2a Feedback Loop and Continuous Improvement
+    subgraph cluster_4 {
+        label="2a Feedback Loop and Continuous Improvement";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol DS Output";
+        input2 = "Actor Professionals";
+        process = "Infer: Deduce1";
+        output = "Symbol Updated DS Outputs";
+
+        "Actor Professionals" [label="Actor Professionals", shape=triangle, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Updated DS Outputs" [label="Symbol Updated DS Outputs", shape=box, fillcolor=white];
+
+        "Symbol DS Output" -> "Infer: Deduce1";
+        "Actor Professionals" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Updated DS Outputs";
+    }
+
+}

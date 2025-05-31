@@ -1,0 +1,106 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Normalization
+    subgraph cluster_1 {
+        label="1d Normalization";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Primarily Ventilation-Perfusion Scans and Chest X-rays";
+        process = "Transform";
+        output = "Data: Numeric Structured Input Vector";
+
+        "Data: Image Primarily Ventilation-Perfusion Scans and Chest X-rays" [label="Data: Image Primarily Ventilation-Perfusion Scans and Chest X-rays", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Structured Input Vector" [label="Data: Numeric Structured Input Vector", shape=box, fillcolor=white];
+
+        "Data: Image Primarily Ventilation-Perfusion Scans and Chest X-rays" -> "Transform";
+        "Transform" -> "Data: Numeric Structured Input Vector";
+    }
+
+    // Subgraph - 1d Rule-based Preprocessing
+    subgraph cluster_2 {
+        label="1d Rule-based Preprocessing";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Numeric Structured Input Vector";
+        input2 = "Symbol Diagnostic Rules";
+        process = "Transform1";
+        output = "Data: Numeric Modified Input Vector";
+
+        "Symbol Diagnostic Rules" [label="Symbol Diagnostic Rules", shape=box, fillcolor=white];
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Modified Input Vector" [label="Data: Numeric Modified Input Vector", shape=box, fillcolor=white];
+
+        "Data: Numeric Structured Input Vector" -> "Transform1";
+        "Symbol Diagnostic Rules" -> "Transform1";
+        "Transform1" -> "Data: Numeric Modified Input Vector";
+    }
+    
+    // Subgraph - 1c Rule Creation
+    subgraph cluster_3 {
+        label="1c Rule Creation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol PIOPED Diagnostic Rules";
+        input2 = "Actor Radiologists";
+        process = "Generate: Engineer"
+        output = "Symbol Diagnostic Rules";
+
+        "Symbol PIOPED Diagnostic Rules" [label="Symbol PIOPED Diagnostic Rules", shape=box, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Actor Radiologists" [label="Actor Radiologists", shape=triangle, fillcolor=white];
+
+        "Symbol PIOPED Diagnostic Rules" -> "Generate: Engineer";
+        "Actor Radiologists" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Symbol Diagnostic Rules";
+    }
+    
+    // Subgraph - 1a Model Training 
+    subgraph cluster_4 {
+        label="1a Model Training ";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Modified Input Vector";
+        process = "Generate: Train";
+        output = "Model: Hybrid MLP";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid MLP" [label="Model: Hybrid MLP", shape=hexagon, fillcolor=white];
+
+        "Data: Numeric Modified Input Vector" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid MLP";
+    }
+
+    // Subgraph - 2a Prediction Making
+    subgraph cluster_5 {
+        label="2a Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid MLP";
+        input2 = "Data Numeric Patient Modified Input Vector From Image"
+        process = "Infer: Deduce";
+        output = "Symbol Pulmonary Embolism Probability";
+
+        "Data Numeric Patient Modified Input Vector From Image" [label="Data Numeric Patient Modified Input Vector From Image", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Pulmonary Embolism Probability" [label="Symbol Pulmonary Embolism Probability", shape=box, fillcolor=white];
+
+        "Data Numeric Patient Modified Input Vector From Image" -> "Infer: Deduce";
+        "Model: Hybrid MLP" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Pulmonary Embolism Probability";
+    }
+
+
+
+
+
+
+
+
+}

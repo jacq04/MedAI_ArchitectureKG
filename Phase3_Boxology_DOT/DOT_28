@@ -1,0 +1,102 @@
+digraph Boxology {
+    rankdir=TB;
+
+    // Subgraph - 1d Pre-processing 
+    subgraph cluster_1 {
+        label="1d Pre-processing ";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Patient Data";
+        process = "Transform: Embed";
+        output = "Data Structured and Pre-processed Data";
+
+        "Data Raw Patient Data" [label="Data Raw Patient Data", shape=box, fillcolor=white];
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Structured and Pre-processed Data" [label="Data Structured and Pre-processed Data", shape=box, fillcolor=white];
+
+        "Data Raw Patient Data" -> "Transform: Embed";
+        "Transform: Embed" -> "Data Structured and Pre-processed Data";
+    }
+
+    // Subgraph - 1d Feature Selection
+    subgraph cluster_2 {
+        label="1d Feature Selection";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Structured and Pre-processed Data";
+        process = "Transform";
+        output = "Data Selected Features";
+
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Selected Features" [label="Data Selected Features", shape=box, fillcolor=white];
+
+        "Data Structured and Pre-processed Data" -> "Transform";
+        "Transform" -> "Data Selected Features";
+    }
+    
+    // Subgraph - 1a Prognostic Model Construction
+    subgraph cluster_3 {
+        label="1a Prognostic Model Construction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Selected Features";
+        process = "Generate: Train";
+        output = "Model: Hybrid MLDP";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid MLDP" [label="Model: Hybrid MLDP", shape=hexagon, fillcolor=white];
+
+        "Data Selected Features" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid MLDP";
+    }
+
+    // Subgraph - 2a Integrated Clinical Decision Support
+    subgraph cluster_4 {
+        label="2a Integrated Clinical Decision Support";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid MLDP";
+        input2 = "Symbol Risk Scores and Recommendations";
+        input3 = "Data Patient Data";
+        process = "Infer: Deduce";
+        output = "Symbol Clinical Report";
+
+        "Symbol Risk Scores and Recommendations" [label="Symbol Risk Scores and Recommendations", shape=box, fillcolor=white];
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Clinical Report" [label="Symbol Clinical Report", shape=box, fillcolor=white];
+
+        "Symbol Risk Scores and Recommendations" -> "Infer: Deduce";
+        "Data Patient Data" -> "Infer: Deduce";
+        "Model: Hybrid MLDP" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Clinical Report";
+    }
+
+    // Subgraph - 2a Ontology Driven Clinical Risk Assesment
+    subgraph cluster_5 {
+        label="2a Ontology Driven Clinical Risk Assesment";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Patient Data";
+        process = "Infer: Deduce1";
+        output = "Symbol Risk Scores and Recommendations";
+
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Risk Scores and Recommendations" [label="Symbol Risk Scores and Recommendations", shape=box, fillcolor=white];
+
+        "Data Patient Data" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Risk Scores and Recommendations";
+    }
+
+
+
+
+
+
+
+}

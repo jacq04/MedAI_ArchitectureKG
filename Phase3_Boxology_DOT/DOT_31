@@ -1,0 +1,139 @@
+digraph Boxology {
+    rankdir=TB;
+        
+
+  // Subgraph - 1d Data Collection
+    subgraph cluster_1 {
+        label="1d Data Collection";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Patient Data";
+        process = "Transform";
+        output = "Data Structured and Relevant Data";
+
+        "Data Raw Patient Data" [label="Data Raw Patient Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Structured and Relevant Data" [label="Data Structured and Relevant Data", shape=box, fillcolor=white];
+
+        "Data Raw Patient Data" -> "Transform";
+        "Transform" -> "Data Structured and Relevant Data";
+    }
+
+    // Subgraph - 1d Fuzzification 
+    subgraph cluster_2 {
+        label="1d Fuzzification ";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Structured and Relevant Data";
+        process = "Transform1";
+        output = "Data Fuzzified Data";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Fuzzified Data" [label="Data Fuzzified Data", shape=box, fillcolor=white];
+
+        "Data Structured and Relevant Data" -> "Transform1";
+        "Transform1" -> "Data Fuzzified Data";
+    }
+
+    // Subgraph - 1a Train ML
+    subgraph cluster_3 {
+        label="1a Train ML";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Structured and Relevant Data";
+        input2 = "Data Crisp Risk Level";
+        process = "Generate: Train";
+        output = "Model: Hybrid ML Model";
+
+        "Data Crisp Risk Level" [label="Data Crisp Risk Level", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ML Model" [label="Model: Hybrid ML Model", shape=hexagon, fillcolor=white];
+
+        "Data Structured and Relevant Data" -> "Generate: Train";
+        "Data Crisp Risk Level" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid ML Model";
+    }
+    
+    // Subgraph - 2a Prediction Making
+    subgraph cluster_4 {
+        label="2a Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid ML Model";
+        input2 = "Data Patient Data";
+        process = "Infer: Predict";
+        output = "Symbol Risk and Likelihood COVID-19";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Infer: Predict" [label="Infer: Predict", shape=oval, fillcolor=lightgray];
+        "Symbol Risk and Likelihood COVID-19" [label="Symbol Risk and Likelihood COVID-19", shape=box, fillcolor=white];
+
+        "Model: Hybrid ML Model" -> "Infer: Predict";
+        "Data Patient Data" -> "Infer: Predict";
+        "Infer: Predict" -> "Symbol Risk and Likelihood COVID-19";
+    }
+
+    // Subgraph - 2a Rule-Based Processing
+    subgraph cluster_5 {
+        label="2a Rule-Based Processing";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Fuzzified Data";
+        input2 = "Symbol Fuzzy Rules";
+        process = "Infer: Deduce";
+        output = "Symbol Fuzzy Risk Level";
+
+        "Symbol Fuzzy Rules" [label="Symbol Fuzzy Rules", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Fuzzy Risk Level" [label="Symbol Fuzzy Risk Level", shape=box, fillcolor=white];
+
+        "Symbol Fuzzy Rules" -> "Infer: Deduce";
+        "Data Fuzzified Data" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Fuzzy Risk Level";
+    }
+
+
+    // Subgraph - 1d Defuzziification
+    subgraph cluster_6 {
+        label="1d Defuzziification";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Fuzzy Risk Level";
+        process = "Transform2";
+        output = "Data Crisp Risk Level";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Crisp Risk Level" [label="Data Crisp Risk Level", shape=box, fillcolor=white];
+
+        "Symbol Fuzzy Risk Level" -> "Transform2";
+        "Transform2" -> "Data Crisp Risk Level";
+    }
+    
+    // Subgraph - 1a Create Fuzzy Rules
+    subgraph cluster_7 {
+        label="1a Create Fuzzy Rules";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor Experts";
+        process = "Generate: Engineer";
+        output = "Symbol Fuzzy Rules";
+
+        "Actor Experts" [label="Actor Experts", shape=triangle, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+     
+        "Actor Experts" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Symbol Fuzzy Rules";
+    }
+
+
+
+
+
+}

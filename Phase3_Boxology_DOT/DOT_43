@@ -1,0 +1,120 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Pre-processing
+    subgraph cluster_1 {
+        label="1d Pre-processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Raw Patient Data";
+        process = "Transform";
+        output = "Data Structured Data";
+
+        "Data Raw Patient Data" [label="Data Raw Patient Data", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data Structured Data" [label="Data Structured Data", shape=box, fillcolor=white];
+
+        "Data Raw Patient Data" -> "Transform";
+        "Transform" -> "Data Structured Data";
+    }
+
+    // Subgraph - Fuzzy Rough Set Application
+    subgraph cluster_2 {
+        label="Fuzzy Rough Set Application";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Actor Experts";
+        input2 = "Symbol Diagnostic Parameters";
+        process = "Infer: Deduce";
+        output = "Data Structred Data";
+
+        "Actor Experts" [label="Actor Experts", shape=triangle, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Diagnostic Parameters" [label="Symbol Diagnostic Parameters", shape=box, fillcolor=white];
+
+        "Actor Experts" -> "Infer: Deduce";
+        "Symbol Diagnostic Parameters" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Structred Data";
+    }
+
+    // Subgraph - 1a ANFIS Method
+    subgraph cluster_3 {
+        label="1a ANFIS Method";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Structured Data";
+        process = "Generate Train";
+        output = "Model: Hybrid ANFIS";
+
+        "Generate Train" [label="Generate Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS" [label="Model: Hybrid ANFIS", shape=hexagon, fillcolor=white];
+
+        "Data Structured Data" -> "Generate Train";
+        "Generate Train" -> "Model: Hybrid ANFIS";
+    }
+
+    // Subgraph - 1d Transform Data is Fuzzy Values
+    subgraph cluster_4 {
+        label="1d Transform Data is Fuzzy Values";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Patient Data";
+        process = "Transform: Embed";
+        output = "Data Fuzzified Value";
+
+        "Data Patient Data" [label="Data Patient Data", shape=box, fillcolor=white];
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data Fuzzified Value" [label="Data Fuzzified Value", shape=box, fillcolor=white];
+
+        "Data Patient Data" -> "Transform: Embed";
+        "Transform: Embed" -> "Data Fuzzified Value";
+    }
+
+    // Subgraph - 2a Fuzzy Inference
+    subgraph cluster_5 {
+        label="2a Fuzzy Inference";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Fuzzified Value";
+        input2 = "Model: Hybrid ANFIS";
+        process = "Infer: Deduce1";
+        output = "Symbol Fuzzy Diagnosis";
+
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Fuzzy Diagnosis" [label="Symbol Fuzzy Diagnosis", shape=box, fillcolor=white];
+
+        "Data Fuzzified Value" -> "Infer: Deduce1";
+        "Model: Hybrid ANFIS" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Fuzzy Diagnosis";
+    }
+    
+    // Subgraph - 1d Diagnosis and Recommendation
+    subgraph cluster_6 {
+        label="1d Diagnosis and Recommendation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Fuzzy Diagnosis";
+        process = "Transform1";
+        output = "Symbol Medical Report";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Symbol Medical Report" [label="Symbol Medical Report", shape=box, fillcolor=white];
+
+        "Symbol Fuzzy Diagnosis" -> "Transform1";
+        "Transform1" -> "Symbol Medical Report";
+    }
+
+
+
+
+
+
+
+
+}

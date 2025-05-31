@@ -1,0 +1,123 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Classification
+    subgraph cluster_1 {
+        label="1d Classification";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Blood Glucose Measurement";
+        process = "Transform: Emebed";
+        output = "Data Dataset w/ Glycaemia Classified";
+
+        "Data: Numeric Blood Glucose Measurement" [label="Data: Numeric Blood Glucose Measurement", shape=box, fillcolor=white];
+        "Transform: Emebed" [label="Transform: Emebed", shape=oval, fillcolor=lightgray];
+        "Data Dataset w/ Glycaemia Classified" [label="Data Dataset w/ Glycaemia Classified", shape=box, fillcolor=white];
+
+        "Data: Numeric Blood Glucose Measurement" -> "Transform: Emebed";
+        "Transform: Emebed" -> "Data Dataset w/ Glycaemia Classified";
+    }
+
+    // Subgraph - 2a First Automation
+    subgraph cluster_2 {
+        label="2a First Automation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Dataset w/ Glycaemia Classified";
+        input2 = "Model: Semantic First Automation"
+        process = "Infer: Deduce";
+        output = "Data: Numeric Blood Glucose Ranges";
+
+        "Model: Semantic First Automation" [label="Model: Semantic First Automation", shape=hexagon, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Blood Glucose Ranges" [label="Data: Numeric Blood Glucose Ranges", shape=box, fillcolor=white];
+
+        "Model: Semantic First Automation" -> "Infer: Deduce";
+        "Data Dataset w/ Glycaemia Classified" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data: Numeric Blood Glucose Ranges"
+    }
+
+    // Subgraph - 2a Determine Status
+    subgraph cluster_3 {
+        label="2a Determine Status";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Numeric Blood Glucose Ranges";
+        input2 = "Data: Numeric Ketones Urine"
+        process = "Infer: Deduce1";
+        output = "Data: Numeric Patient's Metabolic Condition";
+
+        "Data: Numeric Ketones Urine" [label="Data: Numeric Ketones Urine", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce1", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Patient's Metabolic Condition" [label="Data: Numeric Patient's Metabolic Condition", shape=box, fillcolor=white];
+
+        "Data: Numeric Blood Glucose Ranges" -> "Infer: Deduce1";
+        "Data: Numeric Ketones Urine" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Data: Numeric Patient's Metabolic Condition"
+    }
+
+        // Subgraph - 2a Second Automation
+    subgraph cluster_4 {
+        label="2a Second Automation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model Semantic Second Automation";
+        input2 = "Data: Numeric Ketonuria Status"
+        process = "Infer Deduce2";
+        output = "Data: Numeric Ketones Urine";
+
+        "Model Semantic Second Automation" [label="Model Semantic Second Automation", shape=hexagon, fillcolor=white];
+        "Infer Deduce2" [label="Infer Deduce2", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Ketonuria Status" [label="Data: Numeric Ketonuria Status", shape=box, fillcolor=white];
+
+        "Model Semantic Second Automation" -> "Infer Deduce2";
+        "Data: Numeric Ketonuria Status" -> "Infer Deduce2";
+        "Infer Deduce2" -> "Data: Numeric Ketones Urine"
+    }
+    
+    // Subgraph - 2a Decision support for therapy Planning
+    subgraph cluster_5 {
+        label="2a Decision support for therapy Planning";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Numeric Patient's Metabolic Condition";
+        input2 = "Model: Semantic Rule-Based";
+        process = "Infer: Deduce3";
+        output1 = "Symbol Healthcare Provider Interventions";
+        output2 = "Symbol Direct Patient Interventions";
+
+        "Model: Semantic Rule-Based" [label="Model: Semantic Rule-Based", shape=hexagon, fillcolor=white];
+        "Infer: Deduce3" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Healthcare Provider Interventions" [label="Symbol Healthcare Provider Interventions", shape=box, fillcolor=white];
+        "Symbol Direct Patient Interventions" [label="Symbol Direct Patient Interventions", shape=box, fillcolor=white];
+
+        "Data: Numeric Patient's Metabolic Condition" -> "Infer: Deduce3";
+        "Model: Semantic Rule-Based" -> "Infer: Deduce3";
+        "Infer: Deduce3" -> "Symbol Healthcare Provider Interventions";
+        "Infer: Deduce3"-> "Symbol Direct Patient Interventions"
+    }
+
+    // Subgraph - 2c Create Rule-Based Model
+    subgraph cluster_ {
+        label="2c Create Rule-Based Model";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Actor Endocrinologists";
+        input2 = "Model: Semantic Guidelines"
+        process = "Generate: Train";
+        output = "Model: Semantic Rule-Based";
+
+        "Actor Endocrinologist" [label="Actor Endocrinologist", shape=triangle, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        
+        "Actor Endocrinologist" -> "Generate: Train";
+        "Model: Semantic Guidelines" -> "Generate: Train";
+        "Generate: Train"-> "Model: Semantic Rule-Based";
+    }
+}

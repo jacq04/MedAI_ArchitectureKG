@@ -1,0 +1,121 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph 1d Pre-Process 
+    subgraph cluster_1 {
+        label="1d Pre-Process ";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Raw Physiological Data";
+        process = "Tranform";
+        output = "Data: Numeric Cleaned Physiological Data";
+
+        "Data: Numeric Raw Physiological Data" [label="Data: Numeric Raw Physiological Data", shape=box, fillcolor=white];
+        "Tranform" [label="Tranform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Cleaned Physiological Data" [label="Data: Numeric Cleaned Physiological Data", shape=box, fillcolor=white];
+
+        "Data: Numeric Raw Physiological Data" -> "Tranform";
+        "Tranform" -> "Data: Numeric Cleaned Physiological Data";
+    }
+
+
+    // Subgraph - 1d Fuzzy c-means clustering (FCM) and fuzzy k-means clusterign (FKM)
+    subgraph cluster_2 {
+        label="1d Fuzzy c-means clustering (FCM) and fuzzy k-means clusterign (FKM)";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Cleaned Physiological Data";
+        process = "Transform: Embed";
+        output = "Data: Numeric Clustered Physiological Data";
+
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Clustered Physiological Data" [label="Data: Numeric Clustered Physiological Data", shape=box, fillcolor=white];
+
+        "Data: Numeric Cleaned Physiological Data" -> "Transform: Embed";
+        "Transform: Embed" -> "Data: Numeric Clustered Physiological Data";
+    }
+    
+    // Subgraph - 1d Self-Organizing Fuzzy Logic Modelling
+    subgraph cluster_3 {
+        label= "1d Self-Organizing Fuzzy Logic Modelling";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Numeric Clustered Physiological Data";
+        input2 = "Model: Semantic Fuzzy Rules"
+        process = "Transform: Embed1";
+        output = "Data physiological conditions";
+
+        "Data physiological conditions" [label="Data physiological conditions", shape=box, fillcolor=white];
+        "Transform: Embed1" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Model: Semantic Fuzzy Rules" [label="Model: Semantic Fuzzy Rules", shape=hexagon, fillcolor=white];
+
+        "Data: Numeric Clustered Physiological Data" -> "Transform: Embed1";
+        "Transform: Embed1" ->  "Data physiological conditions";
+        "Model: Semantic Fuzzy Rules" -> "Transform: Embed1";
+    }
+
+    // Subgraph - 1c Generate Fuzzy Rules
+    subgraph cluster_4 {
+        label="1c Generate Fuzzy Rules";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data Knowledge + Guidelines";
+        process = "Generate: Train";
+        output = "Model: Semantic Fuzzy Rules";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Data Knowledge + Guidelines" [label="Data Knowledge + Guidelines", shape=box, fillcolor=white];
+
+        "Data Knowledge + Guidelines" -> "Generate: Train";
+        "Generate: Train" -> "Model: Semantic Fuzzy Rules";
+    }
+    
+    // Subgraph -  2a Modelling
+    subgraph cluster_5 {
+        label="2a Modelling";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data physiological conditions";
+        input2 = "Data Historical Data Sets";
+        input3 = "Data Authentic Diagnosis Database";
+        process = "Generate: Train2"
+        ouput = "Model: Semantic Decision Support"
+
+        "Data Historical Data Sets" [label="Data Historical Data Sets", shape=box, fillcolor=white];
+        "Data Authentic Diagnosis Database" [label="Data Authentic Diagnosis Database", shape=box, fillcolor=white];
+        "Generate: Train2" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Semantic Decision Support" [label="Model: Semantic Decision Support", shape=hexagon, fillcolor=white];
+
+        "Data physiological conditions" -> "Generate: Train2";
+        "Data Historical Data Sets" -> "Generate: Train2";
+        "Data Authentic Diagnosis Database" -> "Generate: Train2";
+        "Generate: Train2" -> "Model: Semantic Decision Support"
+    }
+
+    // Subgraph - 2b Check if Early Alert 
+    subgraph cluster_6 {
+        label="2b Check if Early Alert";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Semantic Decision Support";
+        input2 = "Data: Numeric Raw Physiological Data1"
+        process = "Infer: Deduce";
+        output = "Symbol Early Alert";
+
+        "Data: Numeric Raw Physiological Data1" [label="Data: Numeric Raw Physiological Data", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Early Alert" [label="Symbol Early Alert", shape=box, fillcolor=white];
+
+        "Model: Semantic Decision Support" -> "Infer: Deduce";
+        "Data: Numeric Raw Physiological Data1" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Early Alert"
+    }
+
+    
+}

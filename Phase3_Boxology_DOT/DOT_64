@@ -1,0 +1,103 @@
+digraph Boxology {
+    rankdir=TB;
+    
+
+    // Subgraph - 1d Definition of Input Variables
+    subgraph cluster_1 {
+        label="1d Definition of Input Variables";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Measurements";
+        process = "Transform";
+        output = "Data: Numeric Normalized Data";
+
+        "Data: Numeric Measurements" [label="Data: Numeric Measurements", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Normalized Data" [label="Data: Numeric Normalized Data", shape=box, fillcolor=white];
+
+        "Data: Numeric Measurements" -> "Transform";
+        "Transform" -> "Data: Numeric Normalized Data";
+    }
+
+    // Subgraph - 1d Fuzzification
+    subgraph cluster_2 {
+        label="1d Fuzzification";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Normalized Data";
+        process = "Transform1";
+        output = "Data: Numeric Fuzzified Input";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Fuzzified Input" [label="Data: Numeric Fuzzified Input", shape=box, fillcolor=white];
+
+        "Data: Numeric Normalized Data" -> "Transform1";
+        "Transform1" -> "Data: Numeric Fuzzified Input";
+    }
+
+    // Subgraph - 1a Inference Engine
+    subgraph cluster_3 {
+        label="1a Inference Engine";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data: Numeric Fuzzified Input";
+        input2 = "Symbol Fuzzy Rule Base"
+        process = "Generate: Train";
+        output = "Model: Hybrid Inference Engine";
+
+        "Symbol Fuzzy Rule Base" [label="Symbol Fuzzy Rule Base", shape=box, fillcolor=white];
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid Inference Engine" [label="Model: Hybrid Inference Engine", shape=hexagon, fillcolor=white];
+
+        "Data: Numeric Fuzzified Input" -> "Generate: Train";
+        "Symbol Fuzzy Rule Base" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid Inference Engine";
+    }
+
+    // Subgraph - 1c Rules Creation
+    subgraph cluster_4 {
+        label="1c Rules Creation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor";
+        process = "Generate: Engineer";
+        output = "Symbol Fuzzy Rule Base";
+
+        "Actor" [label="Actor", shape=triangle, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+       
+        "Actor" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Symbol Fuzzy Rule Base";
+    }
+
+    // Subgraph - 2a Prediction Making
+    subgraph cluster_5 {
+        label="2a Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid Inference Engine";
+        input2 = "Data: Numeric Patient Measurements";
+        process = "Infer: Deduce";
+        output = "Symbol Adviced Infusion Rate";
+
+        "Data: Numeric Patient Measurements" [label="Data: Numeric Patient Measurements", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Adviced Infusion Rate" [label="Symbol Adviced Infusion Rate", shape=box, fillcolor=white];
+
+        "Model: Hybrid Inference Engine" -> "Infer: Deduce";
+        "Data: Numeric Patient Measurements" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Adviced Infusion Rate"
+    }
+
+
+
+
+
+
+
+}

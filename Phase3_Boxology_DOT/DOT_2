@@ -1,0 +1,131 @@
+digraph Boxology {
+    rankdir=TB;
+
+     // Subgraph - 1d Pre-Processing
+    subgraph cluster_1 {
+        label="1d Pre-Processing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Raw fMRI Scans";
+        process = "Transform: Embed";
+        output = "Data: Image Normalized fMRI Scans";
+
+        "Data: Image Raw fMRI Scans" [label="Data: Image Raw fMRI Scans", shape=box, fillcolor=white];
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Image Normalized fMRI Scans" [label="Data: Image Normalized fMRI Scans", shape=box, fillcolor=white];
+
+        "Data: Image Raw fMRI Scans" -> "Transform: Embed";
+        "Transform: Embed" -> "Data: Image Normalized fMRI Scans";
+    }
+
+
+    // Subgraph - 1d Feature Extraction
+        subgraph cluster_2 {
+            label="1d Feature Extraction";
+            style=filled;
+            color=lightgrey;
+    
+            input = "Data: Image Normalized fMRI Scans";
+            process = "Transform: Embed1";
+            output = "Data: Numeric Features of Brain Activity Patterns";
+    
+            "Transform: Embed1" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+            "Data: Numeric Features of Brain Activity Patterns" [label="Data: Numeric Features of Brain Activity Patterns", shape=box, fillcolor=white];
+    
+            "Data: Image Normalized fMRI Scans" -> "Transform: Embed1";
+            "Transform: Embed1" -> "Data: Numeric Features of Brain Activity Patterns";
+        }
+
+     // Subgraph - SMOTE
+    subgraph cluster_3 {
+        label="1d SMOTE";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Features of Brain Activity Patterns";
+        process = "Transform: Embed2";
+        output = "Data: Numeric Balanced Set";
+
+        "Transform: Embed2" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Balanced Set" [label="Data: Numeric Balanced Set", shape=box, fillcolor=white];
+
+        "Data: Numeric Features of Brain Activity Patterns" -> "Transform: Embed2";
+        "Transform: Embed2" -> "Data: Numeric Balanced Set";
+    }
+
+     // Subgraph - 1d Feature Selection with CCSO
+    subgraph cluster_4 {
+        label="1d Feature Selection with CCSO";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Balanced Set";
+        process = "Transform Embed3";
+        output = "Data: Numeric Features Pain Levels";
+
+        "Transform Embed3" [label="Transform Embed", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Features Pain Levels" [label="Data: Numeric Features Pain Levels", shape=box, fillcolor=white];
+
+        "Data: Numeric Balanced Set" -> "Transform Embed3";
+        "Transform Embed3" -> "Data: Numeric Features Pain Levels";
+    }
+
+    // Subgraph - 1a Create Fuzzy Rules
+    subgraph cluster_5 {
+        label="1a Create Fuzzy Rules";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Features Pain Levels";
+        process = "Generate: Train";
+        output = "Model Semantic CCSO-SOFLP";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model Semantic CCSO-SOFLP" [label="Model Semantic CCSO-SOFLP", shape=hexagon, fillcolor=white];
+
+        "Data: Numeric Features Pain Levels" -> "Generate: Train";
+        "Generate: Train" -> "Model Semantic CCSO-SOFLP";
+    }
+    
+     // Subgraph - 2d Multi-classificiation for Pain levels
+    subgraph cluster_6 {
+        label="2d Multi-classificiation for Pain levels";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model Semantic CCSO-SOFLP";
+        input2 = "Data: Images fMRI Images"
+        process = "Infer: Deduce";
+        output = "Data Pain Levels";
+
+        "Data: Images fMRI Images" [label="DataL Unages fMRI Images", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Pain Levels" [label="Data Pain Levels", shape=box, fillcolor=white];
+
+        "Data: Images fMRI Images" -> "Infer: Deduce";
+        "Model Semantic CCSO-SOFLP" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Data Pain Levels"
+    }
+
+
+    // Subgraph - 1d Interpret Results with SOFLP
+        subgraph cluster_7 {
+            label="1d Interpret Results with SOFLP";
+            style=filled;
+            color=lightgrey;
+    
+            input = "Data Pain Levels";
+            process = "Transform: Embed4";
+            output = "Symbol Pain Levels";
+    
+            "Transform: Embed4" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+            "Symbol Pain Levels" [label="Symbol Pain Levels", shape=box, fillcolor=white];
+    
+            "Data Pain Levels" -> "Transform: Embed4";
+            "Transform: Embed4" -> "Symbol Pain Levels";
+        }
+
+
+    
+}

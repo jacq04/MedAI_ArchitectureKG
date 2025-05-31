@@ -1,0 +1,94 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Artifact Removal 
+    subgraph cluster_1 {
+        label="1d Artifact Removal ";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image MRI Brain Tumor Scans";
+        process = "Transform";
+        output = "Data: Image MRI Removed Artifact";
+
+        "Data: Image MRI Brain Tumor Scans" [label="Data: Image MRI Brain Tumor Scans", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image MRI Removed Artifact" [label="Data: Image MRI Removed Artifact", shape=box, fillcolor=white];
+
+        "Data: Image MRI Brain Tumor Scans" -> "Transform";
+        "Transform" -> "Data: Image MRI Removed Artifact";
+    }
+
+    // Subgraph - 1d Noise Reduction
+    subgraph cluster_2 {
+        label="1d Noise Reduction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image MRI Removed Artifact";
+        process = "Transform1";
+        output = "Data: Image Brain MRI Normalized";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Image Brain MRI Normalized" [label="Data: Image Brain Normalized", shape=box, fillcolor=white];
+
+        "Data: Image MRI Removed Artifact" -> "Transform1";
+        "Transform1" -> "Data: Image Brain MRI Normalized";
+    }
+
+    // Subgraph - 1d Feature Extraction
+    subgraph cluster_3 {
+        label="1d Feature Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Image Brain MRI Normalized";
+        process = "Transform2";
+        output = "Data: Numeric Feature Vectors";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Numeric Feature Vectors" [label="Data: Numeric Feature Vectors", shape=box, fillcolor=white];
+
+        "Data: Image Brain MRI Normalized" -> "Transform2";
+        "Transform2" -> "Data: Numeric Feature Vectors";
+    }
+    
+    // Subgraph - 1a Model Training
+    subgraph cluster_4 {
+        label="1a Model Training";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Numeric Feature Vectors";
+        process = "Generate: Train";
+        output = "Model: Hybrid ANFIS";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid ANFIS" [label="Model: Hybrid ANFIS", shape=hexagon, fillcolor=white];
+
+        "Data: Numeric Feature Vectors" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid ANFIS";
+    }
+    
+    // Subgraph - Prediction Making
+    subgraph cluster_5 {
+        label="Prediction Making";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid ANFIS";
+        input2 = "Data: Image Patient Brain MRI";
+        process = "Infer: Deduce";
+        output = "Symbol Tumor type";
+
+        "Data: Image Patient Brain MRI" [label="Data: Image Patient Brain MRI", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Tumor type" [label="Symbol Tumor type", shape=box, fillcolor=white];
+
+        "Model: Hybrid ANFIS" -> "Infer: Deduce";
+        "Data: Image Patient Brain MRI" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Tumor type";
+    }
+
+
+}

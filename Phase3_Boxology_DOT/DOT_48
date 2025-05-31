@@ -1,0 +1,128 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1d Preprocessing
+    subgraph cluster_1 {
+        label="1d Preprocessing";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Images Raw Lung CT Images";
+        process = "Transform";
+        output = "Data: Images JPEG Images";
+
+        "Data: Images Raw Lung CT Images" [label="Data: Images Raw Lung CT Images", shape=box, fillcolor=white];
+        "Transform" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Images JPEG Images" [label="Data: Images JPEG Images", shape=box, fillcolor=white];
+
+        "Data: Images Raw Lung CT Images" -> "Transform";
+        "Transform" -> "Data: Images JPEG Images";
+    }
+
+    // Subgraph - 1d Greyscale Conversion
+    subgraph cluster_2 {
+        label="1d Greyscale Conversion";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Images JPEG Images";
+        process = "Transform: Embed";
+        output = "Data: Images Greyscale + Normalized Images";
+
+        "Transform: Embed" [label="Transform: Embed", shape=oval, fillcolor=lightgray];
+        "Data: Images Greyscale + Normalized Images" [label="Data: Images Greyscale + Normalized Images", shape=box, fillcolor=white];
+
+        "Data: Images JPEG Images" -> "Transform: Embed";
+        "Transform: Embed" -> "Data: Images Greyscale + Normalized Images";
+    }
+
+    // Subgraph - 1d Image Segmentation
+    subgraph cluster_3 {
+        label="1d Image Segmentation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Images Greyscale + Normalized Images";
+        process = "Transform1";
+        output = "Data: Images Contrast-Enhanced Images";
+
+        "Transform1" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Images Contrast-Enhanced Images" [label="Data: Images Contrast-Enhanced Images", shape=box, fillcolor=white];
+
+        "Data: Images Greyscale + Normalized Images" -> "Transform1";
+        "Transform1" -> "Data: Images Contrast-Enhanced Images";
+    }
+    
+    // Subgraph - 1d Image Segmentation
+    subgraph cluster_4 {
+        label="1d Image Segmentation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Images Contrast-Enhanced Images";
+        process = "Transform2";
+        output = "Data: Images Segmentated Images";
+
+        "Transform2" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Images Segmentated Images" [label="Data: Images Segmentated Images", shape=box, fillcolor=white];
+
+        "Data: Images Contrast-Enhanced Images" -> "Transform2";
+        "Transform2" -> "Data: Images Segmentated Images";
+    }
+
+    // Subgraph - 1d Feature Extraction
+    subgraph cluster_5 {
+        label="1d Feature Extraction";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Images Segmentated Images";
+        process = "Transform3";
+        output = "Data: Inages Extracted Features";
+
+        "Transform3" [label="Transform", shape=oval, fillcolor=lightgray];
+        "Data: Inages Extracted Features" [label="Data: Inages Extracted Features", shape=box, fillcolor=white];
+
+        "Data: Images Segmentated Images" -> "Transform3";
+        "Transform3" -> "Data: Inages Extracted Features";
+    }
+    
+    // Subgraph - 1a Nero-Fuzzy Training
+    subgraph cluster_6 {
+        label="1a Nero-Fuzzy Training";
+        style=filled;
+        color=lightgrey;
+
+        input = "Data: Inages Extracted Features";
+        process = "Generate: Train";
+        output = "Model: Hybrid Neuro-Fuzzy logic";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid Neuro-Fuzzy logic" [label="Model: Hybrid Neuro-Fuzzy logic", shape=hexagon, fillcolor=white];
+
+        "Data: Inages Extracted Features" -> "Generate: Train";
+        "Generate: Train" -> "Model: Hybrid Neuro-Fuzzy logic";
+    }
+
+
+    // Subgraph - 2a Classification (Neuro-Fuzzy Logic)
+    subgraph cluster_7 {
+        label="2a Classification (Neuro-Fuzzy Logic)";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid Neuro-Fuzzy logic";
+        input2 = "Data: Images Patient Lung CT Images";
+        process = "Infer: Deduce";
+        output = "Symbol Report w/ Visual Aids";
+
+        "Data: Images Patient Lung CT Images" [label="Data: Images Patient Lung CT Images", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Report w/ Visual Aids" [label="Symbol Report w/ Visual Aids", shape=box, fillcolor=white];
+
+        "Model: Hybrid Neuro-Fuzzy logic" -> "Infer: Deduce";
+        "Data: Images Patient Lung CT Images" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Report w/ Visual Aids";
+    }
+
+}

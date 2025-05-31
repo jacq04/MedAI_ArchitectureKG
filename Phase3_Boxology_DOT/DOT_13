@@ -1,0 +1,120 @@
+digraph Boxology {
+    rankdir=TB;
+    // Subgraph - 2a Create Vectorized Representations
+    subgraph cluster_1 {
+        label="2a Create Vectorized Representations";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Static Word2Vec";
+        input2 = "Data Annotated Dataset"
+        process = "Infer: Deduce";
+        output = "Symbol Vectorized Representation";
+
+        "Model: Static Word2Vec" [label="Model: Static Word2Vec", shape=hexagon, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Data Annotated Dataset" [label="Data Annotated Dataset", shape=box, fillcolor=white];
+        "Symbol Vectorized Representation" [label="Symbol Vectorized Representation", shape=box, fillcolor=white];
+        
+        
+        "Model: Static Word2Vec" -> "Infer: Deduce";
+        "Data Annotated Dataset" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Vectorized Representation";
+    }
+
+    // Subgraph - 1a Model Training
+    subgraph cluster_2 {
+        label="1a Model Training";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Data Annotated Dataset";
+        input2 = "Symbol Vectorized Representation"
+        process = "Generate: Train";
+        output = "Model: Semantic NLP Model";
+
+        "Generate: Train" [label="Generate: Train", shape=oval, fillcolor=lightgray];
+        "Model: Semantic NLP Model" [label="Model: Semantic NLP Model", shape=hexagon, fillcolor=white];
+
+        "Data Annotated Dataset" -> "Generate: Train";
+        "Symbol Vectorized Representation" -> "Generate: Train";
+        "Generate: Train" -> "Model: Semantic NLP Model";
+    }
+
+    // Subgraph - 2a Output NLP Model
+    subgraph cluster_3 {
+        label="2a Output NLP Model";
+        style=filled;
+        color=lightgrey;
+
+        input = "Model: Semantic NLP Model";
+        process = "Infer: Deduce1";
+        output = "Symbol Semnatically Classified Data";
+
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Semnatically Classified Data" [label="Symbol Semnatically Classified Data", shape=box, fillcolor=white];
+
+        "Model: Semantic NLP Model" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Semnatically Classified Data";
+    }
+
+    // Subgraph - 2a Fuzzy Classification
+    subgraph cluster_4 {
+        label="2a Fuzzy Classification";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Semnatically Classified Data";
+        process = "Infer: Deduce2";
+        output = "Symbol Fuzzy Rules";
+
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Fuzzy Rules" [label="Symbol Fuzzy Rules", shape=box, fillcolor=white];
+
+        "Symbol Semnatically Classified Data" -> "Infer: Deduce2";
+        "Infer: Deduce2" -> "Symbol Fuzzy Rules";
+    }
+
+
+
+    // Subgraph - 1c Create NLP-Fuzzy
+    subgraph cluster_5 {
+        label="1c Create NLP-Fuzzy";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Fuzzy Rules";
+        process = "Generate: Engineer";
+        output = "Model: Hybrid NLP-Fuzzy";
+
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model: Hybrid NLP-Fuzzy" [label="Model: Hybrid NLP-Fuzzy", shape=hexagon, fillcolor=white];
+
+        "Symbol Fuzzy Rules" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Hybrid NLP-Fuzzy";
+    }
+
+
+    // Subgraph - 2a Recommendation
+    subgraph cluster_6 {
+        label="2a Recommendation";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Hybrid NLP-Fuzzy";
+        input2 = "Data Input Query";
+        process = "Infer: Deduce3";
+        output = "Symbol Recommendation";
+
+        "Symbol Recommendation" [label="Symbol Recommendation", shape=box, fillcolor=white];
+        "Data Input Query" [label= "Data Input Query", shape=oval, fillcolor=lightgray];
+        "Infer: Deduce3" [label="Infer: Deduce", shape=box, fillcolor=white];
+
+        "Model: Hybrid NLP-Fuzzy" -> "Infer: Deduce3";
+        "Data Input Query" -> "Infer: Deduce3";
+        "Infer: Deduce3" -> "Symbol Recommendation"
+    }
+
+
+
+}

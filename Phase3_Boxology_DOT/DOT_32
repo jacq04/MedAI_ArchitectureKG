@@ -1,0 +1,97 @@
+digraph Boxology {
+    rankdir=TB;
+    
+    // Subgraph - 1C Rule Formulation
+    subgraph cluster_1 {
+        label="1C Rule Formulation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor Clinicians";
+        process = "Generate: Engineer";
+        output = "Model: Semantic RBR Module";
+
+        "Actor Clinicians" [label="Actor Clinicians", shape=box, fillcolor=white];
+        "Generate: Engineer" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        "Model: Semantic RBR Module" [label="Model: Semantic RBR Module", shape=hexagon, fillcolor=white];
+
+        "Actor Clinicians" -> "Generate: Engineer";
+        "Generate: Engineer" -> "Model: Semantic RBR Module";
+    }
+
+    // Subgraph - 2a Initial Assessment (RBR Module)
+    subgraph cluster_2 {
+        label="2a Initial Assessment (RBR Module)";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Model: Semantic RBR Module";
+        input2 = "Data Patient Measurements"
+        process = "Infer: Deduce";
+        output = "Symbol Triage Level Recommendations";
+
+        "Data Patient Measurement" [label="Data Patient Measurement", shape=box, fillcolor=white];
+        "Infer: Deduce" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Triage Level Recommendations" [label="Symbol Triage Level Recommendations", shape=box, fillcolor=white];
+
+        "Model: Semantic RBR Module" -> "Infer: Deduce";
+        "Data Patient Measurement" -> "Infer: Deduce";
+        "Infer: Deduce" -> "Symbol Triage Level Recommendations";
+    }
+
+    // Subgraph - 2a Knowledge Representation
+    subgraph cluster_3 {
+        label="2a Knowledge Representation";
+        style=filled;
+        color=lightgrey;
+
+        input = "Symbol Refined Triage Level";
+        process = "Infer: Deduce1";
+        output = "Symbol Triage Level Recommendations";
+
+        "Symbol Refined Triage Level" [label="Symbol Refined Triage Level", shape=box, fillcolor=white];
+        "Infer: Deduce1" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Triage Level Recommendations" [label="Symbol Triage Level Recommendations", shape=box, fillcolor=white];
+
+        "Symbol Refined Triage Level" -> "Infer: Deduce1";
+        "Infer: Deduce1" -> "Symbol Triage Level Recommendations";
+    }
+
+    // Subgraph - 2a Fuzzy Logic Classification (FLC Module)
+    subgraph cluster_4 {
+        label="2a Fuzzy Logic Classification (FLC Module)";
+        style=filled;
+        color=lightgrey;
+
+        input1 = "Symbol Triage Level Recommendations";
+        input2 = "Model: Semantic FLC";
+        process = "Infer: Deduce2"
+        output = "Symbol Refined Triage Level";
+
+        "Model: Semantic FLC" [label="Model: Semantic FLC", shape=hexagon, fillcolor=white];
+        "Infer: Deduce2" [label="Infer: Deduce", shape=oval, fillcolor=lightgray];
+        "Symbol Refined Triage Level" [label="Symbol Refined Triage Level", shape=box, fillcolor=white];
+
+        "Symbol Triage Level Recommendations" -> "Infer: Deduce2";
+        "Model: Semantic FLC" -> "Infer: Deduce2";
+        "Infer: Deduce2" ->"Symbol Refined Triage Level";
+    }
+
+
+    // Subgraph - 1c Designing the Fuzzy Logic System
+    subgraph cluster_5 {
+        label="1c Designing the Fuzzy Logic System";
+        style=filled;
+        color=lightgrey;
+
+        input = "Actor Experts";
+        process = "Generate: Engineer1";
+        output = "Model: Semantic FLC";
+
+        "Actor Experts" [label="Actor Experts", shape=triangle, fillcolor=white];
+        "Generate: Engineer1" [label="Generate: Engineer", shape=oval, fillcolor=lightgray];
+        
+        "Actor Experts" -> "Generate: Engineer1";
+        "Generate: Engineer1" -> "Model: Semantic FLC";
+    }
+}
