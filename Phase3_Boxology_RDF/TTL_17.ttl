@@ -1,0 +1,70 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_17 ex:hasBoxology box:Boxology_17 .
+
+box:Actor_Experts rdfs:label "Actor Experts" .
+
+box:Boxology_17 box:includesStep box:Steps_17_1,
+        box:Steps_17_2,
+        box:Steps_17_3,
+        box:Steps_17_4,
+        box:Steps_17_5 .
+
+box:Data_All_Cases rdfs:label "Data All Cases" .
+
+box:Data_Raw_Patient_Data rdfs:label "Data Raw Patient Data" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Infer__Deduce2 rdfs:label "Infer: Deduce2" .
+
+box:Steps_17_1 a box:Step ;
+    rdfs:label "1d Encode" ;
+    box:hasInput box:Data_Raw_Patient_Data ;
+    box:hasOutput box:Data_Encoded_and_Structured_Data ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_17_2 a box:Step ;
+    rdfs:label "Rule-Based Preprocessing" ;
+    box:hasInput box:Data_Encoded_and_Structured_Data,
+        box:Model__Semantic_Rules ;
+    box:hasOutput box:Symbol_Case_with_Attribute_Weights ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_17_3 a box:Step ;
+    rdfs:label "1c Create Rules" ;
+    box:hasInput box:Actor_Experts ;
+    box:hasOutput box:Model__Semantic_Rules ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_17_4 a box:Step ;
+    rdfs:label "2a Case Retrival" ;
+    box:hasInput box:Data_All_Cases,
+        box:Symbol_Case_with_Attribute_Weights ;
+    box:hasOutput box:Data_Similar_Cases ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_17_5 a box:Step ;
+    rdfs:label "2a Solution Generation" ;
+    box:hasInput box:Data_Similar_Cases ;
+    box:hasOutput box:Symbol_Diagnosis ;
+    box:hasProcess box:Infer__Deduce2 .
+
+box:Symbol_Diagnosis rdfs:label "Symbol Diagnosis" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Data_Encoded_and_Structured_Data rdfs:label "Data Encoded and Structured Data" .
+
+box:Data_Similar_Cases rdfs:label "Data Similar Cases" .
+
+box:Model__Semantic_Rules rdfs:label "Model: Semantic Rules" .
+
+box:Symbol_Case_with_Attribute_Weights rdfs:label "Symbol Case with Attribute Weights" .
+

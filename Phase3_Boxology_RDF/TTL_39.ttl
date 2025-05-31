@@ -1,0 +1,65 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_39 ex:hasBoxology box:Boxology_39 .
+
+box:Boxology_39 box:includesStep box:Steps_39_1,
+        box:Steps_39_2,
+        box:Steps_39_3,
+        box:Steps_39_4 .
+
+<http://example.org/boxology#Data_Cleaned_w/_Resistance_and_Reactance_param> rdfs:label "Data Cleaned w/ Resistance and Reactance param" .
+
+<http://example.org/boxology#Data_Cleaned_w/_Resistance_and_Reactance_param.> rdfs:label "Data Cleaned w/ Resistance and Reactance param." .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data_Raw_Patient_Data rdfs:label "Data Raw Patient Data" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Steps_39_1 a box:Step ;
+    rdfs:label "1d Data Preprocessing" ;
+    box:hasInput box:Data_Raw_Patient_Data ;
+    box:hasOutput <http://example.org/boxology#Data_Cleaned_w/_Resistance_and_Reactance_param.> ;
+    box:hasProcess box:Transform .
+
+box:Steps_39_2 a box:Step ;
+    rdfs:label "2a Feature Selection and Reduction" ;
+    box:hasInput <http://example.org/boxology#Data_Cleaned_w/_Resistance_and_Reactance_param> ;
+    box:hasOutput box:Data_Reduced_Dataset ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_39_3 a box:Step ;
+    rdfs:label "1a Training the Models" ;
+    box:hasInput box:Data_Reduced_Dataset ;
+    box:hasOutput box:Model__Hybrid_Neuro-Fuzzy_Classifier,
+        box:Model__Statistic_ML_Model ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_39_4 a box:Step ;
+    rdfs:label "2a Prediction" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Hybrid_Neuro-Fuzzy_Classifier,
+        box:Model__Statistic_ML_Model ;
+    box:hasOutput box:Symbol_Diagnosis,
+        box:Symbol_Explenation ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Symbol_Diagnosis rdfs:label "Symbol Diagnosis" .
+
+box:Symbol_Explenation rdfs:label "Symbol Explenation" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Data_Reduced_Dataset rdfs:label "Data Reduced Dataset" .
+
+box:Model__Hybrid_Neuro-Fuzzy_Classifier rdfs:label "Model: Hybrid Neuro-Fuzzy Classifier" .
+
+box:Model__Statistic_ML_Model rdfs:label "Model: Statistic ML Model" .
+

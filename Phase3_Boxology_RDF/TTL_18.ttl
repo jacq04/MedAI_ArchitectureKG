@@ -1,0 +1,48 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_18 ex:hasBoxology box:Boxology_18 .
+
+box:Actor_Physicians rdfs:label "Actor Physicians" .
+
+box:Boxology_18 box:includesStep box:Steps_18_1,
+        box:Steps_18_2,
+        box:Steps_18_3 .
+
+box:Data_Current_Case rdfs:label "Data Current Case" .
+
+box:Data_Previous_Cases rdfs:label "Data Previous Cases" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_18_1 a box:Step ;
+    rdfs:label "1c Rules from experts" ;
+    box:hasInput box:Actor_Physicians ;
+    box:hasOutput box:Model__Rule-Based ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_18_2 a box:Step ;
+    rdfs:label "1a Train from previous cases" ;
+    box:hasInput box:Data_Previous_Cases ;
+    box:hasOutput box:Model__Case-Based ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_18_3 a box:Step ;
+    rdfs:label "2a Final Decision" ;
+    box:hasInput box:Data_Current_Case,
+        box:Model__Case-Based,
+        box:Model__Rule-Based ;
+    box:hasOutput box:Symbol_Final_Diagnosis ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Final_Diagnosis rdfs:label "Symbol Final Diagnosis" .
+
+box:Model__Case-Based rdfs:label "Model: Case-Based" .
+
+box:Model__Rule-Based rdfs:label "Model: Rule-Based" .
+

@@ -1,0 +1,78 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_21 ex:hasBoxology box:Boxology_21 .
+
+box:Boxology_21 box:includesStep box:Steps_21_1,
+        box:Steps_21_2,
+        box:Steps_21_3,
+        box:Steps_21_4,
+        box:Steps_21_5,
+        box:Steps_21_6 .
+
+box:Data__Numeric_Gene_Expression_Levels rdfs:label "Data: Numeric Gene Expression Levels" .
+
+box:Data__Numeric_Gene_Expression_Levels1 rdfs:label "Data: Numeric Gene Expression Levels1" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_21_1 a box:Step ;
+    rdfs:label "1D Construct Fuzzy Rough Set" ;
+    box:hasInput box:Data__Numeric_Gene_Expression_Levels ;
+    box:hasOutput <http://example.org/boxology#Data_Fuzzy_Equivalence_Relations_and_Lower_+_Upper_Approx> ;
+    box:hasProcess box:Transform__Embed_Fuzzy_Rough_Set .
+
+box:Steps_21_2 a box:Step ;
+    rdfs:label "1d Compute Information Measures" ;
+    box:hasInput <http://example.org/boxology#Data_Fuzzy_Equivalence_Relations_and_Lower_+_Upper_Approx> ;
+    box:hasOutput box:Data_Fuzzy_Information_Measures ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_21_3 a box:Step ;
+    rdfs:label "1d Calculate Fuzzy Gain Ratio" ;
+    box:hasInput box:Data_Fuzzy_Information_Measures ;
+    box:hasOutput box:Data_Fuzzy_Gain_Ratios ;
+    box:hasProcess box:Transform__Embed1 .
+
+box:Steps_21_4 a box:Step ;
+    rdfs:label "1d Rank Attributes" ;
+    box:hasInput box:Data_Fuzzy_Gain_Ratios ;
+    box:hasOutput box:Data_Selected_Attributes ;
+    box:hasProcess box:Transform__Embed2 .
+
+box:Steps_21_5 a box:Step ;
+    rdfs:label "1a Train Classification Model" ;
+    box:hasInput box:Data_Selected_Attributes ;
+    box:hasOutput box:Model__Semantic ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_21_6 a box:Step ;
+    rdfs:label "Subgraph - 2a Classify Tumor" ;
+    box:hasInput box:Data__Numeric_Gene_Expression_Levels1,
+        box:Model__Semantic ;
+    box:hasOutput box:Symbol__Label_Tumor_Class ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol__Label_Tumor_Class rdfs:label "Symbol: Label Tumor Class" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Transform__Embed1 rdfs:label "Transform: Embed1" .
+
+box:Transform__Embed2 rdfs:label "Transform: Embed2" .
+
+box:Transform__Embed_Fuzzy_Rough_Set rdfs:label "Transform: Embed Fuzzy Rough Set" .
+
+<http://example.org/boxology#Data_Fuzzy_Equivalence_Relations_and_Lower_+_Upper_Approx> rdfs:label "Data Fuzzy Equivalence Relations and Lower + Upper Approx" .
+
+box:Data_Fuzzy_Gain_Ratios rdfs:label "Data Fuzzy Gain Ratios" .
+
+box:Data_Fuzzy_Information_Measures rdfs:label "Data Fuzzy Information Measures" .
+
+box:Data_Selected_Attributes rdfs:label "Data Selected Attributes" .
+
+box:Model__Semantic rdfs:label "Model: Semantic" .
+

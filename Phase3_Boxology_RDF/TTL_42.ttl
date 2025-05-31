@@ -1,0 +1,56 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_42 ex:hasBoxology box:Boxology_42 .
+
+box:Boxology_42 box:includesStep box:Steps_42_1,
+        box:Steps_42_2,
+        box:Steps_42_3,
+        box:Steps_42_4 .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Raw_Clinical_Data rdfs:label "Raw Clinical Data" .
+
+box:Steps_42_1 a box:Step ;
+    rdfs:label "1d Data Collection and Preprocessing" ;
+    box:hasInput box:Raw_Clinical_Data ;
+    box:hasOutput box:Data_Structured_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_42_2 a box:Step ;
+    rdfs:label "2a Attribute Reduction Using Rough Set Theory" ;
+    box:hasInput box:Data_Structured_Data ;
+    box:hasOutput box:Data_Reduced_Dataset ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_42_3 a box:Step ;
+    rdfs:label "1a Rule Generation" ;
+    box:hasInput box:Data_Reduced_Dataset ;
+    box:hasOutput box:Model__Statistical_IL_Algorithms ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_42_4 a box:Step ;
+    rdfs:label "2a Decision Making" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Statistical_IL_Algorithms ;
+    box:hasOutput box:Symbol_Various_Clinical_Predictions ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Symbol_Various_Clinical_Predictions rdfs:label "Symbol Various Clinical Predictions" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Data_Reduced_Dataset rdfs:label "Data Reduced Dataset" .
+
+box:Data_Structured_Data rdfs:label "Data Structured Data" .
+
+box:Model__Statistical_IL_Algorithms rdfs:label "Model: Statistical IL Algorithms" .
+

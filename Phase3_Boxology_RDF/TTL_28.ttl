@@ -1,0 +1,68 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_28 ex:hasBoxology box:Boxology_28 .
+
+box:Boxology_28 box:includesStep box:Steps_28_1,
+        box:Steps_28_2,
+        box:Steps_28_3,
+        box:Steps_28_4,
+        box:Steps_28_5 .
+
+box:Data_Raw_Patient_Data rdfs:label "Data Raw Patient Data" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Steps_28_1 a box:Step ;
+    rdfs:label "1d Pre-processing" ;
+    box:hasInput box:Data_Raw_Patient_Data ;
+    box:hasOutput box:Data_Structured_and_Pre-processed_Data ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_28_2 a box:Step ;
+    rdfs:label "1d Feature Selection" ;
+    box:hasInput box:Data_Structured_and_Pre-processed_Data ;
+    box:hasOutput box:Data_Selected_Features ;
+    box:hasProcess box:Transform .
+
+box:Steps_28_3 a box:Step ;
+    rdfs:label "1a Prognostic Model Construction" ;
+    box:hasInput box:Data_Selected_Features ;
+    box:hasOutput box:Model__Hybrid_MLDP ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_28_4 a box:Step ;
+    rdfs:label "2a Integrated Clinical Decision Support" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Hybrid_MLDP,
+        box:Symbol_Risk_Scores_and_Recommendations ;
+    box:hasOutput box:Symbol_Clinical_Report ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_28_5 a box:Step ;
+    rdfs:label "2a Ontology Driven Clinical Risk Assesment" ;
+    box:hasInput box:Data_Patient_Data ;
+    box:hasOutput box:Symbol_Risk_Scores_and_Recommendations ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Symbol_Clinical_Report rdfs:label "Symbol Clinical Report" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data_Selected_Features rdfs:label "Data Selected Features" .
+
+box:Data_Structured_and_Pre-processed_Data rdfs:label "Data Structured and Pre-processed Data" .
+
+box:Model__Hybrid_MLDP rdfs:label "Model: Hybrid MLDP" .
+
+box:Symbol_Risk_Scores_and_Recommendations rdfs:label "Symbol Risk Scores and Recommendations" .
+

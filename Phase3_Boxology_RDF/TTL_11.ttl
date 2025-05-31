@@ -1,0 +1,69 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_11 ex:hasBoxology box:Boxology_11 .
+
+box:Boxology_11 box:includesStep box:Steps_11_1,
+        box:Steps_11_2,
+        box:Steps_11_3,
+        box:Steps_11_4,
+        box:Steps_11_5 .
+
+box:Data_Silico_Data_and_In_Vivo_Data rdfs:label "Data Silico Data and In Vivo Data" .
+
+box:Data__Image_Initial_Segemntation_Estimates rdfs:label "Data: Image Initial Segemntation Estimates" .
+
+box:Data__Image_Initial_Segmentation_Estimates rdfs:label "Data: Image Initial Segmentation Estimates" .
+
+box:Data__Image_Raw_Multidimensional_13C_MRI_Data rdfs:label "Data: Image Raw Multidimensional 13C MRI Data" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_11_1 a box:Step ;
+    rdfs:label "1d Pre-process" ;
+    box:hasInput box:Data__Image_Raw_Multidimensional_13C_MRI_Data ;
+    box:hasOutput box:Data__Image_Preprocessed_Data ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_11_2 a box:Step ;
+    rdfs:label "1d Initialization" ;
+    box:hasInput box:Data__Image_Preprocessed_Data ;
+    box:hasOutput box:Data__Image_Initial_Segmentation_Estimates ;
+    box:hasProcess box:Transform__Embed1 .
+
+box:Steps_11_3 a box:Step ;
+    rdfs:label "2a Fuzzy MRF Model Application" ;
+    box:hasInput box:Data__Image_Initial_Segemntation_Estimates,
+        box:Model__Hybrid_Fuzzy_MRF_Model ;
+    box:hasOutput box:Symbol_Refined_Segmentation ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_11_4 a box:Step ;
+    rdfs:label "1d Segmentation Refinement" ;
+    box:hasInput box:Symbol_Refined_Segmentation ;
+    box:hasOutput box:Symbol_Segmentation_Maps ;
+    box:hasProcess box:Transform__Embed2 .
+
+box:Steps_11_5 a box:Step ;
+    rdfs:label "1a Development" ;
+    box:hasInput box:Data_Silico_Data_and_In_Vivo_Data ;
+    box:hasOutput box:Model__Hybrid_Fuzzy_MRF_Model ;
+    box:hasProcess box:Generate__Train .
+
+box:Symbol_Segmentation_Maps rdfs:label "Symbol Segmentation Maps" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Transform__Embed1 rdfs:label "Transform: Embed1" .
+
+box:Transform__Embed2 rdfs:label "Transform: Embed2" .
+
+box:Data__Image_Preprocessed_Data rdfs:label "Data: Image Preprocessed Data" .
+
+box:Model__Hybrid_Fuzzy_MRF_Model rdfs:label "Model: Hybrid Fuzzy MRF Model" .
+
+box:Symbol_Refined_Segmentation rdfs:label "Symbol Refined Segmentation" .
+

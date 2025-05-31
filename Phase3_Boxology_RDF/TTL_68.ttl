@@ -1,0 +1,72 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_68 ex:hasBoxology box:Boxology_68 .
+
+box:Actor rdfs:label "Actor" .
+
+box:Boxology_68 box:includesStep box:Steps_68_1,
+        box:Steps_68_2,
+        box:Steps_68_3,
+        box:Steps_68_4,
+        box:Steps_68_5 .
+
+box:Data_ECG_Data_and_Medical_Records rdfs:label "Data ECG Data and Medical Records" .
+
+box:Data_Patient_ECG_and_Medical_Data rdfs:label "Data Patient ECG and Medical Data" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Steps_68_1 a box:Step ;
+    rdfs:label "1d Data Input and Ontology Mapping" ;
+    box:hasInput box:Data_ECG_Data_and_Medical_Records ;
+    box:hasOutput box:Data_Structured_Representation ;
+    box:hasProcess box:Transform .
+
+box:Steps_68_2 a box:Step ;
+    rdfs:label "2a Rule-Based Reasoning" ;
+    box:hasInput box:Data_Structured_Representation ;
+    box:hasOutput box:Symbol_Inferred_Knowledge ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_68_3 a box:Step ;
+    rdfs:label "1a LCS Training" ;
+    box:hasInput box:Data_Structured_Representation,
+        box:Symbol_Inferred_Knowledge ;
+    box:hasOutput box:Model__Hybrid_LCS ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_68_4 a box:Step ;
+    rdfs:label "2a Decision Support Generate" ;
+    box:hasInput box:Data_Patient_ECG_and_Medical_Data,
+        box:Model__Hybrid_LCS,
+        box:Symbol_Expert_Adjusted_Advice ;
+    box:hasOutput box:Symbol_Decision_Support_Recommendation ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_68_5 a box:Step ;
+    rdfs:label "1d Human Involvement and System Feedback" ;
+    box:hasInput box:Actor,
+        box:Symbol_Decision_Support_Recommendation ;
+    box:hasOutput box:Symbol_Expert_Adjusted_Advice ;
+    box:hasProcess box:Transform1 .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Model__Hybrid_LCS rdfs:label "Model: Hybrid LCS" .
+
+box:Symbol_Decision_Support_Recommendation rdfs:label "Symbol Decision Support Recommendation" .
+
+box:Symbol_Expert_Adjusted_Advice rdfs:label "Symbol Expert Adjusted Advice" .
+
+box:Symbol_Inferred_Knowledge rdfs:label "Symbol Inferred Knowledge" .
+
+box:Data_Structured_Representation rdfs:label "Data Structured Representation" .
+

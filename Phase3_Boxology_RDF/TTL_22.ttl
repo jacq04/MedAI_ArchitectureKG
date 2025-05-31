@@ -1,0 +1,68 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_22 ex:hasBoxology box:Boxology_22 .
+
+box:Actor_Experienced_Cardiac_Clinicians rdfs:label "Actor Experienced Cardiac Clinicians" .
+
+box:Boxology_22 box:includesStep box:Steps_22_1,
+        box:Steps_22_2,
+        box:Steps_22_3,
+        box:Steps_22_4,
+        box:Steps_22_5 .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_22_1 a box:Step ;
+    rdfs:label "1c Expert Knowledge" ;
+    box:hasInput box:Actor_Experienced_Cardiac_Clinicians ;
+    box:hasOutput box:Model__Semantic_Risk ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_22_2 a box:Step ;
+    rdfs:label "2a Pairwise Comaprison" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Semantic_Risk ;
+    box:hasOutput box:Data__Numeric_Fuzzy_Numbers ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_22_3 a box:Step ;
+    rdfs:label "1d Fuzzy Analytic Hierarchy" ;
+    box:hasInput box:Data__Numeric_Fuzzy_Numbers ;
+    box:hasOutput box:Data__Numeric_Local_and_Global_Weights ;
+    box:hasProcess box:Transform__Embed1 .
+
+box:Steps_22_4 a box:Step ;
+    rdfs:label "1a Train ANN" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Data__Numeric_Local_and_Global_Weights ;
+    box:hasOutput box:Model__Static_ANN ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_22_5 a box:Step ;
+    rdfs:label "2b Predict" ;
+    box:hasInput box:Model__Static_ANN ;
+    box:hasOutput box:Symbol_Heart_Failure_Risk ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Heart_Failure_Risk rdfs:label "Symbol Heart Failure Risk" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Transform__Embed1 rdfs:label "Transform: Embed1" .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data__Numeric_Fuzzy_Numbers rdfs:label "Data: Numeric Fuzzy Numbers" .
+
+box:Data__Numeric_Local_and_Global_Weights rdfs:label "Data: Numeric Local and Global Weights" .
+
+box:Model__Semantic_Risk rdfs:label "Model: Semantic Risk" .
+
+box:Model__Static_ANN rdfs:label "Model: Static ANN" .
+

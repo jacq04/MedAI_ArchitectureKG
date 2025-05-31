@@ -1,0 +1,96 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_45 ex:hasBoxology box:Boxology_45 .
+
+box:Boxology_45 box:includesStep box:Steps_45_1,
+        box:Steps_45_2,
+        box:Steps_45_3,
+        box:Steps_45_4,
+        box:Steps_45_5,
+        box:Steps_45_6,
+        box:Steps_45_7 .
+
+box:Data_EMG_Signals rdfs:label "Data EMG Signals" .
+
+box:Data_Other_EDIC_Data rdfs:label "Data Other EDIC Data" .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data_Raw_EDIC_Data rdfs:label "Data Raw EDIC Data" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Generate__Train1 rdfs:label "Generate: Train1" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Infer__Deduce2 rdfs:label "Infer: Deduce2" .
+
+box:Steps_45_1 a box:Step ;
+    rdfs:label "1d Pre-processing" ;
+    box:hasInput box:Data_Raw_EDIC_Data ;
+    box:hasOutput box:Data_Cleaned_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_45_2 a box:Step ;
+    rdfs:label "2a Feature Ranking" ;
+    box:hasInput box:Data_Cleaned_Data ;
+    box:hasOutput box:Symbol_Ranked_MNSI_Parameters ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_45_3 a box:Step ;
+    rdfs:label "1a Model Development with ANFIS" ;
+    box:hasInput box:Data_Cleaned_Data,
+        box:Symbol_Ranked_MNSI_Parameters ;
+    box:hasOutput box:Model__Hybrid_ANFIS_Model ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_45_4 a box:Step ;
+    rdfs:label "2a Longitudinal Analysis of DSPN Progression" ;
+    box:hasInput box:Data_Other_EDIC_Data ;
+    box:hasOutput box:Symbol_DSPN_Severity_Progress ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_45_5 a box:Step ;
+    rdfs:label "1a EMG Signal Analysis for DSPN Severity Classification" ;
+    box:hasInput box:Data_Selected_Datas,
+        box:Model__Hybrid_ANFIS_Model,
+        box:Symbol_DSPN_Severity_Progress ;
+    box:hasOutput box:Model__Hybrid_ANFIS_Model1 ;
+    box:hasProcess box:Generate__Train1 .
+
+box:Steps_45_6 a box:Step ;
+    rdfs:label "1d EMG Signal Pre-processing" ;
+    box:hasInput box:Data_EMG_Signals ;
+    box:hasOutput box:Data_Selected_Datas ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_45_7 a box:Step ;
+    rdfs:label "2a Prediction" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Hybrid_ANFIS_Model1 ;
+    box:hasOutput box:Symbol_Severity_and_Treatment_Plan ;
+    box:hasProcess box:Infer__Deduce2 .
+
+box:Symbol_Severity_and_Treatment_Plan rdfs:label "Symbol Severity and Treatment Plan" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Data_Selected_Datas rdfs:label "Data Selected Datas" .
+
+box:Model__Hybrid_ANFIS_Model rdfs:label "Model: Hybrid ANFIS Model" .
+
+box:Model__Hybrid_ANFIS_Model1 rdfs:label "Model: Hybrid ANFIS Model1" .
+
+box:Symbol_DSPN_Severity_Progress rdfs:label "Symbol DSPN Severity Progress" .
+
+box:Symbol_Ranked_MNSI_Parameters rdfs:label "Symbol Ranked MNSI Parameters" .
+
+box:Data_Cleaned_Data rdfs:label "Data Cleaned Data" .
+

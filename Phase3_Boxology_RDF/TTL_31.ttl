@@ -1,0 +1,93 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_31 ex:hasBoxology box:Boxology_31 .
+
+box:Actor_Experts rdfs:label "Actor Experts" .
+
+box:Boxology_31 box:includesStep box:Steps_31_1,
+        box:Steps_31_2,
+        box:Steps_31_3,
+        box:Steps_31_4,
+        box:Steps_31_5,
+        box:Steps_31_6,
+        box:Steps_31_7 .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data_Raw_Patient_Data rdfs:label "Data Raw Patient Data" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Predict rdfs:label "Infer: Predict" .
+
+box:Steps_31_1 a box:Step ;
+    rdfs:label "1d Data Collection" ;
+    box:hasInput box:Data_Raw_Patient_Data ;
+    box:hasOutput box:Data_Structured_and_Relevant_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_31_2 a box:Step ;
+    rdfs:label "1d Fuzzification" ;
+    box:hasInput box:Data_Structured_and_Relevant_Data ;
+    box:hasOutput box:Data_Fuzzified_Data ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_31_3 a box:Step ;
+    rdfs:label "1a Train ML" ;
+    box:hasInput box:Data_Crisp_Risk_Level,
+        box:Data_Structured_and_Relevant_Data ;
+    box:hasOutput box:Model__Hybrid_ML_Model ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_31_4 a box:Step ;
+    rdfs:label "2a Prediction Making" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Hybrid_ML_Model ;
+    box:hasOutput box:Symbol_Risk_and_Likelihood_COVID-19 ;
+    box:hasProcess box:Infer__Predict .
+
+box:Steps_31_5 a box:Step ;
+    rdfs:label "2a Rule-Based Processing" ;
+    box:hasInput box:Data_Fuzzified_Data,
+        box:Symbol_Fuzzy_Rules ;
+    box:hasOutput box:Symbol_Fuzzy_Risk_Level ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_31_6 a box:Step ;
+    rdfs:label "1d Defuzziification" ;
+    box:hasInput box:Symbol_Fuzzy_Risk_Level ;
+    box:hasOutput box:Data_Crisp_Risk_Level ;
+    box:hasProcess box:Transform2 .
+
+box:Steps_31_7 a box:Step ;
+    rdfs:label "1a Create Fuzzy Rules" ;
+    box:hasInput box:Actor_Experts ;
+    box:hasOutput box:Symbol_Fuzzy_Rules ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Symbol_Risk_and_Likelihood_COVID-19 rdfs:label "Symbol Risk and Likelihood COVID-19" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Transform2 rdfs:label "Transform2" .
+
+box:Data_Crisp_Risk_Level rdfs:label "Data Crisp Risk Level" .
+
+box:Data_Fuzzified_Data rdfs:label "Data Fuzzified Data" .
+
+box:Model__Hybrid_ML_Model rdfs:label "Model: Hybrid ML Model" .
+
+box:Symbol_Fuzzy_Risk_Level rdfs:label "Symbol Fuzzy Risk Level" .
+
+box:Symbol_Fuzzy_Rules rdfs:label "Symbol Fuzzy Rules" .
+
+box:Data_Structured_and_Relevant_Data rdfs:label "Data Structured and Relevant Data" .
+

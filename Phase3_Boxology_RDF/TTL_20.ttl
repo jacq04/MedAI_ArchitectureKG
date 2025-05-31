@@ -1,0 +1,56 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_20 ex:hasBoxology box:Boxology_20 .
+
+box:Boxology_20 box:includesStep box:Steps_20_1,
+        box:Steps_20_2,
+        box:Steps_20_3,
+        box:Steps_20_4 .
+
+box:Data__Image_Brain_MRI_Images rdfs:label "Data: Image Brain MRI Images" .
+
+box:Data__Image_Brain_MRI_Images2 rdfs:label "Data: Image Brain MRI Images2" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_20_1 a box:Step ;
+    rdfs:label "1d Feature Extraction" ;
+    box:hasInput box:Data__Image_Brain_MRI_Images ;
+    box:hasOutput box:Data__Numeric_Wavelet_Features ;
+    box:hasProcess box:Transform__Embed_Wavelet_Transformation .
+
+box:Steps_20_2 a box:Step ;
+    rdfs:label "1d Fuzzy Logic Analysis" ;
+    box:hasInput box:Data__Numeric_Wavelet_Features ;
+    box:hasOutput box:Data__Numeric_Refined_Set_of_Features ;
+    box:hasProcess box:Transform__Embed_Fuzzy_Logic_Analysis .
+
+box:Steps_20_3 a box:Step ;
+    rdfs:label "1a Train WNN" ;
+    box:hasInput box:Data__Numeric_Refined_Set_of_Features ;
+    box:hasOutput box:Model__Semantic_WNN ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_20_4 a box:Step ;
+    rdfs:label "2a Output" ;
+    box:hasInput box:Data__Image_Brain_MRI_Images2,
+        box:Model__Semantic_WNN ;
+    box:hasOutput box:Symbol_Diagnostic_Report ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Diagnostic_Report rdfs:label "Symbol Diagnostic Report" .
+
+box:Transform__Embed_Fuzzy_Logic_Analysis rdfs:label "Transform: Embed Fuzzy Logic Analysis" .
+
+box:Transform__Embed_Wavelet_Transformation rdfs:label "Transform: Embed Wavelet Transformation" .
+
+box:Data__Numeric_Refined_Set_of_Features rdfs:label "Data: Numeric Refined Set of Features" .
+
+box:Data__Numeric_Wavelet_Features rdfs:label "Data: Numeric Wavelet Features" .
+
+box:Model__Semantic_WNN rdfs:label "Model: Semantic WNN" .
+

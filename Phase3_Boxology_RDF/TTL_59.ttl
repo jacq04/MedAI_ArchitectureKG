@@ -1,0 +1,73 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_59 ex:hasBoxology box:Boxology_59 .
+
+box:Actor_Radiologists rdfs:label "Actor Radiologists" .
+
+box:Boxology_59 box:includesStep box:Steps_59_1,
+        box:Steps_59_2,
+        box:Steps_59_3,
+        box:Steps_59_4,
+        box:Steps_59_5 .
+
+box:Data_Numeric_Patient_Modified_Input_Vector_From_Image rdfs:label "Data Numeric Patient Modified Input Vector From Image" .
+
+box:Data__Image_Primarily_Ventilation-Perfusion_Scans_and_Chest_X-rays rdfs:label "Data: Image Primarily Ventilation-Perfusion Scans and Chest X-rays" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_59_1 a box:Step ;
+    rdfs:label "1d Normalization" ;
+    box:hasInput box:Data__Image_Primarily_Ventilation-Perfusion_Scans_and_Chest_X-rays ;
+    box:hasOutput box:Data__Numeric_Structured_Input_Vector ;
+    box:hasProcess box:Transform .
+
+box:Steps_59_2 a box:Step ;
+    rdfs:label "1d Rule-based Preprocessing" ;
+    box:hasInput box:Data__Numeric_Structured_Input_Vector,
+        box:Symbol_Diagnostic_Rules ;
+    box:hasOutput box:Data__Numeric_Modified_Input_Vector ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_59_3 a box:Step ;
+    rdfs:label "1c Rule Creation" ;
+    box:hasInput box:Actor_Radiologists,
+        box:Symbol_PIOPED_Diagnostic_Rules ;
+    box:hasOutput box:Symbol_Diagnostic_Rules ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_59_4 a box:Step ;
+    rdfs:label "1a Model Training" ;
+    box:hasInput box:Data__Numeric_Modified_Input_Vector ;
+    box:hasOutput box:Model__Hybrid_MLP ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_59_5 a box:Step ;
+    rdfs:label "2a Prediction Making" ;
+    box:hasInput box:Data_Numeric_Patient_Modified_Input_Vector_From_Image,
+        box:Model__Hybrid_MLP ;
+    box:hasOutput box:Symbol_Pulmonary_Embolism_Probability ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_PIOPED_Diagnostic_Rules rdfs:label "Symbol PIOPED Diagnostic Rules" .
+
+box:Symbol_Pulmonary_Embolism_Probability rdfs:label "Symbol Pulmonary Embolism Probability" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Data__Numeric_Modified_Input_Vector rdfs:label "Data: Numeric Modified Input Vector" .
+
+box:Data__Numeric_Structured_Input_Vector rdfs:label "Data: Numeric Structured Input Vector" .
+
+box:Model__Hybrid_MLP rdfs:label "Model: Hybrid MLP" .
+
+box:Symbol_Diagnostic_Rules rdfs:label "Symbol Diagnostic Rules" .
+

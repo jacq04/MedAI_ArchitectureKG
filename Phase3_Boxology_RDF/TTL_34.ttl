@@ -1,0 +1,86 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_34 ex:hasBoxology box:Boxology_34 .
+
+box:Actor_Expert rdfs:label "Actor Expert" .
+
+box:Boxology_34 box:includesStep box:Steps_34_1,
+        box:Steps_34_2,
+        box:Steps_34_3,
+        box:Steps_34_4,
+        box:Steps_34_5,
+        box:Steps_34_6 .
+
+box:Data_Osteoarthritis_Data rdfs:label "Data Osteoarthritis Data" .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Infer__Predict rdfs:label "Infer: Predict" .
+
+box:Steps_34_1 a box:Step ;
+    rdfs:label "1d Preprocessing and Feature Selection" ;
+    box:hasInput box:Data_Osteoarthritis_Data ;
+    box:hasOutput box:Data_Extracted_Features ;
+    box:hasProcess box:Transform .
+
+box:Steps_34_2 a box:Step ;
+    rdfs:label "1a learning Process" ;
+    box:hasInput box:Data_Extracted_Features,
+        box:Symbol_Overall_Importance ;
+    box:hasOutput box:Model__Statistical_Prediction_Model ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_34_3 a box:Step ;
+    rdfs:label "2a Prediction" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Statistical_Prediction_Model ;
+    box:hasOutput <http://example.org/boxology#Symbol_Likelihood_KOA_+_Certainity> ;
+    box:hasProcess box:Infer__Predict .
+
+box:Steps_34_4 a box:Step ;
+    rdfs:label "2a FIS 1" ;
+    box:hasInput box:Data_Extracted_Features ;
+    box:hasOutput box:Model_Semantic_FIS_1,
+        box:Symbol_Importance_Score ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_34_5 a box:Step ;
+    rdfs:label "1c FIS Creation" ;
+    box:hasInput box:Actor_Expert,
+        box:Model_Semantic_FIS_1 ;
+    box:hasOutput box:Model__Semantic_FIS_2 ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_34_6 a box:Step ;
+    rdfs:label "2a FIS 2" ;
+    box:hasInput box:Model__Semantic_FIS_2,
+        box:Symbol_Importance_Score ;
+    box:hasOutput box:Symbol_Overall_Importance ;
+    box:hasProcess box:Infer__Deduce1 .
+
+<http://example.org/boxology#Symbol_Likelihood_KOA_+_Certainity> rdfs:label "Symbol Likelihood KOA + Certainity" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Model_Semantic_FIS_1 rdfs:label "Model Semantic FIS 1" .
+
+box:Model__Semantic_FIS_2 rdfs:label "Model: Semantic FIS 2" .
+
+box:Model__Statistical_Prediction_Model rdfs:label "Model: Statistical Prediction Model" .
+
+box:Symbol_Importance_Score rdfs:label "Symbol Importance Score" .
+
+box:Symbol_Overall_Importance rdfs:label "Symbol Overall Importance" .
+
+box:Data_Extracted_Features rdfs:label "Data Extracted Features" .
+

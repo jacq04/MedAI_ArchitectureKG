@@ -1,0 +1,79 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_5 ex:hasBoxology box:Boxology_5 .
+
+box:Boxology_5 box:includesStep box:Steps_5_1,
+        box:Steps_5_2,
+        box:Steps_5_3,
+        box:Steps_5_4,
+        box:Steps_5_5 .
+
+box:Data__Numeric_Blood_Glucose_Measurement rdfs:label "Data: Numeric Blood Glucose Measurement" .
+
+box:Data__Numeric_Ketonuria_Status rdfs:label "Data: Numeric Ketonuria Status" .
+
+box:Infer_Deduce2 rdfs:label "Infer Deduce2" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Infer__Deduce3 rdfs:label "Infer: Deduce3" .
+
+box:Model_Semantic_Second_Automation rdfs:label "Model Semantic Second Automation" .
+
+box:Model__Semantic_First_Automation rdfs:label "Model: Semantic First Automation" .
+
+box:Model__Semantic_Rule-Based rdfs:label "Model: Semantic Rule-Based" .
+
+box:Steps_5_1 a box:Step ;
+    rdfs:label "1d Classification" ;
+    box:hasInput box:Data__Numeric_Blood_Glucose_Measurement ;
+    box:hasOutput <http://example.org/boxology#Data_Dataset_w/_Glycaemia_Classified> ;
+    box:hasProcess box:Transform__Emebed .
+
+box:Steps_5_2 a box:Step ;
+    rdfs:label "2a First Automation" ;
+    box:hasInput <http://example.org/boxology#Data_Dataset_w/_Glycaemia_Classified>,
+        box:Model__Semantic_First_Automation ;
+    box:hasOutput box:Data__Numeric_Blood_Glucose_Ranges ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_5_3 a box:Step ;
+    rdfs:label "2a Determine Status" ;
+    box:hasInput box:Data__Numeric_Blood_Glucose_Ranges,
+        box:Data__Numeric_Ketones_Urine ;
+    box:hasOutput <http://example.org/boxology#Data__Numeric_Patient's_Metabolic_Condition> ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_5_4 a box:Step ;
+    rdfs:label "2a Second Automation" ;
+    box:hasInput box:Data__Numeric_Ketonuria_Status,
+        box:Model_Semantic_Second_Automation ;
+    box:hasOutput box:Data__Numeric_Ketones_Urine ;
+    box:hasProcess box:Infer_Deduce2 .
+
+box:Steps_5_5 a box:Step ;
+    rdfs:label "2a Decision support for therapy Planning" ;
+    box:hasInput <http://example.org/boxology#Data__Numeric_Patient's_Metabolic_Condition>,
+        box:Model__Semantic_Rule-Based ;
+    box:hasOutput box:Symbol_Direct_Patient_Interventions,
+        box:Symbol_Healthcare_Provider_Interventions ;
+    box:hasProcess box:Infer__Deduce3 .
+
+box:Symbol_Direct_Patient_Interventions rdfs:label "Symbol Direct Patient Interventions" .
+
+box:Symbol_Healthcare_Provider_Interventions rdfs:label "Symbol Healthcare Provider Interventions" .
+
+box:Transform__Emebed rdfs:label "Transform: Emebed" .
+
+<http://example.org/boxology#Data_Dataset_w/_Glycaemia_Classified> rdfs:label "Data Dataset w/ Glycaemia Classified" .
+
+box:Data__Numeric_Blood_Glucose_Ranges rdfs:label "Data: Numeric Blood Glucose Ranges" .
+
+box:Data__Numeric_Ketones_Urine rdfs:label "Data: Numeric Ketones Urine" .
+
+<http://example.org/boxology#Data__Numeric_Patient's_Metabolic_Condition> rdfs:label "Data: Numeric Patient's Metabolic Condition" .
+

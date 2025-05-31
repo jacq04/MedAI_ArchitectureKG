@@ -1,0 +1,82 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_13 ex:hasBoxology box:Boxology_13 .
+
+box:Boxology_13 box:includesStep box:Steps_13_1,
+        box:Steps_13_2,
+        box:Steps_13_3,
+        box:Steps_13_4,
+        box:Steps_13_5,
+        box:Steps_13_6 .
+
+box:Data_Input_Query rdfs:label "Data Input Query" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Infer__Deduce2 rdfs:label "Infer: Deduce2" .
+
+box:Infer__Deduce3 rdfs:label "Infer: Deduce3" .
+
+box:Model__Static_Word2Vec rdfs:label "Model: Static Word2Vec" .
+
+box:Steps_13_1 a box:Step ;
+    rdfs:label "2a Create Vectorized Representations" ;
+    box:hasInput box:Data_Annotated_Dataset,
+        box:Model__Static_Word2Vec ;
+    box:hasOutput box:Symbol_Vectorized_Representation ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_13_2 a box:Step ;
+    rdfs:label "1a Model Training" ;
+    box:hasInput box:Data_Annotated_Dataset,
+        box:Symbol_Vectorized_Representation ;
+    box:hasOutput box:Model__Semantic_NLP_Model ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_13_3 a box:Step ;
+    rdfs:label "2a Output NLP Model" ;
+    box:hasInput box:Model__Semantic_NLP_Model ;
+    box:hasOutput box:Symbol_Semnatically_Classified_Data ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_13_4 a box:Step ;
+    rdfs:label "2a Fuzzy Classification" ;
+    box:hasInput box:Symbol_Semnatically_Classified_Data ;
+    box:hasOutput box:Symbol_Fuzzy_Rules ;
+    box:hasProcess box:Infer__Deduce2 .
+
+box:Steps_13_5 a box:Step ;
+    rdfs:label "1c Create NLP-Fuzzy" ;
+    box:hasInput box:Symbol_Fuzzy_Rules ;
+    box:hasOutput box:Model__Hybrid_NLP-Fuzzy ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_13_6 a box:Step ;
+    rdfs:label "2a Recommendation" ;
+    box:hasInput box:Data_Input_Query,
+        box:Model__Hybrid_NLP-Fuzzy ;
+    box:hasOutput box:Symbol_Recommendation ;
+    box:hasProcess box:Infer__Deduce3 .
+
+box:Symbol_Recommendation rdfs:label "Symbol Recommendation" .
+
+box:Data_Annotated_Dataset rdfs:label "Data Annotated Dataset" .
+
+box:Model__Hybrid_NLP-Fuzzy rdfs:label "Model: Hybrid NLP-Fuzzy" .
+
+box:Model__Semantic_NLP_Model rdfs:label "Model: Semantic NLP Model" .
+
+box:Symbol_Fuzzy_Rules rdfs:label "Symbol Fuzzy Rules" .
+
+box:Symbol_Semnatically_Classified_Data rdfs:label "Symbol Semnatically Classified Data" .
+
+box:Symbol_Vectorized_Representation rdfs:label "Symbol Vectorized Representation" .
+

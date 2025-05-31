@@ -1,0 +1,91 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_51 ex:hasBoxology box:Boxology_51 .
+
+box:Boxology_51 box:includesStep box:Steps_51_1,
+        box:Steps_51_2,
+        box:Steps_51_3,
+        box:Steps_51_4,
+        box:Steps_51_5,
+        box:Steps_51_6,
+        box:Steps_51_7 .
+
+box:Data_Clinical_Data rdfs:label "Data Clinical Data" .
+
+box:Data_Observational_Data rdfs:label "Data Observational Data" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Steps_51_1 a box:Step ;
+    rdfs:label "1d Data Preparation and Splitting" ;
+    box:hasInput box:Data_Observational_Data ;
+    box:hasOutput box:Data_Discovery_Data,
+        box:Data_Infrence_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_51_2 a box:Step ;
+    rdfs:label "1d Pseudo-outcome Re-estimation" ;
+    box:hasInput box:Data_Infrence_Data,
+        box:Symbol_Candidate_Rules ;
+    box:hasOutput box:Symbol_Re-estimated_Pseudo_Outcomes ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_51_3 a box:Step ;
+    rdfs:label "2a Effect Estimation" ;
+    box:hasInput box:Symbol_Re-estimated_Pseudo_Outcomes ;
+    box:hasOutput box:Model__Hybrid_Treatment_Model ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_51_4 a box:Step ;
+    rdfs:label "2a Model Application" ;
+    box:hasInput box:Data_Clinical_Data,
+        box:Model__Hybrid_Treatment_Model ;
+    box:hasOutput box:Symbol_Treatment_Effects ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_51_5 a box:Step ;
+    rdfs:label "2a Rule Selection" ;
+    box:hasInput box:Symbol_Potential_Decision_Rules ;
+    box:hasOutput box:Symbol_Candidate_Rules ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_51_6 a box:Step ;
+    rdfs:label "1d Pseudo-outcome Estimation" ;
+    box:hasInput box:Data_Discovery_Data ;
+    box:hasOutput box:Data_Individual_Pseudo_Outcomes ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_51_7 a box:Step ;
+    rdfs:label "1d Rule Generation" ;
+    box:hasInput box:Data_Individual_Pseudo_Outcomes ;
+    box:hasOutput box:Symbol_Potential_Decision_Rules ;
+    box:hasProcess box:Transform2 .
+
+box:Symbol_Treatment_Effects rdfs:label "Symbol Treatment Effects" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform2 rdfs:label "Transform2" .
+
+box:Data_Discovery_Data rdfs:label "Data Discovery Data" .
+
+box:Data_Individual_Pseudo_Outcomes rdfs:label "Data Individual Pseudo Outcomes" .
+
+box:Data_Infrence_Data rdfs:label "Data Infrence Data" .
+
+box:Model__Hybrid_Treatment_Model rdfs:label "Model: Hybrid Treatment Model" .
+
+box:Symbol_Candidate_Rules rdfs:label "Symbol Candidate Rules" .
+
+box:Symbol_Potential_Decision_Rules rdfs:label "Symbol Potential Decision Rules" .
+
+box:Symbol_Re-estimated_Pseudo_Outcomes rdfs:label "Symbol Re-estimated Pseudo Outcomes" .
+
+box:Transform1 rdfs:label "Transform1" .
+

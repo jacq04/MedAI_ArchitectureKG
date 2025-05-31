@@ -1,0 +1,54 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_37 ex:hasBoxology box:Boxology_37 .
+
+box:Boxology_37 box:includesStep box:Steps_37_1,
+        box:Steps_37_2,
+        box:Steps_37_3,
+        box:Steps_37_4 .
+
+<http://example.org/boxology#Data_Clinical_Data_+_CT_Scan> rdfs:label "Data Clinical Data + CT Scan" .
+
+<http://example.org/boxology#Data_Patient_Data_+_CT_Scan> rdfs:label "Data Patient Data + CT Scan" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Steps_37_1 a box:Step ;
+    rdfs:label "1d Pre-Processing" ;
+    box:hasInput <http://example.org/boxology#Data_Clinical_Data_+_CT_Scan> ;
+    box:hasOutput box:Data_Cleaned_and_Normalized_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_37_2 a box:Step ;
+    rdfs:label "2a Feature Reduction Using PCA" ;
+    box:hasInput box:Data_Cleaned_and_Normalized_Data ;
+    box:hasOutput <http://example.org/boxology#Data_Dataset_w/_Reduced_Features> ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_37_3 a box:Step ;
+    rdfs:label "1a ANFIS Model Training" ;
+    box:hasInput <http://example.org/boxology#Data_Dataset_w/_Reduced_Features> ;
+    box:hasOutput box:Model__Hybrid_ANFIS ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_37_4 a box:Step ;
+    rdfs:label "2a Prediction" ;
+    box:hasInput <http://example.org/boxology#Data_Patient_Data_+_CT_Scan>,
+        box:Model__Hybrid_ANFIS ;
+    box:hasOutput box:Symbol_Predicted_Infraction_Volume_Growth ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Predicted_Infraction_Volume_Growth rdfs:label "Symbol Predicted Infraction Volume Growth" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Data_Cleaned_and_Normalized_Data rdfs:label "Data Cleaned and Normalized Data" .
+
+<http://example.org/boxology#Data_Dataset_w/_Reduced_Features> rdfs:label "Data Dataset w/ Reduced Features" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Model__Hybrid_ANFIS rdfs:label "Model: Hybrid ANFIS" .
+

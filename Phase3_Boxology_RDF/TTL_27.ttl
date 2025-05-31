@@ -1,0 +1,57 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_27 ex:hasBoxology box:Boxology_27 .
+
+box:Boxology_27 box:includesStep box:Steps_27_1,
+        box:Steps_27_2,
+        box:Steps_27_3,
+        box:Steps_27_4 .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data_Raw_Patient_Data rdfs:label "Data Raw Patient Data" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Steps_27_1 a box:Step ;
+    rdfs:label "1d Preliminary Data Processing" ;
+    box:hasInput box:Data_Raw_Patient_Data ;
+    box:hasOutput box:Data_Structured_and_Pre-processed ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_27_2 a box:Step ;
+    rdfs:label "2a Estimating the Optimal Number of Clusters" ;
+    box:hasInput box:Data_Structured_and_Pre-processed ;
+    box:hasOutput box:Data_Optimal_no.of_Clusters ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_27_3 a box:Step ;
+    rdfs:label "1c Fuzzy Partition Method + MLE Clustering" ;
+    box:hasInput box:Data_Optimal_no.of_Clusters,
+        box:Data_Structured_and_Pre-processed ;
+    box:hasOutput box:Model__Statistical_Fuzzy_Partition_Matrix ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_27_4 a box:Step ;
+    rdfs:label "2a Diagnosis Prediction" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Statistical_Fuzzy_Partition_Matrix ;
+    box:hasOutput box:Symbol_Diagnosis ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Symbol_Diagnosis rdfs:label "Symbol Diagnosis" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Data_Optimal_no.of_Clusters rdfs:label "Data Optimal no.of Clusters" .
+
+box:Model__Statistical_Fuzzy_Partition_Matrix rdfs:label "Model: Statistical Fuzzy Partition Matrix" .
+
+box:Data_Structured_and_Pre-processed rdfs:label "Data Structured and Pre-processed" .
+

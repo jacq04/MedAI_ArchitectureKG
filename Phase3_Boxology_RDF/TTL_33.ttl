@@ -1,0 +1,115 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_33 ex:hasBoxology box:Boxology_33 .
+
+box:Actor_Experts rdfs:label "Actor Experts" .
+
+box:Actors_Domain_Experts rdfs:label "Actors Domain Experts" .
+
+box:Boxology_33 box:includesStep box:Steps_33_1,
+        box:Steps_33_2,
+        box:Steps_33_3,
+        box:Steps_33_4,
+        box:Steps_33_5,
+        box:Steps_33_6,
+        box:Steps_33_7,
+        box:Steps_33_8,
+        box:Steps_33_9 .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data_Raw_Patient_Data rdfs:label "Data Raw Patient Data" .
+
+box:Generate_Engineer1 rdfs:label "Generate Engineer1" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Steps_33_1 a box:Step ;
+    rdfs:label "1d Compilation of Charecteristics and Other Information of Interest and Expert Interpretation" ;
+    box:hasInput box:Actor_Experts,
+        box:Data_Raw_Patient_Data ;
+    box:hasOutput box:Data_Structured_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_33_2 a box:Step ;
+    rdfs:label "2a Risk Assessment" ;
+    box:hasInput box:Data_Structured_Data,
+        box:Model__Semantic_Cascaded_Expert_Systems ;
+    box:hasOutput box:Symbol_Risk_Assesment ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_33_3 a box:Step ;
+    rdfs:label "1d Cascade Individual Systems" ;
+    box:hasInput box:Model__Semantic_Individual_Expert_System ;
+    box:hasOutput box:Model__Semantic_Cascaded_Expert_Systems ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_33_4 a box:Step ;
+    rdfs:label "1c Individual System Creation" ;
+    box:hasInput box:Symbol_Fuzzy_Rules ;
+    box:hasOutput box:Model__Semantic_Individual_Expert_System ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_33_5 a box:Step ;
+    rdfs:label "1c Fuzzy Rules Creation" ;
+    box:hasInput box:Actors_Domain_Experts ;
+    box:hasOutput box:Symbol_Fuzzy_Rules ;
+    box:hasProcess box:Generate_Engineer1 .
+
+box:Steps_33_6 a box:Step ;
+    rdfs:label "1d Structure Dataset" ;
+    box:hasInput box:Symbol_Risk_Assesment ;
+    box:hasOutput box:Data_Balanced_Dataset ;
+    box:hasProcess box:Transform2 .
+
+box:Steps_33_7 a box:Step ;
+    rdfs:label "1d Latent Factors" ;
+    box:hasInput box:Data_Balanced_Dataset ;
+    box:hasOutput box:Data_Latent_Factors ;
+    box:hasProcess box:Transform3 .
+
+box:Steps_33_8 a box:Step ;
+    rdfs:label "1a Train Model" ;
+    box:hasInput box:Data_Latent_Factors ;
+    box:hasOutput box:Model__Statistical_ML_Model ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_33_9 a box:Step ;
+    rdfs:label "2a Risk Assessment" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Statistical_ML_Model ;
+    box:hasOutput box:Symbol_Risk_Assessment ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Risk_Assessment rdfs:label "Symbol Risk Assessment" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Transform2 rdfs:label "Transform2" .
+
+box:Transform3 rdfs:label "Transform3" .
+
+box:Data_Balanced_Dataset rdfs:label "Data Balanced Dataset" .
+
+box:Data_Latent_Factors rdfs:label "Data Latent Factors" .
+
+box:Data_Structured_Data rdfs:label "Data Structured Data" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Model__Semantic_Cascaded_Expert_Systems rdfs:label "Model: Semantic Cascaded Expert Systems" .
+
+box:Model__Semantic_Individual_Expert_System rdfs:label "Model: Semantic Individual Expert System" .
+
+box:Model__Statistical_ML_Model rdfs:label "Model: Statistical ML Model" .
+
+box:Symbol_Fuzzy_Rules rdfs:label "Symbol Fuzzy Rules" .
+
+box:Symbol_Risk_Assesment rdfs:label "Symbol Risk Assesment" .
+

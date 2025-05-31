@@ -1,0 +1,57 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_40 ex:hasBoxology box:Boxology_40 .
+
+box:Boxology_40 box:includesStep box:Steps_40_1,
+        box:Steps_40_2,
+        box:Steps_40_3,
+        box:Steps_40_4 .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data_Raw_UCI_Data rdfs:label "Data Raw UCI Data" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Infer__Predict rdfs:label "Infer: Predict" .
+
+box:Steps_40_1 a box:Step ;
+    rdfs:label "1d Data Preprocessing" ;
+    box:hasInput box:Data_Raw_UCI_Data ;
+    box:hasOutput box:Data_Cleaned_and_Normalized_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_40_2 a box:Step ;
+    rdfs:label "2a Mining and Selection of Suitable Attributes" ;
+    box:hasInput box:Data_Cleaned_and_Normalized_Data ;
+    box:hasOutput box:Data_Selected_Attributes ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_40_3 a box:Step ;
+    rdfs:label "2a Finding Weighted Fuzzy Rules" ;
+    box:hasInput box:Data_Cleaned_and_Normalized_Data,
+        box:Data_Selected_Attributes ;
+    box:hasOutput box:Symbol_Weighted_Fuzzy_Rules ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_40_4 a box:Step ;
+    rdfs:label "2a Prediction Making" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Symbol_Weighted_Fuzzy_Rules ;
+    box:hasOutput box:Symbol_Risk_Levels ;
+    box:hasProcess box:Infer__Predict .
+
+box:Symbol_Risk_Levels rdfs:label "Symbol Risk Levels" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Data_Selected_Attributes rdfs:label "Data Selected Attributes" .
+
+box:Symbol_Weighted_Fuzzy_Rules rdfs:label "Symbol Weighted Fuzzy Rules" .
+
+box:Data_Cleaned_and_Normalized_Data rdfs:label "Data Cleaned and Normalized Data" .
+

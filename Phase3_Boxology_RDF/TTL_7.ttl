@@ -1,0 +1,54 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_7 ex:hasBoxology box:Boxology_7 .
+
+box:Boxology_7 box:includesStep box:Steps_7_1,
+        box:Steps_7_2,
+        box:Steps_7_3,
+        box:Steps_7_4 .
+
+box:Data_Probability_Score rdfs:label "Data Probability Score" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_7_1 a box:Step ;
+    rdfs:label "1a Generation and Extraction of Decision Rules" ;
+    box:hasInput box:Data_Clinical_Dataset ;
+    box:hasOutput box:Model__Static_Decision_Trees ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_7_2 a box:Step ;
+    rdfs:label "1d Prediction of the Correctness of Each Rule" ;
+    box:hasInput box:Data_Clinical_Dataset,
+        box:Model__Static_Selected_Rules_DT ;
+    box:hasOutput box:Symbol_Predicted_Rule_Accuracy ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_7_3 a box:Step ;
+    rdfs:label "1d Computation of the Probability of Each Class" ;
+    box:hasInput box:Symbol_Predicted_Rule_Accuracy ;
+    box:hasOutput box:Data_Probability_Score ;
+    box:hasProcess box:Transform .
+
+box:Steps_7_4 a box:Step ;
+    rdfs:label "1d Selection of a Set of Best Decision Rules" ;
+    box:hasInput box:Model__Static_Decision_Trees ;
+    box:hasOutput box:Model__Static_Selected_Rules_DT ;
+    box:hasProcess box:Transform__Embed .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Data_Clinical_Dataset rdfs:label "Data Clinical Dataset" .
+
+box:Model__Static_Decision_Trees rdfs:label "Model: Static Decision Trees" .
+
+box:Model__Static_Selected_Rules_DT rdfs:label "Model: Static Selected Rules DT" .
+
+box:Symbol_Predicted_Rule_Accuracy rdfs:label "Symbol Predicted Rule Accuracy" .
+

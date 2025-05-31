@@ -1,0 +1,90 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_38 ex:hasBoxology box:Boxology_38 .
+
+box:Boxology_38 box:includesStep box:Steps_38_1,
+        box:Steps_38_2,
+        box:Steps_38_3,
+        box:Steps_38_4,
+        box:Steps_38_5,
+        box:Steps_38_6,
+        box:Steps_38_7 .
+
+box:Data_Raw_Patient rdfs:label "Data Raw Patient" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Infer__Deduce2 rdfs:label "Infer: Deduce2" .
+
+box:Infer__Predict rdfs:label "Infer: Predict" .
+
+box:Infer__Predict1 rdfs:label "Infer: Predict1" .
+
+box:Steps_38_1 a box:Step ;
+    rdfs:label "1d Data Collection and Preprocessing" ;
+    box:hasInput box:Data_Raw_Patient ;
+    box:hasOutput box:Data_Normalized_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_38_2 a box:Step ;
+    rdfs:label "2a PICA" ;
+    box:hasInput box:Data_Normalized_Data ;
+    box:hasOutput <http://example.org/boxology#Data_Reduced_Dataset_w/_Principal_Components> ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_38_3 a box:Step ;
+    rdfs:label "1a TRain ML Models" ;
+    box:hasInput <http://example.org/boxology#Data_Reduced_Dataset_w/_Principal_Components> ;
+    box:hasOutput box:Model__Statistical_DHCN,
+        box:Model__Statistical_IVGR2 ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_38_4 a box:Step ;
+    rdfs:label "2a Defining Input Variables" ;
+    box:hasInput box:Model__Statistical_IVGR2 ;
+    box:hasOutput box:Symbol_Volume_Growth_Rate ;
+    box:hasProcess box:Infer__Predict .
+
+box:Steps_38_5 a box:Step ;
+    rdfs:label "2a Defining Input Variables" ;
+    box:hasInput box:Model__Statistical_DHCN ;
+    box:hasOutput box:Symbol_Surgery_Prediction ;
+    box:hasProcess box:Infer__Predict1 .
+
+box:Steps_38_6 a box:Step ;
+    rdfs:label "2a Integrating ML Predictions with Fuzzy Inference System (FIS)" ;
+    box:hasInput box:Symbol_Surgery_Prediction,
+        box:Symbol_Volume_Growth_Rate ;
+    box:hasOutput box:Model__Semantic_FIS ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_38_7 a box:Step ;
+    rdfs:label "2a Final Decision" ;
+    box:hasInput box:Model__Semantic_FIS ;
+    box:hasOutput box:Symbol_Recommendations ;
+    box:hasProcess box:Infer__Deduce2 .
+
+box:Symbol_Recommendations rdfs:label "Symbol Recommendations" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Data_Normalized_Data rdfs:label "Data Normalized Data" .
+
+<http://example.org/boxology#Data_Reduced_Dataset_w/_Principal_Components> rdfs:label "Data Reduced Dataset w/ Principal Components" .
+
+box:Model__Semantic_FIS rdfs:label "Model: Semantic FIS" .
+
+box:Model__Statistical_DHCN rdfs:label "Model: Statistical DHCN" .
+
+box:Model__Statistical_IVGR2 rdfs:label "Model: Statistical IVGR2" .
+
+box:Symbol_Surgery_Prediction rdfs:label "Symbol Surgery Prediction" .
+
+box:Symbol_Volume_Growth_Rate rdfs:label "Symbol Volume Growth Rate" .
+

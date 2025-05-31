@@ -1,0 +1,91 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_16 ex:hasBoxology box:Boxology_16 .
+
+box:Boxology_16 box:includesStep box:Steps_16_1,
+        box:Steps_16_2,
+        box:Steps_16_3,
+        box:Steps_16_4,
+        box:Steps_16_5,
+        box:Steps_16_6,
+        box:Steps_16_7 .
+
+box:Data_New_Patient_Data rdfs:label "Data New Patient Data" .
+
+box:Data_Patient_Health_Records rdfs:label "Data Patient Health Records" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Infer__Deduce2 rdfs:label "Infer: Deduce2" .
+
+box:Model__Statistical_J48_Algorithm rdfs:label "Model: Statistical J48 Algorithm" .
+
+box:Steps_16_1 a box:Step ;
+    rdfs:label "1D Pre-process" ;
+    box:hasInput box:Data_Patient_Health_Records ;
+    box:hasOutput box:Data_Structured_Data ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_16_2 a box:Step ;
+    rdfs:label "2a Rule Extraction" ;
+    box:hasInput box:Data_Structured_Data,
+        box:Model__Statistical_J48_Algorithm ;
+    box:hasOutput box:Symbol_Extracted_Rules ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_16_3 a box:Step ;
+    rdfs:label "1d Transformation to Fuzzy Rules" ;
+    box:hasInput box:Symbol_Extracted_Rules ;
+    box:hasOutput box:Symbol_Fuzzy_Rules ;
+    box:hasProcess box:Transform .
+
+box:Steps_16_4 a box:Step ;
+    rdfs:label "2a Periodic Rule Updating" ;
+    box:hasInput box:Symbol_Structured_Recommendations ;
+    box:hasOutput box:Symbol_New_Rules ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_16_5 a box:Step ;
+    rdfs:label "1d Output Presentation" ;
+    box:hasInput box:Symbol_Likelihood_Prostate_Disease ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_16_6 a box:Step ;
+    rdfs:label "2a Inference Engine Operation" ;
+    box:hasInput box:Data_Fuzzy_Values,
+        box:Symbol_Fuzzy_Rules ;
+    box:hasOutput box:Symbol_Likelihood_Prostate_Disease ;
+    box:hasProcess box:Infer__Deduce2 .
+
+box:Steps_16_7 a box:Step ;
+    rdfs:label "1d Fuzzification of Input Data" ;
+    box:hasInput box:Data_New_Patient_Data ;
+    box:hasOutput box:Data_Fuzzy_Values ;
+    box:hasProcess box:Transform__Embed1 .
+
+box:Symbol_New_Rules rdfs:label "Symbol New Rules" .
+
+box:Symbol_Structured_Recommendations rdfs:label "Symbol Structured Recommendations" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Transform__Embed1 rdfs:label "Transform: Embed1" .
+
+box:Data_Fuzzy_Values rdfs:label "Data Fuzzy Values" .
+
+box:Data_Structured_Data rdfs:label "Data Structured Data" .
+
+box:Symbol_Extracted_Rules rdfs:label "Symbol Extracted Rules" .
+
+box:Symbol_Fuzzy_Rules rdfs:label "Symbol Fuzzy Rules" .
+
+box:Symbol_Likelihood_Prostate_Disease rdfs:label "Symbol Likelihood Prostate Disease" .
+

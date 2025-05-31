@@ -1,0 +1,60 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_4 ex:hasBoxology box:Boxology_4 .
+
+box:Actor_Experts rdfs:label "Actor Experts" .
+
+box:Boxology_4 box:includesStep box:Steps_4_1,
+        box:Steps_4_2,
+        box:Steps_4_3,
+        box:Steps_4_4 .
+
+box:Data_EHRs rdfs:label "Data EHRs" .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_4_1 a box:Step ;
+    rdfs:label "1d Data Pre-processing" ;
+    box:hasInput box:Data_EHRs ;
+    box:hasOutput box:Data_Preprocessed_Data ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_4_2 a box:Step ;
+    rdfs:label "1d Data Transformation" ;
+    box:hasInput box:Data_Preprocessed_Data ;
+    box:hasOutput box:Data_Transformed_Data ;
+    box:hasProcess box:Transform__Embed1 .
+
+box:Steps_4_3 a box:Step ;
+    rdfs:label "2a Decision Support Generation" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model_Patterns ;
+    box:hasOutput <http://example.org/boxology#Symbol_Risk_Assessment_+_Recommendation> ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_4_4 a box:Step ;
+    rdfs:label "1c Knowledge Integration + Data Mining" ;
+    box:hasInput box:Actor_Experts,
+        box:Data_Transformed_Data,
+        <http://example.org/boxology#Symbol_Risk_Assessment_+_Recommendation> ;
+    box:hasOutput box:Model_Patterns ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Transform__Embed1 rdfs:label "Transform: Embed1" .
+
+box:Data_Preprocessed_Data rdfs:label "Data Preprocessed Data" .
+
+box:Data_Transformed_Data rdfs:label "Data Transformed Data" .
+
+box:Model_Patterns rdfs:label "Model Patterns" .
+
+<http://example.org/boxology#Symbol_Risk_Assessment_+_Recommendation> rdfs:label "Symbol Risk Assessment + Recommendation" .
+

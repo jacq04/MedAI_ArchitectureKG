@@ -1,0 +1,105 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_6 ex:hasBoxology box:Boxology_6 .
+
+box:Actor_Experts rdfs:label "Actor Experts" .
+
+box:Boxology_6 box:includesStep box:Steps_6_1,
+        box:Steps_6_2,
+        box:Steps_6_3,
+        box:Steps_6_4,
+        box:Steps_6_5,
+        box:Steps_6_6,
+        box:Steps_6_7 .
+
+<http://example.org/boxology#Data_Patient's_Genomic_Data> rdfs:label "Data Patient's Genomic Data" .
+
+box:Data_Raw_Next-Generation_Genomic_Data rdfs:label "Data Raw Next-Generation Genomic Data" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce2 rdfs:label "Infer: Deduce2" .
+
+box:Model__Statisitcal_CoxPH rdfs:label "Model: Statisitcal CoxPH" .
+
+box:Model__Statistical_CoxPH_HR-based rdfs:label "Model: Statistical CoxPH HR-based" .
+
+box:Steps_6_1 a box:Step ;
+    rdfs:label "1d Pre-processing" ;
+    box:hasInput box:Data_Raw_Next-Generation_Genomic_Data ;
+    box:hasOutput box:Data_Cleaned_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_6_2 a box:Step ;
+    rdfs:label "1a DL-training" ;
+    box:hasInput box:Data_Cleaned_Data ;
+    box:hasOutput box:Model__ML_Abstracted_Weights ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_6_3 a box:Step ;
+    rdfs:label "2a Cox Proportional Hazards (CoxPH) Model Application" ;
+    box:hasInput box:Data_Cleaned_Data,
+        box:Model__Statisitcal_CoxPH ;
+    box:hasOutput box:Data__Numeric_HR-Values ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_6_4 a box:Step ;
+    rdfs:label "1a Risk Score Development" ;
+    box:hasInput box:Data__Numeric_HR-Values,
+        box:Model__ML_Abstracted_Weights ;
+    box:hasOutput box:Model__ML_DL-based,
+        box:Model__Statistical_Addition_model-based,
+        box:Model__Statistical_Multiplication_model-based ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_6_5 a box:Step ;
+    rdfs:label "2a Fuzzy Logic Integration" ;
+    box:hasInput <http://example.org/boxology#Data_Patient's_Genomic_Data>,
+        box:Model__ML_DL-based,
+        box:Model__Semantic_Fuzzy_Rules,
+        box:Model__Statistical_Addition_model-based,
+        box:Model__Statistical_CoxPH_HR-based,
+        box:Model__Statistical_Multiplication_model-based ;
+    box:hasOutput box:Data_Risk-scores ;
+    box:hasProcess box:Infer__Deduce2 .
+
+box:Steps_6_6 a box:Step ;
+    rdfs:label "1c Fuzzy Rules" ;
+    box:hasInput box:Actor_Experts ;
+    box:hasOutput box:Model__Semantic_Fuzzy_Rules ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_6_7 a box:Step ;
+    rdfs:label "1d Reporting and interpretation" ;
+    box:hasInput box:Data_Risk-scores ;
+    box:hasOutput box:Symbol_Clinical_Implications ;
+    box:hasProcess box:Transform2 .
+
+box:Symbol_Clinical_Implications rdfs:label "Symbol Clinical Implications" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform2 rdfs:label "Transform2" .
+
+box:Data_Risk-scores rdfs:label "Data Risk-scores" .
+
+box:Data__Numeric_HR-Values rdfs:label "Data: Numeric HR-Values" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Model__ML_Abstracted_Weights rdfs:label "Model: ML Abstracted Weights" .
+
+box:Model__ML_DL-based rdfs:label "Model: ML DL-based" .
+
+box:Model__Semantic_Fuzzy_Rules rdfs:label "Model: Semantic Fuzzy Rules" .
+
+box:Model__Statistical_Addition_model-based rdfs:label "Model: Statistical Addition model-based" .
+
+box:Model__Statistical_Multiplication_model-based rdfs:label "Model: Statistical Multiplication model-based" .
+
+box:Data_Cleaned_Data rdfs:label "Data Cleaned Data" .
+

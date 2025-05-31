@@ -1,0 +1,56 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_62 ex:hasBoxology box:Boxology_62 .
+
+box:Boxology_62 box:includesStep box:Steps_62_1,
+        box:Steps_62_2,
+        box:Steps_62_3,
+        box:Steps_62_4 .
+
+box:Data_Patient_EEG_Signals rdfs:label "Data Patient EEG Signals" .
+
+box:Data_Raw_EEG_Data rdfs:label "Data Raw EEG Data" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_62_1 a box:Step ;
+    rdfs:label "1d Pre-processing" ;
+    box:hasInput box:Data_Raw_EEG_Data ;
+    box:hasOutput box:Data_Preprocessed_EEG_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_62_2 a box:Step ;
+    rdfs:label "1d Feature Extraction Using DWT" ;
+    box:hasInput box:Data_Preprocessed_EEG_Data ;
+    box:hasOutput box:Data_Statistical_Features ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_62_3 a box:Step ;
+    rdfs:label "1a Train Model" ;
+    box:hasInput box:Data_Statistical_Features ;
+    box:hasOutput box:Model__Hybrid_ANFIS ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_62_4 a box:Step ;
+    rdfs:label "2a Analyzing" ;
+    box:hasInput box:Data_Patient_EEG_Signals,
+        box:Model__Hybrid_ANFIS ;
+    box:hasOutput box:Symbol_Detected_Epileptic_Seizure ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Detected_Epileptic_Seizure rdfs:label "Symbol Detected Epileptic Seizure" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Data_Preprocessed_EEG_Data rdfs:label "Data Preprocessed EEG Data" .
+
+box:Data_Statistical_Features rdfs:label "Data Statistical Features" .
+
+box:Model__Hybrid_ANFIS rdfs:label "Model: Hybrid ANFIS" .
+

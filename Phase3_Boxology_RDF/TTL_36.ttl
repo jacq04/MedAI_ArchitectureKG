@@ -1,0 +1,60 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_36 ex:hasBoxology box:Boxology_36 .
+
+box:Boxology_36 box:includesStep box:Steps_36_1,
+        box:Steps_36_2,
+        box:Steps_36_3,
+        box:Steps_36_4 .
+
+box:Data__Image_Patient_Chest_MRI_Images rdfs:label "Data: Image Patient Chest MRI Images" .
+
+box:Data__Image_Raw_Chest_MRI_Image rdfs:label "Data: Image Raw Chest MRI Image" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Model__Statistical_GLCM rdfs:label "Model: Statistical GLCM" .
+
+box:Steps_36_1 a box:Step ;
+    rdfs:label "1d Image Preprocessing" ;
+    box:hasInput box:Data__Image_Raw_Chest_MRI_Image ;
+    box:hasOutput box:Data__Image_Standardized_Images ;
+    box:hasProcess box:Transform .
+
+box:Steps_36_2 a box:Step ;
+    rdfs:label "2a Feature Extraction Using GLCM" ;
+    box:hasInput box:Data__Image_Standardized_Images,
+        box:Model__Statistical_GLCM ;
+    box:hasOutput box:Data_Feature_Vector ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_36_3 a box:Step ;
+    rdfs:label "ANFIS Fine-tuning" ;
+    box:hasInput box:Data_Feature_Vector,
+        box:Data__Image_Standardized_Images ;
+    box:hasOutput box:Model__Hybrid_ANFIS ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_36_4 a box:Step ;
+    rdfs:label "2a Classification with ANFIS" ;
+    box:hasInput box:Data__Image_Patient_Chest_MRI_Images,
+        box:Model__Hybrid_ANFIS ;
+    box:hasOutput box:Symbol_COVID-19_Prediction ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Symbol_COVID-19_Prediction rdfs:label "Symbol COVID-19 Prediction" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Data_Feature_Vector rdfs:label "Data Feature Vector" .
+
+box:Model__Hybrid_ANFIS rdfs:label "Model: Hybrid ANFIS" .
+
+box:Data__Image_Standardized_Images rdfs:label "Data: Image Standardized Images" .
+

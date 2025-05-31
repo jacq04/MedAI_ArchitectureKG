@@ -1,0 +1,59 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_15 ex:hasBoxology box:Boxology_15 .
+
+box:Boxology_15 box:includesStep box:Steps_15_1,
+        box:Steps_15_2,
+        box:Steps_15_3,
+        box:Steps_15_4 .
+
+box:Data_Measurements rdfs:label "Data Measurements" .
+
+box:Data_Raw_Measurements rdfs:label "Data Raw Measurements" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Steps_15_1 a box:Step ;
+    rdfs:label "1d Feature Extraction" ;
+    box:hasInput box:Data_Raw_Measurements ;
+    box:hasOutput box:Data_Extracted_Features ;
+    box:hasProcess box:Transform .
+
+box:Steps_15_2 a box:Step ;
+    rdfs:label "1a Ensemble Machine Learning Model Training" ;
+    box:hasInput box:Data_Extracted_Features ;
+    box:hasOutput box:Model__Dynamic_Boosting_Model ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_15_3 a box:Step ;
+    rdfs:label "2a Health Score Prediction" ;
+    box:hasInput box:Data_Measurements,
+        box:Model__Dynamic_Boosting_Model ;
+    box:hasOutput box:Symbol_Health_Score_and_Epilepsy_Prediction ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_15_4 a box:Step ;
+    rdfs:label "2a Fuzzy Logic Inference" ;
+    box:hasInput box:Symbol_Fuzzy_Rules,
+        box:Symbol_Health_Score_and_Epilepsy_Prediction ;
+    box:hasOutput box:Symbol_Diagnosis_and_Treatment ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Symbol_Diagnosis_and_Treatment rdfs:label "Symbol Diagnosis and Treatment" .
+
+box:Symbol_Fuzzy_Rules rdfs:label "Symbol Fuzzy Rules" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Data_Extracted_Features rdfs:label "Data Extracted Features" .
+
+box:Model__Dynamic_Boosting_Model rdfs:label "Model: Dynamic Boosting Model" .
+
+box:Symbol_Health_Score_and_Epilepsy_Prediction rdfs:label "Symbol Health Score and Epilepsy Prediction" .
+

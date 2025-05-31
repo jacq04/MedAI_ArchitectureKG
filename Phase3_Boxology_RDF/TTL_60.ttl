@@ -1,0 +1,89 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_60 ex:hasBoxology box:Boxology_60 .
+
+box:Boxology_60 box:includesStep box:Steps_60_1,
+        box:Steps_60_2,
+        box:Steps_60_3,
+        box:Steps_60_4,
+        box:Steps_60_5,
+        box:Steps_60_6,
+        box:Steps_60_7 .
+
+box:Data_Medical_Data rdfs:label "Data Medical Data" .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Engineer1 rdfs:label "Generate: Engineer1" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_60_1 a box:Step ;
+    rdfs:label "1d Pre-processing" ;
+    box:hasInput box:Data_Medical_Data ;
+    box:hasOutput box:Data_Normalized_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_60_2 a box:Step ;
+    rdfs:label "1d Divide Data" ;
+    box:hasInput box:Data_Normalized_Data ;
+    box:hasOutput box:Data_Segmented_Data ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_60_3 a box:Step ;
+    rdfs:label "1c Agent Learning" ;
+    box:hasInput box:Data_Segmented_Data ;
+    box:hasOutput box:Symbol_Local_Rules ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_60_4 a box:Step ;
+    rdfs:label "1d Communication and Neighborhood Formation" ;
+    box:hasInput box:Symbol_Local_Rules ;
+    box:hasOutput box:Symbol_Enriched_Rules ;
+    box:hasProcess box:Transform2 .
+
+box:Steps_60_5 a box:Step ;
+    rdfs:label "1d Probabilistic Fuzzy Rule Refinement" ;
+    box:hasInput box:Symbol_Enriched_Rules ;
+    box:hasOutput box:Symbol_Probabilistic_Rules ;
+    box:hasProcess box:Transform3 .
+
+box:Steps_60_6 a box:Step ;
+    rdfs:label "1c System Creation" ;
+    box:hasInput box:Symbol_Probabilistic_Rules ;
+    box:hasOutput box:Model__Hybrid_DPFRM_System ;
+    box:hasProcess box:Generate__Engineer1 .
+
+box:Steps_60_7 a box:Step ;
+    rdfs:label "2a Prediction Making" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Hybrid_DPFRM_System ;
+    box:hasOutput box:Symbol_Task_Specific_Prediction_\(e.g._Mortality\) ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Task_Specific_Prediction_\(e.g._Mortality\) rdfs:label "Symbol Task Specific Prediction (e.g. Mortality)" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Transform2 rdfs:label "Transform2" .
+
+box:Transform3 rdfs:label "Transform3" .
+
+box:Data_Normalized_Data rdfs:label "Data Normalized Data" .
+
+box:Data_Segmented_Data rdfs:label "Data Segmented Data" .
+
+box:Model__Hybrid_DPFRM_System rdfs:label "Model: Hybrid DPFRM System" .
+
+box:Symbol_Enriched_Rules rdfs:label "Symbol Enriched Rules" .
+
+box:Symbol_Local_Rules rdfs:label "Symbol Local Rules" .
+
+box:Symbol_Probabilistic_Rules rdfs:label "Symbol Probabilistic Rules" .
+

@@ -1,0 +1,68 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_32 ex:hasBoxology box:Boxology_32 .
+
+box:Actor_Clinicians rdfs:label "Actor Clinicians" .
+
+box:Actor_Experts rdfs:label "Actor Experts" .
+
+box:Boxology_32 box:includesStep box:Steps_32_1,
+        box:Steps_32_2,
+        box:Steps_32_3,
+        box:Steps_32_4,
+        box:Steps_32_5 .
+
+box:Data_Patient_Measurements rdfs:label "Data Patient Measurements" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Engineer1 rdfs:label "Generate: Engineer1" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Infer__Deduce2 rdfs:label "Infer: Deduce2" .
+
+box:Steps_32_1 a box:Step ;
+    rdfs:label "1C Rule Formulation" ;
+    box:hasInput box:Actor_Clinicians ;
+    box:hasOutput box:Model__Semantic_RBR_Module ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_32_2 a box:Step ;
+    rdfs:label "2a Initial Assessment (RBR Module)" ;
+    box:hasInput box:Data_Patient_Measurements,
+        box:Model__Semantic_RBR_Module ;
+    box:hasOutput box:Symbol_Triage_Level_Recommendations ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_32_3 a box:Step ;
+    rdfs:label "2a Knowledge Representation" ;
+    box:hasInput box:Symbol_Refined_Triage_Level ;
+    box:hasOutput box:Symbol_Triage_Level_Recommendations ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_32_4 a box:Step ;
+    rdfs:label "2a Fuzzy Logic Classification (FLC Module)" ;
+    box:hasInput box:Model__Semantic_FLC,
+        box:Symbol_Triage_Level_Recommendations ;
+    box:hasOutput box:Symbol_Refined_Triage_Level ;
+    box:hasProcess box:Infer__Deduce2 .
+
+box:Steps_32_5 a box:Step ;
+    rdfs:label "1c Designing the Fuzzy Logic System" ;
+    box:hasInput box:Actor_Experts ;
+    box:hasOutput box:Model__Semantic_FLC ;
+    box:hasProcess box:Generate__Engineer1 .
+
+box:Model__Semantic_FLC rdfs:label "Model: Semantic FLC" .
+
+box:Model__Semantic_RBR_Module rdfs:label "Model: Semantic RBR Module" .
+
+box:Symbol_Refined_Triage_Level rdfs:label "Symbol Refined Triage Level" .
+
+box:Symbol_Triage_Level_Recommendations rdfs:label "Symbol Triage Level Recommendations" .
+

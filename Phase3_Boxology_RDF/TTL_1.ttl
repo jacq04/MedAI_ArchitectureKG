@@ -1,0 +1,109 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_1 ex:hasBoxology box:Boxology_1 .
+
+box:Boxology_1 box:includesStep box:Steps_1_1,
+        box:Steps_1_2,
+        box:Steps_1_3,
+        box:Steps_1_4,
+        box:Steps_1_5,
+        box:Steps_1_6,
+        box:Steps_1_7,
+        box:Steps_1_8,
+        box:Steps_1_9 .
+
+box:Data__Text_Medical_Knowledge rdfs:label "Data: Text Medical Knowledge" .
+
+box:Data__Text_Symptoms rdfs:label "Data: Text Symptoms" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce2 rdfs:label "Infer: Deduce2" .
+
+box:Model__Semantic_Fuzzy_Rules_with_weights rdfs:label "Model: Semantic Fuzzy Rules with weights" .
+
+box:Steps_1_1 a box:Step ;
+    rdfs:label "1d Extract Relevant Information" ;
+    box:hasInput box:Data__Text_Symptoms ;
+    box:hasOutput box:Data__Text_Symptoms_Cleaned ;
+    box:hasProcess box:Transform .
+
+box:Steps_1_2 a box:Step ;
+    rdfs:label "1d Tokenize" ;
+    box:hasInput box:Data__Text_Symptoms_Cleaned ;
+    box:hasOutput box:Data__Text_Tokens ;
+    box:hasProcess box:Transform .
+
+box:Steps_1_3 a box:Step ;
+    rdfs:label "1d Transform to Feature Vectors" ;
+    box:hasInput box:Data__Text_Tokens ;
+    box:hasOutput box:Data__Text_Feature_Vectors_Symptoms ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_1_4 a box:Step ;
+    rdfs:label "2a Possible Diagnosis (per case)" ;
+    box:hasInput box:Data__Text_Feature_Vectors_Symptoms ;
+    box:hasOutput box:Model__Semantic_Support_Vector_Machine ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_1_5 a box:Step ;
+    rdfs:label "2a Possible Diagnosis (per case)" ;
+    box:hasInput box:Data__Text_Feature_Vectors_Symptoms ;
+    box:hasOutput box:Data_Possible_Diagnosis_with_Likelihood ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_1_6 a box:Step ;
+    rdfs:label "2a Classification" ;
+    box:hasInput box:Data_Possible_Diagnosis_with_Likelihood,
+        box:Model__Semantic_Support_Vector_Machine ;
+    box:hasOutput box:Symbol__Text_Possible_Diagnosis_ranked_by_Likelihood ;
+    box:hasProcess box:Infer__Deduce2 .
+
+box:Steps_1_7 a box:Step ;
+    rdfs:label "1d Structure Medical Knowledge" ;
+    box:hasInput box:Data__Text_Medical_Knowledge ;
+    box:hasOutput box:Data__Text_Structures_Representation ;
+    box:hasProcess box:Transform__Embed3 .
+
+box:Steps_1_8 a box:Step ;
+    rdfs:label "1d Fuzzy Rules without Weights" ;
+    box:hasInput box:Data__Text_Structures_Representation ;
+    box:hasOutput box:Data__Text_Fuzzy_Rules ;
+    box:hasProcess box:Tranform__Embed4 .
+
+box:Steps_1_9 a box:Step ;
+    rdfs:label "1a Fuzzy Rules" ;
+    box:hasInput box:Data__Text_Fuzzy_Rules ;
+    box:hasOutput box:Model__Semantic_Fuzzy_Rules_with_weights ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Symbol__Text_Possible_Diagnosis_ranked_by_Likelihood rdfs:label "Symbol: Text Possible Diagnosis ranked by Likelihood" .
+
+box:Tranform__Embed4 rdfs:label "Tranform: Embed4" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Transform__Embed3 rdfs:label "Transform: Embed3" .
+
+box:Data_Possible_Diagnosis_with_Likelihood rdfs:label "Data Possible Diagnosis with Likelihood" .
+
+box:Data__Text_Fuzzy_Rules rdfs:label "Data: Text Fuzzy Rules" .
+
+box:Data__Text_Structures_Representation rdfs:label "Data: Text Structures Representation" .
+
+box:Data__Text_Symptoms_Cleaned rdfs:label "Data: Text Symptoms Cleaned" .
+
+box:Data__Text_Tokens rdfs:label "Data: Text Tokens" .
+
+box:Model__Semantic_Support_Vector_Machine rdfs:label "Model: Semantic Support Vector Machine" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Data__Text_Feature_Vectors_Symptoms rdfs:label "Data: Text Feature Vectors Symptoms" .
+

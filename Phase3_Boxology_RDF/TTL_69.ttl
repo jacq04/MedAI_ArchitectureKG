@@ -1,0 +1,79 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_69 ex:hasBoxology box:Boxology_69 .
+
+box:Boxology_69 box:includesStep box:Steps_69_1,
+        box:Steps_69_2,
+        box:Steps_69_3,
+        box:Steps_69_4,
+        box:Steps_69_5,
+        box:Steps_69_6 .
+
+box:Data_New_Patient_Data rdfs:label "Data New Patient Data" .
+
+box:Data_Raw_Patient_Data rdfs:label "Data Raw Patient Data" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Generate__Train1 rdfs:label "Generate: Train1" .
+
+box:Infer__Predict rdfs:label "Infer: Predict" .
+
+box:Steps_69_1 a box:Step ;
+    rdfs:label "1d Pre-processing" ;
+    box:hasInput box:Data_Raw_Patient_Data ;
+    box:hasOutput box:Data_Processed_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_69_2 a box:Step ;
+    rdfs:label "1d Crisp Values" ;
+    box:hasInput box:Data_Processed_Data ;
+    box:hasOutput box:Data_Crisp_Values ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_69_3 a box:Step ;
+    rdfs:label "1d Variable Selection" ;
+    box:hasInput box:Data_Processed_Data ;
+    box:hasOutput box:Data_Selected_Variables ;
+    box:hasProcess box:Transform2 .
+
+box:Steps_69_4 a box:Step ;
+    rdfs:label "1a MLP Training" ;
+    box:hasInput box:Data_Selected_Variables ;
+    box:hasOutput box:Model__ML_MLP ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_69_5 a box:Step ;
+    rdfs:label "2a Prediction Making" ;
+    box:hasInput box:Data_New_Patient_Data,
+        box:Model__ML_MLP,
+        box:Model__Semantic_Fuzzy_Regression ;
+    box:hasOutput box:Symbol_Predicted_Triglyceride_Levels ;
+    box:hasProcess box:Infer__Predict .
+
+box:Steps_69_6 a box:Step ;
+    rdfs:label "1a Fuzzy Regression" ;
+    box:hasInput box:Data_Crisp_Values ;
+    box:hasOutput box:Model__Semantic_Fuzzy_Regression ;
+    box:hasProcess box:Generate__Train1 .
+
+box:Symbol_Predicted_Triglyceride_Levels rdfs:label "Symbol Predicted Triglyceride Levels" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Transform2 rdfs:label "Transform2" .
+
+box:Data_Crisp_Values rdfs:label "Data Crisp Values" .
+
+box:Data_Selected_Variables rdfs:label "Data Selected Variables" .
+
+box:Model__ML_MLP rdfs:label "Model: ML MLP" .
+
+box:Model__Semantic_Fuzzy_Regression rdfs:label "Model: Semantic Fuzzy Regression" .
+
+box:Data_Processed_Data rdfs:label "Data Processed Data" .
+

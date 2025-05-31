@@ -1,0 +1,89 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_2 ex:hasBoxology box:Boxology_2 .
+
+box:Boxology_2 box:includesStep box:Steps_2_1,
+        box:Steps_2_2,
+        box:Steps_2_3,
+        box:Steps_2_4,
+        box:Steps_2_5,
+        box:Steps_2_6,
+        box:Steps_2_7 .
+
+box:Data__Image_Raw_fMRI_Scans rdfs:label "Data: Image Raw fMRI Scans" .
+
+box:Data__Images_fMRI_Images rdfs:label "Data: Images fMRI Images" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_2_1 a box:Step ;
+    rdfs:label "1d Pre-Processing" ;
+    box:hasInput box:Data__Image_Raw_fMRI_Scans ;
+    box:hasOutput box:Data__Image_Normalized_fMRI_Scans ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_2_2 a box:Step ;
+    rdfs:label "1d Feature Extraction" ;
+    box:hasInput box:Data__Image_Normalized_fMRI_Scans ;
+    box:hasOutput box:Data__Numeric_Features_of_Brain_Activity_Patterns ;
+    box:hasProcess box:Transform__Embed1 .
+
+box:Steps_2_3 a box:Step ;
+    rdfs:label "1d SMOTE" ;
+    box:hasInput box:Data__Numeric_Features_of_Brain_Activity_Patterns ;
+    box:hasOutput box:Data__Numeric_Balanced_Set ;
+    box:hasProcess box:Transform__Embed2 .
+
+box:Steps_2_4 a box:Step ;
+    rdfs:label "1d Feature Selection with CCSO" ;
+    box:hasInput box:Data__Numeric_Balanced_Set ;
+    box:hasOutput box:Data__Numeric_Features_Pain_Levels ;
+    box:hasProcess box:Transform_Embed3 .
+
+box:Steps_2_5 a box:Step ;
+    rdfs:label "1a Create Fuzzy Rules" ;
+    box:hasInput box:Data__Numeric_Features_Pain_Levels ;
+    box:hasOutput box:Model_Semantic_CCSO-SOFLP ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_2_6 a box:Step ;
+    rdfs:label "2d Multi-classificiation for Pain levels" ;
+    box:hasInput box:Data__Images_fMRI_Images,
+        box:Model_Semantic_CCSO-SOFLP ;
+    box:hasOutput box:Data_Pain_Levels ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_2_7 a box:Step ;
+    rdfs:label "1d Interpret Results with SOFLP" ;
+    box:hasInput box:Data_Pain_Levels ;
+    box:hasOutput box:Symbol_Pain_Levels ;
+    box:hasProcess box:Transform__Embed4 .
+
+box:Symbol_Pain_Levels rdfs:label "Symbol Pain Levels" .
+
+box:Transform_Embed3 rdfs:label "Transform Embed3" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Transform__Embed1 rdfs:label "Transform: Embed1" .
+
+box:Transform__Embed2 rdfs:label "Transform: Embed2" .
+
+box:Transform__Embed4 rdfs:label "Transform: Embed4" .
+
+box:Data_Pain_Levels rdfs:label "Data Pain Levels" .
+
+box:Data__Image_Normalized_fMRI_Scans rdfs:label "Data: Image Normalized fMRI Scans" .
+
+box:Data__Numeric_Balanced_Set rdfs:label "Data: Numeric Balanced Set" .
+
+box:Data__Numeric_Features_Pain_Levels rdfs:label "Data: Numeric Features Pain Levels" .
+
+box:Data__Numeric_Features_of_Brain_Activity_Patterns rdfs:label "Data: Numeric Features of Brain Activity Patterns" .
+
+box:Model_Semantic_CCSO-SOFLP rdfs:label "Model Semantic CCSO-SOFLP" .
+

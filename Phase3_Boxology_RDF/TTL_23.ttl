@@ -1,0 +1,66 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_23 ex:hasBoxology box:Boxology_23 .
+
+box:Boxology_23 box:includesStep box:Steps_23_1,
+        box:Steps_23_2,
+        box:Steps_23_3,
+        box:Steps_23_4,
+        box:Steps_23_5 .
+
+box:Data_Patient_Records rdfs:label "Data Patient Records" .
+
+box:Data_Patient_Reocrds rdfs:label "Data Patient Reocrds" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_23_1 a box:Step ;
+    rdfs:label "2d Prediction Generation" ;
+    box:hasInput box:Data_Patient_Reocrds,
+        box:Model_WFM_Model ;
+    box:hasOutput box:Symbol_Hospital_Readmission ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_23_2 a box:Step ;
+    rdfs:label "1d Submodel Construction" ;
+    box:hasInput box:Data_Partitioned_Subsets,
+        box:Symbol_Hospital_Readmission ;
+    box:hasOutput box:Model_WFM_Model ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_23_3 a box:Step ;
+    rdfs:label "1d Fuzzy Partitioning with FCM" ;
+    box:hasInput box:Data_Weighted_Training_Instances ;
+    box:hasOutput box:Data_Partitioned_Subsets ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_23_4 a box:Step ;
+    rdfs:label "1d Locally Weighted FM" ;
+    box:hasInput box:Data_Prepared_Dataset ;
+    box:hasOutput box:Data_Weighted_Training_Instances ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_23_5 a box:Step ;
+    rdfs:label "1d Factorization Machines" ;
+    box:hasInput box:Data_Patient_Records ;
+    box:hasOutput box:Data_Prepared_Dataset ;
+    box:hasProcess box:Transform__Embed2 .
+
+box:Transform__Embed2 rdfs:label "Transform: Embed2" .
+
+box:Data_Partitioned_Subsets rdfs:label "Data Partitioned Subsets" .
+
+box:Data_Prepared_Dataset rdfs:label "Data Prepared Dataset" .
+
+box:Data_Weighted_Training_Instances rdfs:label "Data Weighted Training Instances" .
+
+box:Model_WFM_Model rdfs:label "Model WFM Model" .
+
+box:Symbol_Hospital_Readmission rdfs:label "Symbol Hospital Readmission" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+

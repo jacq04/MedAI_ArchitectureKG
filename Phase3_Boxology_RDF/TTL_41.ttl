@@ -1,0 +1,70 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_41 ex:hasBoxology box:Boxology_41 .
+
+box:Boxology_41 box:includesStep box:Steps_41_1,
+        box:Steps_41_2,
+        box:Steps_41_3,
+        box:Steps_41_4,
+        box:Steps_41_5 .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data_Raw_Patient_Data rdfs:label "Data Raw Patient Data" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Model__Hybrid_Second_ANFIS rdfs:label "Model: Hybrid Second ANFIS" .
+
+box:Steps_41_1 a box:Step ;
+    rdfs:label "1d Data Collection and Pre-processing" ;
+    box:hasInput box:Data_Raw_Patient_Data ;
+    box:hasOutput box:Data_Normalized_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_41_2 a box:Step ;
+    rdfs:label "1d Fuzzification" ;
+    box:hasInput box:Data_Normalized_Data ;
+    box:hasOutput box:Data_Fuzzy_Values_for_Input_Variables ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_41_3 a box:Step ;
+    rdfs:label "1c System Creation" ;
+    box:hasInput box:Data_Fuzzy_Values_for_Input_Variables ;
+    box:hasOutput box:Model__Hybrid_ANFIS ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_41_4 a box:Step ;
+    rdfs:label "2a Aggregation" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Hybrid_ANFIS ;
+    box:hasOutput box:Symbol_Single_Crisp_Prediction ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_41_5 a box:Step ;
+    rdfs:label "2a Equilibrated Urea Concentration Prediction" ;
+    box:hasInput box:Model__Hybrid_Second_ANFIS,
+        box:Symbol_Single_Crisp_Prediction ;
+    box:hasOutput box:Symbol_Effectiveness_Dialysis ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Symbol_Effectiveness_Dialysis rdfs:label "Symbol Effectiveness Dialysis" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Data_Fuzzy_Values_for_Input_Variables rdfs:label "Data Fuzzy Values for Input Variables" .
+
+box:Data_Normalized_Data rdfs:label "Data Normalized Data" .
+
+box:Model__Hybrid_ANFIS rdfs:label "Model: Hybrid ANFIS" .
+
+box:Symbol_Single_Crisp_Prediction rdfs:label "Symbol Single Crisp Prediction" .
+

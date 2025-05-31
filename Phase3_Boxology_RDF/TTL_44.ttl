@@ -1,0 +1,99 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_44 ex:hasBoxology box:Boxology_44 .
+
+box:Actor_Experts rdfs:label "Actor Experts" .
+
+box:Actor_Experts1 rdfs:label "Actor Experts1" .
+
+box:Boxology_44 box:includesStep box:Steps_44_1,
+        box:Steps_44_2,
+        box:Steps_44_3,
+        box:Steps_44_4,
+        box:Steps_44_5,
+        box:Steps_44_6,
+        box:Steps_44_7 .
+
+box:Data_Labeled_Data1 rdfs:label "Data Labeled Data1" .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data_Raw_Microarray_Gene_Expression_Datasets rdfs:label "Data Raw Microarray Gene Expression Datasets" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Generate__Train1 rdfs:label "Generate: Train1" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Infer__Predict rdfs:label "Infer: Predict" .
+
+box:Steps_44_1 a box:Step ;
+    rdfs:label "1d Pre-processing" ;
+    box:hasInput box:Data_Raw_Microarray_Gene_Expression_Datasets ;
+    box:hasOutput box:Data_Cleaned_and_Normalize ;
+    box:hasProcess box:Transform .
+
+box:Steps_44_2 a box:Step ;
+    rdfs:label "1d Annotation" ;
+    box:hasInput box:Actor_Experts,
+        box:Data_Cleaned_and_Normalize ;
+    box:hasOutput box:Data_Labeled_Data,
+        box:Data_Unlabeled_Data ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_44_3 a box:Step ;
+    rdfs:label "1a Development of the Rough-Fuzzy Classifier" ;
+    box:hasInput box:Data_Labeled_Data ;
+    box:hasOutput box:Model__Hybrid_Rough-Fuzzy_Classifier ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_44_4 a box:Step ;
+    rdfs:label "2a Iterative Selection" ;
+    box:hasInput box:Data_Unlabeled_Data,
+        box:Model__Hybrid_Rough-Fuzzy_Classifier ;
+    box:hasOutput box:Data_Most_Uncertain_Data ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_44_5 a box:Step ;
+    rdfs:label "2a Expert Labeling" ;
+    box:hasInput box:Actor_Experts1,
+        box:Data_Most_Uncertain_Data ;
+    box:hasOutput box:Data_Labeled_Data ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_44_6 a box:Step ;
+    rdfs:label "1a Classsifier Update" ;
+    box:hasInput box:Data_Labeled_Data1 ;
+    box:hasOutput box:Model__Hybrid_Rough_Fuzzy_Classifier ;
+    box:hasProcess box:Generate__Train1 .
+
+box:Steps_44_7 a box:Step ;
+    rdfs:label "2a Prediction" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Hybrid_Rough_Fuzzy_Classifier ;
+    box:hasOutput box:Symbol_Cancer_Type ;
+    box:hasProcess box:Infer__Predict .
+
+box:Symbol_Cancer_Type rdfs:label "Symbol Cancer Type" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Data_Cleaned_and_Normalize rdfs:label "Data Cleaned and Normalize" .
+
+box:Data_Most_Uncertain_Data rdfs:label "Data Most Uncertain Data" .
+
+box:Data_Unlabeled_Data rdfs:label "Data Unlabeled Data" .
+
+box:Model__Hybrid_Rough-Fuzzy_Classifier rdfs:label "Model: Hybrid Rough-Fuzzy Classifier" .
+
+box:Model__Hybrid_Rough_Fuzzy_Classifier rdfs:label "Model: Hybrid Rough Fuzzy Classifier" .
+
+box:Data_Labeled_Data rdfs:label "Data Labeled Data" .
+

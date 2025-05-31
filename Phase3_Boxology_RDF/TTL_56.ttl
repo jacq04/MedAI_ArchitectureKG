@@ -1,0 +1,59 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_56 ex:hasBoxology box:Boxology_56 .
+
+box:Boxology_56 box:includesStep box:Steps_56_1,
+        box:Steps_56_2,
+        box:Steps_56_3,
+        box:Steps_56_4 .
+
+box:Data_Patient_Respiratory_Signals rdfs:label "Data Patient Respiratory Signals" .
+
+box:Data_Respiratory_Signals rdfs:label "Data Respiratory Signals" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_56_1 a box:Step ;
+    rdfs:label "1d Feature Extraction" ;
+    box:hasInput box:Data_Respiratory_Signals ;
+    box:hasOutput box:Data_Extracted_Features ;
+    box:hasProcess box:Transform .
+
+box:Steps_56_2 a box:Step ;
+    rdfs:label "1d Patient Clustering Based on Breating Features" ;
+    box:hasInput box:Data_Extracted_Features ;
+    box:hasOutput box:Symbol_Patient_Group_Clusters ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_56_3 a box:Step ;
+    rdfs:label "1a Training Fuzzy Deep Learning (FDL) Models" ;
+    box:hasInput box:Symbol_Expert_Fuzzy_Rules,
+        box:Symbol_Patient_Group_Clusters ;
+    box:hasOutput box:Model__Hybrid_FDL ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_56_4 a box:Step ;
+    rdfs:label "2a Prediction Making" ;
+    box:hasInput box:Data_Patient_Respiratory_Signals,
+        box:Model__Hybrid_FDL ;
+    box:hasOutput box:Symbol_Tumor_Position_Predictons ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Expert_Fuzzy_Rules rdfs:label "Symbol Expert Fuzzy Rules" .
+
+box:Symbol_Tumor_Position_Predictons rdfs:label "Symbol Tumor Position Predictons" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Data_Extracted_Features rdfs:label "Data Extracted Features" .
+
+box:Model__Hybrid_FDL rdfs:label "Model: Hybrid FDL" .
+
+box:Symbol_Patient_Group_Clusters rdfs:label "Symbol Patient Group Clusters" .
+

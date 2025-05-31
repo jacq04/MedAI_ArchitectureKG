@@ -1,0 +1,86 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_3 ex:hasBoxology box:Boxology_3 .
+
+box:Boxology_3 box:includesStep box:Steps_3_1,
+        box:Steps_3_2,
+        box:Steps_3_3,
+        box:Steps_3_4,
+        box:Steps_3_5,
+        box:Steps_3_6 .
+
+box:Data_Authentic_Diagnosis_Database rdfs:label "Data Authentic Diagnosis Database" .
+
+box:Data_Historical_Data_Sets rdfs:label "Data Historical Data Sets" .
+
+<http://example.org/boxology#Data_Knowledge_+_Guidelines> rdfs:label "Data Knowledge + Guidelines" .
+
+box:Data__Numeric_Raw_Physiological_Data rdfs:label "Data: Numeric Raw Physiological Data" .
+
+box:Data__Numeric_Raw_Physiological_Data1 rdfs:label "Data: Numeric Raw Physiological Data1" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Generate__Train2 rdfs:label "Generate: Train2" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Model__Semantic_Decision_Support rdfs:label "Model: Semantic Decision Support" .
+
+box:Steps_3_1 a box:Step ;
+    rdfs:label "1d Pre-Process" ;
+    box:hasInput box:Data__Numeric_Raw_Physiological_Data ;
+    box:hasOutput box:Data__Numeric_Cleaned_Physiological_Data ;
+    box:hasProcess box:Tranform .
+
+box:Steps_3_2 a box:Step ;
+    rdfs:label "1d Fuzzy c-means clustering (FCM) and fuzzy k-means clusterign (FKM)" ;
+    box:hasInput box:Data__Numeric_Cleaned_Physiological_Data ;
+    box:hasOutput box:Data__Numeric_Clustered_Physiological_Data ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_3_3 a box:Step ;
+    rdfs:label "1d Self-Organizing Fuzzy Logic Modelling" ;
+    box:hasInput box:Data__Numeric_Clustered_Physiological_Data,
+        box:Model__Semantic_Fuzzy_Rules ;
+    box:hasOutput box:Data_physiological_conditions ;
+    box:hasProcess box:Transform__Embed1 .
+
+box:Steps_3_4 a box:Step ;
+    rdfs:label "1c Generate Fuzzy Rules" ;
+    box:hasInput <http://example.org/boxology#Data_Knowledge_+_Guidelines> ;
+    box:hasOutput box:Model__Semantic_Fuzzy_Rules ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_3_5 a box:Step ;
+    rdfs:label "2a Modelling" ;
+    box:hasInput box:Data_Authentic_Diagnosis_Database,
+        box:Data_Historical_Data_Sets,
+        box:Data_physiological_conditions ;
+    box:hasProcess box:Generate__Train2 .
+
+box:Steps_3_6 a box:Step ;
+    rdfs:label "2b Check if Early Alert" ;
+    box:hasInput box:Data__Numeric_Raw_Physiological_Data1,
+        box:Model__Semantic_Decision_Support ;
+    box:hasOutput box:Symbol_Early_Alert ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Early_Alert rdfs:label "Symbol Early Alert" .
+
+box:Tranform rdfs:label "Tranform" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Transform__Embed1 rdfs:label "Transform: Embed1" .
+
+box:Data__Numeric_Cleaned_Physiological_Data rdfs:label "Data: Numeric Cleaned Physiological Data" .
+
+box:Data__Numeric_Clustered_Physiological_Data rdfs:label "Data: Numeric Clustered Physiological Data" .
+
+box:Data_physiological_conditions rdfs:label "Data physiological conditions" .
+
+box:Model__Semantic_Fuzzy_Rules rdfs:label "Model: Semantic Fuzzy Rules" .
+

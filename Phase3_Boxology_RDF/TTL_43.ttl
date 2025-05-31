@@ -1,0 +1,83 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_43 ex:hasBoxology box:Boxology_43 .
+
+box:Actor_Experts rdfs:label "Actor Experts" .
+
+box:Boxology_43 box:includesStep box:Steps_43_1,
+        box:Steps_43_2,
+        box:Steps_43_3,
+        box:Steps_43_4,
+        box:Steps_43_5,
+        box:Steps_43_6 .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data_Raw_Patient_Data rdfs:label "Data Raw Patient Data" .
+
+box:Data_Structred_Data rdfs:label "Data Structred Data" .
+
+box:Generate_Train rdfs:label "Generate Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Steps_43_1 a box:Step ;
+    rdfs:label "1d Pre-processing" ;
+    box:hasInput box:Data_Raw_Patient_Data ;
+    box:hasOutput box:Data_Structured_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_43_2 a box:Step ;
+    rdfs:label "Fuzzy Rough Set Application" ;
+    box:hasInput box:Actor_Experts,
+        box:Symbol_Diagnostic_Parameters ;
+    box:hasOutput box:Data_Structred_Data ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_43_3 a box:Step ;
+    rdfs:label "1a ANFIS Method" ;
+    box:hasInput box:Data_Structured_Data ;
+    box:hasOutput box:Model__Hybrid_ANFIS ;
+    box:hasProcess box:Generate_Train .
+
+box:Steps_43_4 a box:Step ;
+    rdfs:label "1d Transform Data is Fuzzy Values" ;
+    box:hasInput box:Data_Patient_Data ;
+    box:hasOutput box:Data_Fuzzified_Value ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_43_5 a box:Step ;
+    rdfs:label "2a Fuzzy Inference" ;
+    box:hasInput box:Data_Fuzzified_Value,
+        box:Model__Hybrid_ANFIS ;
+    box:hasOutput box:Symbol_Fuzzy_Diagnosis ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_43_6 a box:Step ;
+    rdfs:label "1d Diagnosis and Recommendation" ;
+    box:hasInput box:Symbol_Fuzzy_Diagnosis ;
+    box:hasOutput box:Symbol_Medical_Report ;
+    box:hasProcess box:Transform1 .
+
+box:Symbol_Diagnostic_Parameters rdfs:label "Symbol Diagnostic Parameters" .
+
+box:Symbol_Medical_Report rdfs:label "Symbol Medical Report" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Data_Fuzzified_Value rdfs:label "Data Fuzzified Value" .
+
+box:Data_Structured_Data rdfs:label "Data Structured Data" .
+
+box:Model__Hybrid_ANFIS rdfs:label "Model: Hybrid ANFIS" .
+
+box:Symbol_Fuzzy_Diagnosis rdfs:label "Symbol Fuzzy Diagnosis" .
+

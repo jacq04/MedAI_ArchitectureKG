@@ -1,0 +1,89 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_48 ex:hasBoxology box:Boxology_48 .
+
+box:Boxology_48 box:includesStep box:Steps_48_1,
+        box:Steps_48_2,
+        box:Steps_48_3,
+        box:Steps_48_4,
+        box:Steps_48_5,
+        box:Steps_48_6,
+        box:Steps_48_7 .
+
+box:Data__Images_Patient_Lung_CT_Images rdfs:label "Data: Images Patient Lung CT Images" .
+
+box:Data__Images_Raw_Lung_CT_Images rdfs:label "Data: Images Raw Lung CT Images" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_48_1 a box:Step ;
+    rdfs:label "1d Preprocessing" ;
+    box:hasInput box:Data__Images_Raw_Lung_CT_Images ;
+    box:hasOutput box:Data__Images_JPEG_Images ;
+    box:hasProcess box:Transform .
+
+box:Steps_48_2 a box:Step ;
+    rdfs:label "1d Greyscale Conversion" ;
+    box:hasInput box:Data__Images_JPEG_Images ;
+    box:hasOutput <http://example.org/boxology#Data__Images_Greyscale_+_Normalized_Images> ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_48_3 a box:Step ;
+    rdfs:label "1d Image Segmentation" ;
+    box:hasInput <http://example.org/boxology#Data__Images_Greyscale_+_Normalized_Images> ;
+    box:hasOutput box:Data__Images_Contrast-Enhanced_Images ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_48_4 a box:Step ;
+    rdfs:label "1d Image Segmentation" ;
+    box:hasInput box:Data__Images_Contrast-Enhanced_Images ;
+    box:hasOutput box:Data__Images_Segmentated_Images ;
+    box:hasProcess box:Transform2 .
+
+box:Steps_48_5 a box:Step ;
+    rdfs:label "1d Feature Extraction" ;
+    box:hasInput box:Data__Images_Segmentated_Images ;
+    box:hasOutput box:Data__Inages_Extracted_Features ;
+    box:hasProcess box:Transform3 .
+
+box:Steps_48_6 a box:Step ;
+    rdfs:label "1a Nero-Fuzzy Training" ;
+    box:hasInput box:Data__Inages_Extracted_Features ;
+    box:hasOutput box:Model__Hybrid_Neuro-Fuzzy_logic ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_48_7 a box:Step ;
+    rdfs:label "2a Classification (Neuro-Fuzzy Logic)" ;
+    box:hasInput box:Data__Images_Patient_Lung_CT_Images,
+        box:Model__Hybrid_Neuro-Fuzzy_logic ;
+    box:hasOutput <http://example.org/boxology#Symbol_Report_w/_Visual_Aids> ;
+    box:hasProcess box:Infer__Deduce .
+
+<http://example.org/boxology#Symbol_Report_w/_Visual_Aids> rdfs:label "Symbol Report w/ Visual Aids" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Transform2 rdfs:label "Transform2" .
+
+box:Transform3 rdfs:label "Transform3" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Data__Images_Contrast-Enhanced_Images rdfs:label "Data: Images Contrast-Enhanced Images" .
+
+<http://example.org/boxology#Data__Images_Greyscale_+_Normalized_Images> rdfs:label "Data: Images Greyscale + Normalized Images" .
+
+box:Data__Images_JPEG_Images rdfs:label "Data: Images JPEG Images" .
+
+box:Data__Images_Segmentated_Images rdfs:label "Data: Images Segmentated Images" .
+
+box:Data__Inages_Extracted_Features rdfs:label "Data: Inages Extracted Features" .
+
+box:Model__Hybrid_Neuro-Fuzzy_logic rdfs:label "Model: Hybrid Neuro-Fuzzy logic" .
+

@@ -1,0 +1,68 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_57 ex:hasBoxology box:Boxology_57 .
+
+box:Boxology_57 box:includesStep box:Steps_57_1,
+        box:Steps_57_2,
+        box:Steps_57_3,
+        box:Steps_57_4,
+        box:Steps_57_5 .
+
+box:Data_Patient_MR_Feature_Data rdfs:label "Data Patient MR Feature Data" .
+
+box:Data_mDixon_MR_Images rdfs:label "Data mDixon MR Images" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Steps_57_1 a box:Step ;
+    rdfs:label "1d Feature Extraction" ;
+    box:hasInput box:Data_mDixon_MR_Images ;
+    box:hasOutput box:Data_Extracted_Features ;
+    box:hasProcess box:Transform .
+
+box:Steps_57_2 a box:Step ;
+    rdfs:label "1d MR Feature Data Generation" ;
+    box:hasInput box:Data_Extracted_Features ;
+    box:hasOutput box:Data_Seven-dimensional_MR_Feature ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_57_3 a box:Step ;
+    rdfs:label "2a Reference Class Prototype Acquistion" ;
+    box:hasInput box:Data_Seven-dimensional_MR_Feature ;
+    box:hasOutput box:Data_Referenced_Class_Prototypes ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_57_4 a box:Step ;
+    rdfs:label "1a Generation of Tissue-Distinguisable Operators (TDOs)" ;
+    box:hasInput box:Data_Extracted_Features,
+        box:Data_Referenced_Class_Prototypes ;
+    box:hasOutput box:Model__Hybrid_TDOs ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_57_5 a box:Step ;
+    rdfs:label "1 Fuzzy Rough Set Application" ;
+    box:hasInput box:Data_Patient_MR_Feature_Data,
+        box:Model__Hybrid_TDOs ;
+    box:hasOutput box:Symbol_Segmented_MR_Images ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Symbol_Segmented_MR_Images rdfs:label "Symbol Segmented MR Images" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Data_Referenced_Class_Prototypes rdfs:label "Data Referenced Class Prototypes" .
+
+box:Data_Seven-dimensional_MR_Feature rdfs:label "Data Seven-dimensional MR Feature" .
+
+box:Model__Hybrid_TDOs rdfs:label "Model: Hybrid TDOs" .
+
+box:Data_Extracted_Features rdfs:label "Data Extracted Features" .
+

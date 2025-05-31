@@ -1,0 +1,71 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_35 ex:hasBoxology box:Boxology_35 .
+
+box:Actor_Experts rdfs:label "Actor Experts" .
+
+box:Boxology_35 box:includesStep box:Steps_35_1,
+        box:Steps_35_2,
+        box:Steps_35_3,
+        box:Steps_35_4,
+        box:Steps_35_5 .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data_Patient_Database rdfs:label "Data Patient Database" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Steps_35_1 a box:Step ;
+    rdfs:label "1c Generate Fuzzy Parameters" ;
+    box:hasInput box:Actor_Experts ;
+    box:hasOutput box:Symbol_Fuzzy_Parameters ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_35_2 a box:Step ;
+    rdfs:label "2a Fuzzy Finite State Machine Modeling" ;
+    box:hasInput box:Data_Relevant_Clinical_Variables,
+        box:Symbol_Fuzzy_Parameters ;
+    box:hasOutput box:Symbol_Fuzzy_Values_Clinical_Variables ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_35_3 a box:Step ;
+    rdfs:label "1d Fuzzification of Clinical Variables" ;
+    box:hasInput box:Data_Patient_Database ;
+    box:hasOutput box:Data_Relevant_Clinical_Variables ;
+    box:hasProcess box:Transform .
+
+box:Steps_35_4 a box:Step ;
+    rdfs:label "Generate: Train" ;
+    box:hasInput box:Symbol_Fuzzy_Values_Clinical_Variables,
+        box:Symbol_Ranked_List_of_Treatments ;
+    box:hasOutput box:Model__Semantic_FFSMs ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_35_5 a box:Step ;
+    rdfs:label "2a Integration and System Deployment" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Semantic_FFSMs ;
+    box:hasOutput box:Symbol_Ranked_List_of_Treatments ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Transform rdfs:label "Transform" .
+
+box:Data_Relevant_Clinical_Variables rdfs:label "Data Relevant Clinical Variables" .
+
+box:Model__Semantic_FFSMs rdfs:label "Model: Semantic FFSMs" .
+
+box:Symbol_Fuzzy_Parameters rdfs:label "Symbol Fuzzy Parameters" .
+
+box:Symbol_Fuzzy_Values_Clinical_Variables rdfs:label "Symbol Fuzzy Values Clinical Variables" .
+
+box:Symbol_Ranked_List_of_Treatments rdfs:label "Symbol Ranked List of Treatments" .
+

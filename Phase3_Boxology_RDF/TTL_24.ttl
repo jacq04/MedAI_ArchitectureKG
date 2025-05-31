@@ -1,0 +1,78 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_24 ex:hasBoxology box:Boxology_24 .
+
+box:Actor_Clinicians rdfs:label "Actor Clinicians" .
+
+box:Boxology_24 box:includesStep box:Steps_24_1,
+        box:Steps_24_2,
+        box:Steps_24_3,
+        box:Steps_24_4,
+        box:Steps_24_5,
+        box:Steps_24_6 .
+
+box:Data_Vital_Signs_Data rdfs:label "Data Vital Signs Data" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Infer__Deduce2 rdfs:label "Infer: Deduce2" .
+
+box:Steps_24_1 a box:Step ;
+    rdfs:label "1d Fuzzification" ;
+    box:hasInput box:Data_Vital_Signs_Data ;
+    box:hasOutput box:Symbol_Fuzzy_Values ;
+    box:hasProcess box:Transform .
+
+box:Steps_24_2 a box:Step ;
+    rdfs:label "2a First Layer FIS" ;
+    box:hasInput box:Model__Semantic_Rules,
+        box:Symbol_Fuzzy_Values ;
+    box:hasOutput box:Symbol_Intermediate_Fuzzy_Values_\(Y1\) ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_24_3 a box:Step ;
+    rdfs:label "2a Second Layer FIS" ;
+    box:hasInput box:Symbol_Intermediate_Fuzzy_Values_\(Y1\) ;
+    box:hasOutput box:Symbol_Intermediate_Fuzzy_Values_\(Y2\) ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_24_4 a box:Step ;
+    rdfs:label "2a Final Layer FIS" ;
+    box:hasInput box:Symbol_Intermediate_Fuzzy_Values_\(Y2\) ;
+    box:hasOutput box:Symbol_Cardiovascular_Risk_Level ;
+    box:hasProcess box:Infer__Deduce2 .
+
+box:Steps_24_5 a box:Step ;
+    rdfs:label "1d Defuzzification and Final Decision" ;
+    box:hasInput box:Symbol_Cardiovascular_Risk_Level ;
+    box:hasOutput box:Symbol_Crisp_Risk_Level ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_24_6 a box:Step ;
+    rdfs:label "1c Generate Fuzzy Rules" ;
+    box:hasInput box:Actor_Clinicians ;
+    box:hasOutput box:Model__Semantic_Rules ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Symbol_Crisp_Risk_Level rdfs:label "Symbol Crisp Risk Level" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Model__Semantic_Rules rdfs:label "Model: Semantic Rules" .
+
+box:Symbol_Cardiovascular_Risk_Level rdfs:label "Symbol Cardiovascular Risk Level" .
+
+box:Symbol_Fuzzy_Values rdfs:label "Symbol Fuzzy Values" .
+
+box:Symbol_Intermediate_Fuzzy_Values_\(Y1\) rdfs:label "Symbol Intermediate Fuzzy Values (Y1)" .
+
+box:Symbol_Intermediate_Fuzzy_Values_\(Y2\) rdfs:label "Symbol Intermediate Fuzzy Values (Y2)" .
+

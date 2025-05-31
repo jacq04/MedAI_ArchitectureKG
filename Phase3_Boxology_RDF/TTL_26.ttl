@@ -1,0 +1,70 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_26 ex:hasBoxology box:Boxology_26 .
+
+box:Boxology_26 box:includesStep box:Steps_26_1,
+        box:Steps_26_2,
+        box:Steps_26_3,
+        box:Steps_26_4,
+        box:Steps_26_5 .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Data_Previous_Cases rdfs:label "Data Previous Cases" .
+
+box:Data_Raw_Medical_Data rdfs:label "Data Raw Medical Data" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Infer__Deduce2 rdfs:label "Infer: Deduce2" .
+
+box:Steps_26_1 a box:Step ;
+    rdfs:label "1d Data Collection and Preprocessing" ;
+    box:hasInput box:Data_Raw_Medical_Data ;
+    box:hasOutput box:Data_Categorized_and_Pre-processed_Data ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_26_2 a box:Step ;
+    rdfs:label "2a Data Analysis for Feature Selection" ;
+    box:hasInput box:Data_Categorized_and_Pre-processed_Data ;
+    box:hasOutput box:Data_Refined_Features ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_26_3 a box:Step ;
+    rdfs:label "1a BN Model Building" ;
+    box:hasInput box:Data_Refined_Features ;
+    box:hasOutput box:Model__Statistical_Bayesian_Networks ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_26_4 a box:Step ;
+    rdfs:label "2a Integrating BN and CBR for Decision Support" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Data_Previous_Cases,
+        box:Model__Statistical_Bayesian_Networks ;
+    box:hasOutput box:Symbol_Pain_Level ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_26_5 a box:Step ;
+    rdfs:label "2a Providing Recommendations to Clinicians" ;
+    box:hasInput box:Symbol_Pain_Level ;
+    box:hasOutput <http://example.org/boxology#Symbol_Pain_Classificiation_w/_Supporting_Info> ;
+    box:hasProcess box:Infer__Deduce2 .
+
+<http://example.org/boxology#Symbol_Pain_Classificiation_w/_Supporting_Info> rdfs:label "Symbol Pain Classificiation w/ Supporting Info" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Data_Categorized_and_Pre-processed_Data rdfs:label "Data Categorized and Pre-processed Data" .
+
+box:Data_Refined_Features rdfs:label "Data Refined Features" .
+
+box:Model__Statistical_Bayesian_Networks rdfs:label "Model: Statistical Bayesian Networks" .
+
+box:Symbol_Pain_Level rdfs:label "Symbol Pain Level" .
+

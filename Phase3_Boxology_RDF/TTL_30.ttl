@@ -1,0 +1,67 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_30 ex:hasBoxology box:Boxology_30 .
+
+box:Boxology_30 box:includesStep box:Steps_30_1,
+        box:Steps_30_2,
+        box:Steps_30_3,
+        box:Steps_30_4,
+        box:Steps_30_5 .
+
+box:Data__Image_BUS_Image rdfs:label "Data: Image BUS Image" .
+
+box:Data__Image_Patient_BUS_Image rdfs:label "Data: Image Patient BUS Image" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_30_1 a box:Step ;
+    rdfs:label "1d Fuzzification" ;
+    box:hasInput box:Data__Image_BUS_Image ;
+    box:hasOutput box:Data__Image_Fuzzy_Image ;
+    box:hasProcess box:Transform .
+
+box:Steps_30_2 a box:Step ;
+    rdfs:label "1d Intensification" ;
+    box:hasInput box:Data__Image_Fuzzy_Image ;
+    box:hasOutput box:Data__Image_Enhanced_Image ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_30_3 a box:Step ;
+    rdfs:label "1d Defuzzification" ;
+    box:hasInput box:Data__Image_Enhanced_Image ;
+    box:hasOutput box:Data__Image_Defuzzified_Image ;
+    box:hasProcess box:Transform2 .
+
+box:Steps_30_4 a box:Step ;
+    rdfs:label "1a CNN Training" ;
+    box:hasInput box:Data__Image_Defuzzified_Image ;
+    box:hasOutput box:Model__Statistical_CNN ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_30_5 a box:Step ;
+    rdfs:label "2a Segmentation" ;
+    box:hasInput box:Data__Image_Patient_BUS_Image,
+        box:Model__Statistical_CNN ;
+    box:hasOutput box:Symbol_Segmented_Images_with_Labels ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Segmented_Images_with_Labels rdfs:label "Symbol Segmented Images with Labels" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Transform2 rdfs:label "Transform2" .
+
+box:Data__Image_Defuzzified_Image rdfs:label "Data: Image Defuzzified Image" .
+
+box:Data__Image_Enhanced_Image rdfs:label "Data: Image Enhanced Image" .
+
+box:Data__Image_Fuzzy_Image rdfs:label "Data: Image Fuzzy Image" .
+
+box:Model__Statistical_CNN rdfs:label "Model: Statistical CNN" .
+

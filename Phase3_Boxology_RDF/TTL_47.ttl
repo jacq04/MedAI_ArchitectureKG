@@ -1,0 +1,67 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_47 ex:hasBoxology box:Boxology_47 .
+
+box:Boxology_47 box:includesStep box:Steps_47_1,
+        box:Steps_47_2,
+        box:Steps_47_3,
+        box:Steps_47_4,
+        box:Steps_47_5 .
+
+box:Data_Patient_Clinical_and_Pathalogical_Data rdfs:label "Data Patient Clinical and Pathalogical Data" .
+
+box:Data_Raw_Clinical_and_Pathalogical_Data rdfs:label "Data Raw Clinical and Pathalogical Data" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Steps_47_1 a box:Step ;
+    rdfs:label "1d Pre-processing" ;
+    box:hasInput box:Data_Raw_Clinical_and_Pathalogical_Data ;
+    box:hasOutput box:Data_Processed_and_Normalized ;
+    box:hasProcess box:Transform .
+
+box:Steps_47_2 a box:Step ;
+    rdfs:label "1d Division of Follow-up Time into Intervals" ;
+    box:hasInput box:Data_Processed_and_Normalized ;
+    box:hasOutput box:Data_Time_Segmented_Data ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_47_3 a box:Step ;
+    rdfs:label "2a Selection of Prognostic Factors with Decision Trees" ;
+    box:hasInput box:Data_Time_Segmented_Data ;
+    box:hasOutput box:Symbol_Prognostic_Factors_per_Time ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_47_4 a box:Step ;
+    rdfs:label "1a Neural Network Model Construction" ;
+    box:hasInput box:Symbol_Prognostic_Factors_per_Time ;
+    box:hasOutput box:Model__Hybrid_DS_Tool ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_47_5 a box:Step ;
+    rdfs:label "2a Prediction Making" ;
+    box:hasInput box:Data_Patient_Clinical_and_Pathalogical_Data,
+        box:Model__Hybrid_DS_Tool ;
+    box:hasOutput box:Symbol_Relapse_and_Factors ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Symbol_Relapse_and_Factors rdfs:label "Symbol Relapse and Factors" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Data_Processed_and_Normalized rdfs:label "Data Processed and Normalized" .
+
+box:Data_Time_Segmented_Data rdfs:label "Data Time Segmented Data" .
+
+box:Model__Hybrid_DS_Tool rdfs:label "Model: Hybrid DS Tool" .
+
+box:Symbol_Prognostic_Factors_per_Time rdfs:label "Symbol Prognostic Factors per Time" .
+

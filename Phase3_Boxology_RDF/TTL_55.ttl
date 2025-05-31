@@ -1,0 +1,76 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_55 ex:hasBoxology box:Boxology_55 .
+
+box:Actor_Experts rdfs:label "Actor Experts" .
+
+box:Actor_Professionals rdfs:label "Actor Professionals" .
+
+box:Boxology_55 box:includesStep box:Steps_55_1,
+        box:Steps_55_2,
+        box:Steps_55_3,
+        box:Steps_55_4,
+        box:Steps_55_5 .
+
+box:Data_Previous_Cases rdfs:label "Data Previous Cases" .
+
+box:Data_Real-Time_Patient_Data rdfs:label "Data Real-Time Patient Data" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Steps_55_1 a box:Step ;
+    rdfs:label "1c Construction of the Initial FCM" ;
+    box:hasInput box:Actor_Experts ;
+    box:hasOutput box:Symbol_Preliminary_FCM ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_55_2 a box:Step ;
+    rdfs:label "1d Integration of Fuzzy Rules" ;
+    box:hasInput box:Symbol_Additional_Existing_Knowledge,
+        box:Symbol_Preliminary_FCM ;
+    box:hasOutput box:Symbol_Enhanced_FCM ;
+    box:hasProcess box:Transform .
+
+box:Steps_55_3 a box:Step ;
+    rdfs:label "1a System Training and Calibration" ;
+    box:hasInput box:Data_Previous_Cases,
+        box:Symbol_Enhanced_FCM ;
+    box:hasOutput box:Model__Hybrid_FCM-DSS ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_55_4 a box:Step ;
+    rdfs:label "2a Implementation and Real-Time Decision Support" ;
+    box:hasInput box:Data_Real-Time_Patient_Data,
+        box:Model__Hybrid_FCM-DSS ;
+    box:hasOutput box:Symbol_DS_Output ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_55_5 a box:Step ;
+    rdfs:label "2a Feedback Loop and Continuous Improvement" ;
+    box:hasInput box:Actor_Professionals,
+        box:Symbol_DS_Output ;
+    box:hasOutput box:Symbol_Updated_DS_Outputs ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Symbol_Additional_Existing_Knowledge rdfs:label "Symbol Additional Existing Knowledge" .
+
+box:Symbol_Updated_DS_Outputs rdfs:label "Symbol Updated DS Outputs" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Model__Hybrid_FCM-DSS rdfs:label "Model: Hybrid FCM-DSS" .
+
+box:Symbol_DS_Output rdfs:label "Symbol DS Output" .
+
+box:Symbol_Enhanced_FCM rdfs:label "Symbol Enhanced FCM" .
+
+box:Symbol_Preliminary_FCM rdfs:label "Symbol Preliminary FCM" .
+

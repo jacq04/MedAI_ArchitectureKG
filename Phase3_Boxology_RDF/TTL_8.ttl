@@ -1,0 +1,66 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_8 ex:hasBoxology box:Boxology_8 .
+
+box:Actor_Medical_Professional rdfs:label "Actor Medical Professional" .
+
+box:Actor_Physicians rdfs:label "Actor Physicians" .
+
+box:Boxology_8 box:includesStep box:Steps_8_1,
+        box:Steps_8_2,
+        box:Steps_8_3,
+        box:Steps_8_4 .
+
+box:Data_Previous_Cases rdfs:label "Data Previous Cases" .
+
+box:Data_Symptoms rdfs:label "Data Symptoms" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Infer__Deduce2 rdfs:label "Infer: Deduce2" .
+
+box:Steps_8_1 a box:Step ;
+    rdfs:label "2a Preliminary Diagnosis" ;
+    box:hasInput box:Data_Symptoms,
+        box:Model__Static_Diagnostic_Rules ;
+    box:hasOutput box:Symbol_\(Final\)_Diagnosis ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_8_2 a box:Step ;
+    rdfs:label "1c Knowledge Engineering" ;
+    box:hasInput box:Actor_Physicians,
+        box:Symbol_Final_Diagnosis_CBR ;
+    box:hasOutput box:Model__Static_Diagnostic_Rules ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_8_3 a box:Step ;
+    rdfs:label "2a CBR Process" ;
+    box:hasInput box:Data_Previous_Cases,
+        box:Symbol_\(Final\)_Diagnosis_CBR ;
+    box:hasOutput box:Symbol_Similarity_Score ;
+    box:hasProcess box:Infer__Deduce2 .
+
+box:Steps_8_4 a box:Step ;
+    rdfs:label "1d Similarity Assesment" ;
+    box:hasInput box:Actor_Medical_Professional,
+        box:Symbol_\(Final\)_Diagnosis,
+        box:Symbol_Similarity_Score ;
+    box:hasOutput box:Symbol_Final_Diagnosis_CBR ;
+    box:hasProcess box:Transform .
+
+box:Symbol_\(Final\)_Diagnosis_CBR rdfs:label "Symbol (Final) Diagnosis CBR" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Model__Static_Diagnostic_Rules rdfs:label "Model: Static Diagnostic Rules" .
+
+box:Symbol_\(Final\)_Diagnosis rdfs:label "Symbol (Final) Diagnosis" .
+
+box:Symbol_Final_Diagnosis_CBR rdfs:label "Symbol Final Diagnosis CBR" .
+
+box:Symbol_Similarity_Score rdfs:label "Symbol Similarity Score" .
+

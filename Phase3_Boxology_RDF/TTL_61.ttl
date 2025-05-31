@@ -1,0 +1,95 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_61 ex:hasBoxology box:Boxology_61 .
+
+box:Boxology_61 box:includesStep box:Steps_61_1,
+        box:Steps_61_2,
+        box:Steps_61_3,
+        box:Steps_61_4,
+        box:Steps_61_5,
+        box:Steps_61_6 .
+
+box:Data_Curated_Biological_Information rdfs:label "Data Curated Biological Information" .
+
+box:Data_Gene_Expression_Data rdfs:label "Data Gene Expression Data" .
+
+box:Data_New_Genomic_Data rdfs:label "Data New Genomic Data" .
+
+box:Data_Raw_Genomic_Data rdfs:label "Data Raw Genomic Data" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Engineer1 rdfs:label "Generate: Engineer1" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_61_1 a box:Step ;
+    rdfs:label "1D Pre-processing" ;
+    box:hasInput box:Data_Raw_Genomic_Data ;
+    box:hasOutput box:Data_Processed_Dataset ;
+    box:hasProcess box:Transform .
+
+box:Steps_61_2 a box:Step ;
+    rdfs:label "1d Pre-Processing" ;
+    box:hasInput box:Data_Curated_Biological_Information ;
+    box:hasOutput box:Data_Structured_Biological_Framework ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_61_3 a box:Step ;
+    rdfs:label "1c Network Architecture Design" ;
+    box:hasInput box:Data_Processed_Dataset,
+        box:Data_Structured_Biological_Framework ;
+    box:hasOutput box:Symbol_Drug_Layer,
+        box:Symbol_Gene_Layer,
+        box:Symbol_Pathway_Layer,
+        box:Symbol_Protein_Complex_Layer ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_61_4 a box:Step ;
+    rdfs:label "1c Connection and Regularization Strategy" ;
+    box:hasInput box:Symbol_Drug_Layer,
+        box:Symbol_Pathway_Layer,
+        box:Symbol_Protein_Complex_Layer ;
+    box:hasOutput box:Model__Hybrid_Fully_Connected_Network ;
+    box:hasProcess box:Generate__Engineer1 .
+
+box:Steps_61_5 a box:Step ;
+    rdfs:label "1a Model Training" ;
+    box:hasInput box:Data_Gene_Expression_Data,
+        box:Model__Hybrid_Fully_Connected_Network ;
+    box:hasOutput box:Model__Hybrid_Refined_Model ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_61_6 a box:Step ;
+    rdfs:label "2a Prediction Making" ;
+    box:hasInput box:Data_New_Genomic_Data,
+        box:Model__Hybrid_Refined_Model ;
+    box:hasOutput box:Symbol_Predicted_Drug_Response ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Gene_Layer rdfs:label "Symbol Gene Layer" .
+
+box:Symbol_Predicted_Drug_Response rdfs:label "Symbol Predicted Drug Response" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Data_Processed_Dataset rdfs:label "Data Processed Dataset" .
+
+box:Data_Structured_Biological_Framework rdfs:label "Data Structured Biological Framework" .
+
+box:Model__Hybrid_Fully_Connected_Network rdfs:label "Model: Hybrid Fully Connected Network" .
+
+box:Model__Hybrid_Refined_Model rdfs:label "Model: Hybrid Refined Model" .
+
+box:Symbol_Drug_Layer rdfs:label "Symbol Drug Layer" .
+
+box:Symbol_Pathway_Layer rdfs:label "Symbol Pathway Layer" .
+
+box:Symbol_Protein_Complex_Layer rdfs:label "Symbol Protein Complex Layer" .
+

@@ -1,0 +1,70 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_64 ex:hasBoxology box:Boxology_64 .
+
+box:Actor rdfs:label "Actor" .
+
+box:Boxology_64 box:includesStep box:Steps_64_1,
+        box:Steps_64_2,
+        box:Steps_64_3,
+        box:Steps_64_4,
+        box:Steps_64_5 .
+
+box:Data__Numeric_Measurements rdfs:label "Data: Numeric Measurements" .
+
+box:Data__Numeric_Patient_Measurements rdfs:label "Data: Numeric Patient Measurements" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_64_1 a box:Step ;
+    rdfs:label "1d Definition of Input Variables" ;
+    box:hasInput box:Data__Numeric_Measurements ;
+    box:hasOutput box:Data__Numeric_Normalized_Data ;
+    box:hasProcess box:Transform .
+
+box:Steps_64_2 a box:Step ;
+    rdfs:label "1d Fuzzification" ;
+    box:hasInput box:Data__Numeric_Normalized_Data ;
+    box:hasOutput box:Data__Numeric_Fuzzified_Input ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_64_3 a box:Step ;
+    rdfs:label "1a Inference Engine" ;
+    box:hasInput box:Data__Numeric_Fuzzified_Input,
+        box:Symbol_Fuzzy_Rule_Base ;
+    box:hasOutput box:Model__Hybrid_Inference_Engine ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_64_4 a box:Step ;
+    rdfs:label "1c Rules Creation" ;
+    box:hasInput box:Actor ;
+    box:hasOutput box:Symbol_Fuzzy_Rule_Base ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_64_5 a box:Step ;
+    rdfs:label "2a Prediction Making" ;
+    box:hasInput box:Data__Numeric_Patient_Measurements,
+        box:Model__Hybrid_Inference_Engine ;
+    box:hasOutput box:Symbol_Adviced_Infusion_Rate ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Adviced_Infusion_Rate rdfs:label "Symbol Adviced Infusion Rate" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Data__Numeric_Fuzzified_Input rdfs:label "Data: Numeric Fuzzified Input" .
+
+box:Data__Numeric_Normalized_Data rdfs:label "Data: Numeric Normalized Data" .
+
+box:Model__Hybrid_Inference_Engine rdfs:label "Model: Hybrid Inference Engine" .
+
+box:Symbol_Fuzzy_Rule_Base rdfs:label "Symbol Fuzzy Rule Base" .
+

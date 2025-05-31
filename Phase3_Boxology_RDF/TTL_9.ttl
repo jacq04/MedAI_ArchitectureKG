@@ -1,0 +1,53 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_9 ex:hasBoxology box:Boxology_9 .
+
+box:Boxology_9 box:includesStep box:Steps_9_1,
+        box:Steps_9_2,
+        box:Steps_9_3,
+        box:Steps_9_4 .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer_Deduce rdfs:label "Infer:Deduce" .
+
+box:Steps_9_1 a box:Step ;
+    rdfs:label "1d Data Preparation" ;
+    box:hasInput box:Time_Series_Data_COVID-19 ;
+    box:hasOutput box:Data_Prepared_Time_Series_Data ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_9_2 a box:Step ;
+    rdfs:label "1d Calculation of Fractal Dimensions" ;
+    box:hasInput box:Data_Prepared_Time_Series_Data ;
+    box:hasOutput box:Data_Fractal_Dimensions ;
+    box:hasProcess box:Transforme__Embed .
+
+box:Steps_9_3 a box:Step ;
+    rdfs:label "1a Fuzzy Model Formation" ;
+    box:hasInput box:Data_Fractal_Dimensions ;
+    box:hasOutput box:Model__Semantic_Fuzzy_Logic_Model ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_9_4 a box:Step ;
+    rdfs:label "2a Forecasting Using Fuzzy Logic" ;
+    box:hasInput box:Model__Semantic_Fuzzy_Logic_Model ;
+    box:hasOutput box:Symbol_Forecasted_Trends ;
+    box:hasProcess box:Infer_Deduce .
+
+box:Symbol_Forecasted_Trends rdfs:label "Symbol Forecasted Trends" .
+
+box:Time_Series_Data_COVID-19 rdfs:label "Time Series Data COVID-19" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Transforme__Embed rdfs:label "Transforme: Embed" .
+
+box:Data_Fractal_Dimensions rdfs:label "Data Fractal Dimensions" .
+
+box:Data_Prepared_Time_Series_Data rdfs:label "Data Prepared Time Series Data" .
+
+box:Model__Semantic_Fuzzy_Logic_Model rdfs:label "Model: Semantic Fuzzy Logic Model" .
+

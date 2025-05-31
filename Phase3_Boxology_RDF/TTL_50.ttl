@@ -1,0 +1,81 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_50 ex:hasBoxology box:Boxology_50 .
+
+box:Actor_Radiologist rdfs:label "Actor Radiologist" .
+
+box:Boxology_50 box:includesStep box:Steps_50_1,
+        box:Steps_50_2,
+        box:Steps_50_3,
+        box:Steps_50_4,
+        box:Steps_50_5,
+        box:Steps_50_6 .
+
+box:Data__Image_Raw_CT_Images rdfs:label "Data: Image Raw CT Images" .
+
+box:Data__Images_Patient_CT rdfs:label "Data: Images Patient CT" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_50_1 a box:Step ;
+    rdfs:label "1d Pre-processing" ;
+    box:hasInput box:Data__Image_Raw_CT_Images ;
+    box:hasOutput box:Data__Image_Adjusted_Images ;
+    box:hasProcess box:Transform .
+
+box:Steps_50_2 a box:Step ;
+    rdfs:label "1d Segmentation w/ Morphological Operations" ;
+    box:hasInput box:Data__Image_Adjusted_Images ;
+    box:hasOutput box:Data__Image_Segmented_Lung_Regions ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_50_3 a box:Step ;
+    rdfs:label "1d Feature Extraction" ;
+    box:hasInput box:Data__Image_Segmented_Lung_Regions ;
+    box:hasOutput box:Data__Numerical_Feature_Vectors ;
+    box:hasProcess box:Transform2 .
+
+box:Steps_50_4 a box:Step ;
+    rdfs:label "1a Model Training" ;
+    box:hasInput box:Data__Numerical_Feature_Vectors ;
+    box:hasOutput box:Model__Hybrid_NN_Model ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_50_5 a box:Step ;
+    rdfs:label "2a Predicting" ;
+    box:hasInput box:Actor_Radiologist,
+        box:Data__Numerical_Features,
+        box:Model__Hybrid_NN_Model ;
+    box:hasOutput box:Symbol_Diagnostic_Report ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_50_6 a box:Step ;
+    rdfs:label "1d Data Transformation" ;
+    box:hasInput box:Data__Images_Patient_CT ;
+    box:hasOutput box:Data__Numerical_Features ;
+    box:hasProcess box:Transform3 .
+
+box:Symbol_Diagnostic_Report rdfs:label "Symbol Diagnostic Report" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Transform2 rdfs:label "Transform2" .
+
+box:Transform3 rdfs:label "Transform3" .
+
+box:Data__Image_Adjusted_Images rdfs:label "Data: Image Adjusted Images" .
+
+box:Data__Image_Segmented_Lung_Regions rdfs:label "Data: Image Segmented Lung Regions" .
+
+box:Data__Numerical_Feature_Vectors rdfs:label "Data: Numerical Feature Vectors" .
+
+box:Data__Numerical_Features rdfs:label "Data: Numerical Features" .
+
+box:Model__Hybrid_NN_Model rdfs:label "Model: Hybrid NN Model" .
+

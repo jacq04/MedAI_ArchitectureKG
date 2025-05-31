@@ -1,0 +1,113 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_29 ex:hasBoxology box:Boxology_29 .
+
+box:Actor rdfs:label "Actor" .
+
+box:Boxology_29 box:includesStep box:Steps_29_1,
+        box:Steps_29_2,
+        box:Steps_29_3,
+        box:Steps_29_4,
+        box:Steps_29_5,
+        box:Steps_29_6,
+        box:Steps_29_7,
+        box:Steps_29_8,
+        box:Steps_29_9 .
+
+box:Data__Image_Patient_Brain_MRI rdfs:label "Data: Image Patient Brain MRI" .
+
+box:Data__Imgae_Brain_MRI_Images rdfs:label "Data: Imgae Brain MRI Images" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Infer__Deduce1 rdfs:label "Infer: Deduce1" .
+
+box:Steps_29_1 a box:Step ;
+    rdfs:label "1d Pre-processing" ;
+    box:hasInput box:Data__Imgae_Brain_MRI_Images ;
+    box:hasOutput box:Data__Image_Contrast_Enhanced_Images ;
+    box:hasProcess box:Transform .
+
+box:Steps_29_2 a box:Step ;
+    rdfs:label "2a Dual-Tree Complex Wavelet Transform (DTCWT)" ;
+    box:hasInput box:Data__Image_Contrast_Enhanced_Images ;
+    box:hasOutput box:Data__Image_Decomposed_sub-band_images ;
+    box:hasProcess box:Transform1 .
+
+box:Steps_29_3 a box:Step ;
+    rdfs:label "2a Fuzzy Logic-based Edge Detection" ;
+    box:hasInput box:Data__Image_Decomposed_sub-band_images,
+        box:Symbol_Fuzzy_Rules ;
+    box:hasOutput box:Data__Image_Edge-detected_Images ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_29_4 a box:Step ;
+    rdfs:label "1c Fuzzy-Rules Creation" ;
+    box:hasInput box:Actor ;
+    box:hasOutput box:Symbol_Fuzzy_Rules ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_29_5 a box:Step ;
+    rdfs:label "1d Feature Extraction" ;
+    box:hasInput box:Data__Image_Edge-detected_Images ;
+    box:hasOutput box:Data__Image_Extracted_Features ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_29_6 a box:Step ;
+    rdfs:label "1a Model Training" ;
+    box:hasInput box:Data_Labels,
+        box:Data__Image_Extracted_Features ;
+    box:hasOutput box:Model-Statistical_U-NET_CNN ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_29_7 a box:Step ;
+    rdfs:label "2a Annotation" ;
+    box:hasInput box:Data__Image_Extracted_Features ;
+    box:hasOutput box:Data_Labels ;
+    box:hasProcess box:Infer__Deduce1 .
+
+box:Steps_29_8 a box:Step ;
+    rdfs:label "2a U-NET CNN Classification" ;
+    box:hasInput box:Data__Image_Processed_Image,
+        box:Model-Statistical_U-NET_CNN ;
+    box:hasOutput box:Symbol_Segregated_and_Classified_Images ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_29_9 a box:Step ;
+    rdfs:label "1d Data Processing" ;
+    box:hasInput box:Data__Image_Patient_Brain_MRI ;
+    box:hasOutput box:Data__Image_Processed_Image ;
+    box:hasProcess box:Transform__Embed1 .
+
+box:Symbol_Segregated_and_Classified_Images rdfs:label "Symbol Segregated and Classified Images" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform1 rdfs:label "Transform1" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Transform__Embed1 rdfs:label "Transform: Embed1" .
+
+box:Data_Labels rdfs:label "Data Labels" .
+
+box:Data__Image_Contrast_Enhanced_Images rdfs:label "Data: Image Contrast Enhanced Images" .
+
+box:Data__Image_Decomposed_sub-band_images rdfs:label "Data: Image Decomposed sub-band images" .
+
+box:Data__Image_Edge-detected_Images rdfs:label "Data: Image Edge-detected Images" .
+
+box:Data__Image_Processed_Image rdfs:label "Data: Image Processed Image" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Model-Statistical_U-NET_CNN rdfs:label "Model-Statistical U-NET CNN" .
+
+box:Symbol_Fuzzy_Rules rdfs:label "Symbol Fuzzy Rules" .
+
+box:Data__Image_Extracted_Features rdfs:label "Data: Image Extracted Features" .
+

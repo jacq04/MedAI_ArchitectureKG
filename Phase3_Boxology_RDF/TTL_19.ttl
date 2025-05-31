@@ -1,0 +1,122 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_19 ex:hasBoxology box:Boxology_19 .
+
+box:Actor_Diabetes_Experts rdfs:label "Actor Diabetes Experts" .
+
+box:Boxology_19 box:includesStep box:Steps_19_1,
+        box:Steps_19_10,
+        box:Steps_19_2,
+        box:Steps_19_3,
+        box:Steps_19_4,
+        box:Steps_19_5,
+        box:Steps_19_6,
+        box:Steps_19_7,
+        box:Steps_19_8,
+        box:Steps_19_9 .
+
+box:Data_Patient_Data rdfs:label "Data Patient Data" .
+
+box:Generate__Train rdfs:label "Generate: Train" .
+
+box:Generate__Train1 rdfs:label "Generate: Train1" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_19_1 a box:Step ;
+    rdfs:label "1c Expert Opinion" ;
+    box:hasInput box:Actor_Diabetes_Experts ;
+    box:hasOutput box:Model__Semantic_Relationships ;
+    box:hasProcess box:Generate__Train .
+
+box:Steps_19_10 a box:Step ;
+    rdfs:label "1d Convert to Single-dimension" ;
+    box:hasInput box:Data__Tensor_Damage_Severity ;
+    box:hasOutput box:Symbol_Damage_Severity ;
+    box:hasProcess box:Transform__Embed6 .
+
+box:Steps_19_2 a box:Step ;
+    rdfs:label "1d Aggregation of Experts'Opinion" ;
+    box:hasInput box:Model__Semantic_Relationships ;
+    box:hasOutput box:Data__Matrix_Single_Matrix_Clusters_and_sub-criteria ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_19_3 a box:Step ;
+    rdfs:label "Subgraph - 1d Normalization" ;
+    box:hasInput box:Data__Matrix_Single_Matrix_Clusters_and_sub-criteria ;
+    box:hasOutput box:Data__Matrix_Normalized_Matrix ;
+    box:hasProcess box:Transform__Embed1 .
+
+box:Steps_19_4 a box:Step ;
+    rdfs:label "1d Calculate Total" ;
+    box:hasInput box:Data__Matrix_Normalized_Matrix ;
+    box:hasOutput box:Data__Matrix_Total_Relationship_Matrix ;
+    box:hasProcess box:Transform__Embed2 .
+
+box:Steps_19_5 a box:Step ;
+    rdfs:label "1c Network Diagram Drawing" ;
+    box:hasInput box:Data__Matrix_Total_Relationship_Matrix ;
+    box:hasOutput box:Model__Semantic_Relationship_Diagram ;
+    box:hasProcess box:Generate__Train1 .
+
+box:Steps_19_6 a box:Step ;
+    rdfs:label "1d Pairwise Comparison Matrices Formation" ;
+    box:hasInput box:Model__Semantic_Relationship_Diagram ;
+    box:hasOutput box:Data__Matix_Pairwise_Comparison ;
+    box:hasProcess box:Trannsform__Embed3 .
+
+box:Steps_19_7 a box:Step ;
+    rdfs:label "1d Super Matrix" ;
+    box:hasInput box:Data__Matix_Pairwise_Comparison ;
+    box:hasOutput box:Data__Matrix_Weighted_Super_Matrix ;
+    box:hasProcess box:Transform__Embed4 .
+
+box:Steps_19_8 a box:Step ;
+    rdfs:label "1d Limit Long Term Influence" ;
+    box:hasInput box:Data__Matrix_Weighted_Super_Matrix ;
+    box:hasOutput box:Model__Static_Limited_Weighted_Super_Matrix ;
+    box:hasProcess box:Transform__Embed5 .
+
+box:Steps_19_9 a box:Step ;
+    rdfs:label "2a Severity of Damage Calculation Based on VFS" ;
+    box:hasInput box:Data_Patient_Data,
+        box:Model__Static_Limited_Weighted_Super_Matrix ;
+    box:hasOutput box:Data__Tensor_Damage_Severity ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Symbol_Damage_Severity rdfs:label "Symbol Damage Severity" .
+
+box:Trannsform__Embed3 rdfs:label "Trannsform: Embed3" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Transform__Embed1 rdfs:label "Transform: Embed1" .
+
+box:Transform__Embed2 rdfs:label "Transform: Embed2" .
+
+box:Transform__Embed4 rdfs:label "Transform: Embed4" .
+
+box:Transform__Embed5 rdfs:label "Transform: Embed5" .
+
+box:Transform__Embed6 rdfs:label "Transform: Embed6" .
+
+box:Data__Matix_Pairwise_Comparison rdfs:label "Data: Matix Pairwise Comparison" .
+
+box:Data__Matrix_Normalized_Matrix rdfs:label "Data: Matrix Normalized Matrix" .
+
+box:Data__Matrix_Single_Matrix_Clusters_and_sub-criteria rdfs:label "Data: Matrix Single Matrix Clusters and sub-criteria" .
+
+box:Data__Matrix_Total_Relationship_Matrix rdfs:label "Data: Matrix Total Relationship Matrix" .
+
+box:Data__Matrix_Weighted_Super_Matrix rdfs:label "Data: Matrix Weighted Super Matrix" .
+
+box:Data__Tensor_Damage_Severity rdfs:label "Data: Tensor Damage Severity" .
+
+box:Model__Semantic_Relationship_Diagram rdfs:label "Model: Semantic Relationship Diagram" .
+
+box:Model__Semantic_Relationships rdfs:label "Model: Semantic Relationships" .
+
+box:Model__Static_Limited_Weighted_Super_Matrix rdfs:label "Model: Static Limited Weighted Super Matrix" .
+

@@ -1,0 +1,83 @@
+@prefix box: <http://example.org/boxology#> .
+@prefix ex: <http://example.org/publication#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:Publication_10 ex:hasBoxology box:Boxology_10 .
+
+box:Actor_Physician rdfs:label "Actor Physician" .
+
+box:Boxology_10 box:includesStep box:Steps_10_1,
+        box:Steps_10_2,
+        box:Steps_10_3,
+        box:Steps_10_4,
+        box:Steps_10_5,
+        box:Steps_10_6 .
+
+box:Data_Clinical_Guidelines_for_Sleep_Staging rdfs:label "Data Clinical Guidelines for Sleep Staging" .
+
+box:Data__Numeric_Overnight_Polysomographic_Recordings rdfs:label "Data: Numeric Overnight Polysomographic Recordings" .
+
+box:Generate__Engineer rdfs:label "Generate: Engineer" .
+
+box:Infer__Deduce rdfs:label "Infer: Deduce" .
+
+box:Steps_10_1 a box:Step ;
+    rdfs:label "1d Pre-process" ;
+    box:hasInput box:Data__Numeric_Overnight_Polysomographic_Recordings ;
+    box:hasOutput box:Data__Numeric_Cleaned_Physiological_Signals ;
+    box:hasProcess box:Transform .
+
+box:Steps_10_2 a box:Step ;
+    rdfs:label "1c Adapting Symbolic Fusion for Sleep Staging" ;
+    box:hasInput box:Data_Clinical_Guidelines_for_Sleep_Staging,
+        box:Data__Numeric_Cleaned_Physiological_Signals ;
+    box:hasOutput box:Model__Semantic_Symbolic_Fusion_Framework ;
+    box:hasProcess box:Generate__Engineer .
+
+box:Steps_10_3 a box:Step ;
+    rdfs:label "2a Automated Sleep Staging" ;
+    box:hasInput box:Data_Personalized_Threshold,
+        box:Model__Semantic_Symbolic_Fusion_Framework ;
+    box:hasOutput box:Symbol_Hypnogram ;
+    box:hasProcess box:Infer__Deduce .
+
+box:Steps_10_4 a box:Step ;
+    rdfs:label "1d Feature Extraction" ;
+    box:hasInput box:Data__Numeric_Cleaned_Physiological_Signals ;
+    box:hasOutput box:Data_Sleep_Events_Parameters ;
+    box:hasProcess box:Transform__Embed .
+
+box:Steps_10_5 a box:Step ;
+    rdfs:label "1d Personal Epoch Selection and Scoring" ;
+    box:hasInput box:Actor_Physician,
+        box:Data__Numeric_Cleaned_Physiological_Signals ;
+    box:hasOutput box:Data_Partially_Scored_Hypnogram ;
+    box:hasProcess box:Transform__Embed2 .
+
+box:Steps_10_6 a box:Step ;
+    rdfs:label "1a Integrating Differntial Evolution for Personalization" ;
+    box:hasInput box:Data_Partially_Scored_Hypnogram,
+        box:Data_Sleep_Events_Parameters ;
+    box:hasOutput box:Data_Personalized_Threshold ;
+    box:hasProcess box:Transform__Embed3 .
+
+box:Symbol_Hypnogram rdfs:label "Symbol Hypnogram" .
+
+box:Transform rdfs:label "Transform" .
+
+box:Transform__Embed rdfs:label "Transform: Embed" .
+
+box:Transform__Embed2 rdfs:label "Transform: Embed2" .
+
+box:Transform__Embed3 rdfs:label "Transform: Embed3" .
+
+box:Data_Partially_Scored_Hypnogram rdfs:label "Data Partially Scored Hypnogram" .
+
+box:Data_Personalized_Threshold rdfs:label "Data Personalized Threshold" .
+
+box:Data_Sleep_Events_Parameters rdfs:label "Data Sleep Events Parameters" .
+
+box:Model__Semantic_Symbolic_Fusion_Framework rdfs:label "Model: Semantic Symbolic Fusion Framework" .
+
+box:Data__Numeric_Cleaned_Physiological_Signals rdfs:label "Data: Numeric Cleaned Physiological Signals" .
+
