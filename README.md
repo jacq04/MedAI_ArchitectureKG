@@ -1,6 +1,4 @@
 # MedAI_ArchitectureKG
-Jacquiline Rose Roney  
-Vrije Universiteit Amsterdam 
 
 This repository contains the code and data for the bachelor thesis project: "Formalizing Boxology: An Ontology-Driven Approach for Representing Neuro-Symbolic Medical AI Architectures". The project focuses on transforming unstructured medical AI system diagrams into structured, queryable knowledge graphs using semantic technologies.
 
@@ -22,4 +20,7 @@ This repository contains the code and data for the bachelor thesis project: "For
 - Semantic Querying: Load OntologyFramework.owl and the RDF files into a semantic triple store like GraphDB. Use SPARQL queries to explore and analyze the structured AI system architectures.
 
 For visualizing the DOT file, paste the DOT code into the [Graphviz Online Viewer](https://dreampuf.github.io/GraphvizOnline/?engine=dot).
+
+Jacquiline Rose Roney  
+Vrije Universiteit Amsterdam 
 
