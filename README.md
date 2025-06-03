@@ -1,6 +1,8 @@
 # MedAI_ArchitectureKG
 
-This repository contains the code and data proposed in the methodology for the bachelor thesis project: "Formalizing Boxology: An Ontology-Driven Approach for Representing Neuro-Symbolic Medical AI Architectures". The project focuses on transforming unstructured medical AI system diagrams into structured, queryable knowledge graphs using semantic technologies. 
+This repository contains the code and data developed as part of the methodology for the bachelor thesis project titled "Formalizing Boxology: An Ontology-Driven Approach for Representing Neuro-Symbolic Medical AI Architectures." The project aims to convert unstructured diagrams of medical AI systems into structured, machine-readable knowledge graphs using semantic web technologies.
+
+![Proposed Methodology](Images/picture.png)
 
 ## Repository Structure
 - Phase1_DataCleaning.ipynb: Jupyter Notebook for cleaning and preprocessing raw data extracted from publications.
