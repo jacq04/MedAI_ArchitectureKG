@@ -22,5 +22,3 @@ This repository contains the code and data for the bachelor thesis project: "For
 For visualizing the DOT file, paste the DOT code into the [Graphviz Online Viewer](https://dreampuf.github.io/GraphvizOnline/?engine=dot).
 
 Jacquiline Rose Roney  
-Vrije Universiteit Amsterdam 
-
